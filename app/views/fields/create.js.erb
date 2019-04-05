@@ -1,0 +1,24 @@
+jQuery(document).ready(function($){
+$('#product-modal').modal('hide')
+toastr["success"]("El Campo fue creado con <b> Exito!</b>");
+
+        	var user = $("#user").val();
+            var name = $("#name").val();
+            var type = $("#type").val();
+            var state = $("#state").val();
+            var form = $("#form").val();
+            var reque = $("#reque").val();
+
+            var markup = "<tr><td>1</td><td>" + user + "</td><td>" + type + "</td><td>" + name + "</td><td>" + state + "</td><td>" + reque + "</td><td>" + form + "</td>";
+            $(".table_form tbody").append(markup);
+
+        
+        // Find and remove selected table rows
+        $(".delete-service").click(function(){
+            $(".table_services tbody").find('input[name="record"]').each(function(){
+            	if($(this).is(":checked")){
+                    $(this).parents("tr").remove();
+                }
+            });
+        });   
+});

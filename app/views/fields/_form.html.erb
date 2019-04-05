@@ -1,52 +1,69 @@
-<%= form_with(model: field, local: true) do |form| %>
-  <% if field.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(field.errors.count, "error") %> prohibited this field from being saved:</h2>
+<div id="product-modal" class="modal fade">  
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header padding-lef">
+          <% if action_name == "new" %>
+            <h4 class="modal-title">Crear Nuevo Campo </h4>  
+          <% else %>
+            <h4 class="modal-title">Editar Campo </h4>
+          <% end -%>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
 
-      <ul>
-      <% field.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+    <%= form_with(model: field, remote:true) do |form| %>
+      <div class="modal-body" style="background-color: #f7f7f7;">
+        <% if field.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(field.errors.count, "error") %> prohibited this field from being saved:</h2>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+            <ul>
+            <% field.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="field">
+          <%= form.label "Nombre" %>
+          <%= form.text_field :name, id: "name" %>
+        </div>
+
+        <div class="field">
+          <%= form.label "Tipo de Campo" %>
+          <%= form.text_field :field_type, id: "type" %>
+        </div>
+
+        <div class="field">
+          <%= form.label "Estado" %>
+          <%= form.check_box :state, id: "state" %>
+        </div>
+
+        <div class="field">
+          <%= form.label "Requerido" %>
+          <%= form.check_box :required, id: "reque" %>
+        </div>
+
+        <div class="field">
+          <%= form.label "Agregar Al Formulario" %>
+          <%= form.text_field :form, id: "form" %>
+        </div>
+
+        <%= form.hidden_field :admin_user %>
+        <%= form.hidden_field :user_id, id: "user", :value => current_user.id %>
+
+
+        <div class="col-md-12 modal-footer">
+          <%= form.submit "Guardar", class: "btn btn-success add_service" %>
+        </div>
+
+      </div>
+    <% end %>
+
   </div>
-
-  <div class="field">
-    <%= form.label :field_type %>
-    <%= form.text_field :field_type %>
-  </div>
-
-  <div class="field">
-    <%= form.label :state %>
-    <%= form.check_box :state %>
-  </div>
-
-  <div class="field">
-    <%= form.label :required %>
-    <%= form.check_box :required %>
-  </div>
-
-  <div class="field">
-    <%= form.label :form %>
-    <%= form.text_field :form %>
-  </div>
-
-  <div class="field">
-    <%= form.label :admin_user %>
-    <%= form.number_field :admin_user %>
-  </div>
-
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.number_field :user_id %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>
+</div>

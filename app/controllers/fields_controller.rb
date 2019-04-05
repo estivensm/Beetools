@@ -28,7 +28,7 @@ class FieldsController < ApplicationController
 
     respond_to do |format|
       if @field.save
-        format.html { redirect_to @field, notice: 'Field was successfully created.' }
+        format.js
         format.json { render :show, status: :created, location: @field }
       else
         format.html { render :new }
