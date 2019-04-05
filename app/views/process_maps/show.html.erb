@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>File:</strong>
+  <%= @process_map.file %>
+</p>
+
+<p>
+  <strong>Admin user:</strong>
+  <%= @process_map.admin_user %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @process_map.user_id %>
+</p>
+
+<p>
+  <strong>Version:</strong>
+  <%= @process_map.version %>
+</p>
+
+<%= link_to 'Edit', edit_process_map_path(@process_map) %> |
+<%= link_to 'Back', process_maps_path %>

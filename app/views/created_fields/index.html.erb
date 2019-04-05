@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Created Fields</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Content</th>
+      <th>Document</th>
+      <th>Field</th>
+      <th>Admin user</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @created_fields.each do |created_field| %>
+      <tr>
+        <td><%= created_field.content %></td>
+        <td><%= created_field.document_id %></td>
+        <td><%= created_field.field_id %></td>
+        <td><%= created_field.admin_user %></td>
+        <td><%= created_field.user_id %></td>
+        <td><%= link_to 'Show', created_field %></td>
+        <td><%= link_to 'Edit', edit_created_field_path(created_field) %></td>
+        <td><%= link_to 'Destroy', created_field, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Created Field', new_created_field_path %>

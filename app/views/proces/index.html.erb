@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Proces</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Admin user</th>
+      <th>User</th>
+      <th>Proces type</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @proces.each do |proce| %>
+      <tr>
+        <td><%= proce.name %></td>
+        <td><%= proce.description %></td>
+        <td><%= proce.admin_user %></td>
+        <td><%= proce.user_id %></td>
+        <td><%= proce.proces_type %></td>
+        <td><%= link_to 'Show', proce %></td>
+        <td><%= link_to 'Edit', edit_proce_path(proce) %></td>
+        <td><%= link_to 'Destroy', proce, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Proce', new_proce_path %>

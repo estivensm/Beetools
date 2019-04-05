@@ -1,0 +1,42 @@
+<%= form_with(model: proce, local: true) do |form| %>
+  <% if proce.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(proce.errors.count, "error") %> prohibited this proce from being saved:</h2>
+
+      <ul>
+      <% proce.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :admin_user %>
+    <%= form.number_field :admin_user %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.number_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :proces_type %>
+    <%= form.text_field :proces_type %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

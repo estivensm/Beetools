@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>BeeToolsUser</title>
+    <title>BeeTools</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= favicon_link_tag "https://mybc1.s3.amazonaws.com/uploads/rseguimiento/evidencia/430/WhatsApp_Image_2019-04-05_at_11.55.04_AM.jpeg" %>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta charset="utf-8">
 
@@ -142,7 +143,7 @@
             <div class="top-left">
                 <div class="navbar-header">
                     <a class="navbar-brand" href="./"><h5>BeeTools</h5></a>
-                    <a class="navbar-brand hidden" href="./"><img src="images/logo2.png" alt="Logo"></a>
+                    <a class="navbar-brand hidden" href="./"><img src="https://dnuba.s3.amazonaws.com/uploads/bank_image/achivo/44/user.jpeg" alt="Logo"></a>
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
             </div>
@@ -246,7 +247,7 @@
         <div class="content">
             <!-- Animated -->
             <div class="animated fadeIn">
-                <!-- Widgets  -->
+                <!-- Widgets 
                 <div class="row">
                     <div class="col-lg-3 col-md-6">
                         <div class="card">
@@ -320,7 +321,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- /Widgets -->
+                /Widgets -->
                 <!--  Traffic  -->
                 <div class="row">
                     <div class="col-lg-12">
@@ -577,7 +578,7 @@
                                             <li>
                                                 <div class="msg-received msg-container">
                                                     <div class="avatar">
-                                                       <img src="images/avatar/64-1.jpg" alt="">
+                                                       <img src="https://dnuba.s3.amazonaws.com/uploads/bank_image/achivo/44/user.jpeg" alt="">
                                                        <div class="send-time">11.11 am</div>
                                                     </div>
                                                     <div class="msg-box">
@@ -595,7 +596,7 @@
                                             <li>
                                                 <div class="msg-sent msg-container">
                                                     <div class="avatar">
-                                                       <img src="images/avatar/64-2.jpg" alt="">
+                                                       <img src="https://dnuba.s3.amazonaws.com/uploads/bank_image/achivo/44/user.jpeg" alt="">
                                                        <div class="send-time">11.11 am</div>
                                                     </div>
                                                     <div class="msg-box">
@@ -626,39 +627,6 @@
                     </div>
                 </div>
                 <!-- /To Do and Live Chat -->
-                <!-- Calender Chart Weather  -->
-                <div class="row">
-                    <div class="col-md-12 col-lg-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <!-- <h4 class="box-title">Chandler</h4> -->
-                                <div class="calender-cont widget-calender">
-                                    <div id="calendar"></div>
-                                </div>
-                            </div>
-                        </div><!-- /.card -->
-                    </div>
-
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card ov-h">
-                            <div class="card-body bg-flat-color-2">
-                                <div id="flotBarChart" class="float-chart ml-4 mr-4"></div>
-                            </div>
-                            <div id="cellPaiChart" class="float-chart"></div>
-                        </div><!-- /.card -->
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card weather-box">
-                            <h4 class="weather-title box-title">Weather</h4>
-                            <div class="card-body">
-                                <div class="weather-widget">
-                                    <div id="weather-one" class="weather-one"></div>
-                                </div>
-                            </div>
-                        </div><!-- /.card -->
-                    </div>
-                </div>
-                <!-- /Calender Chart Weather -->
                 <!-- Modal - Calendar - Add New Event -->
                 <div class="modal fade none-border" id="event-modal">
                     <div class="modal-dialog">
@@ -2836,8 +2804,7 @@ header .form-inline {
       color: #fff; }
 
 /* Footer */
-footer.site-footer {
-  padding: 0 1.875em; }
+
   footer.site-footer .footer-inner {
     color: #78909c;
     font-family: 'Open Sans';
@@ -3249,102 +3216,6 @@ footer.site-footer {
   #cellPaiChart #pieLabel0 {
     left: inherit !important;
     right: 20px !important; }
-
-/*# sourceMappingURL=style.css.map */
 </style>
 
 
-<script type="text/javascript">
-  jQuery(document).ready(function($) {
-    $.noConflict();
-
-jQuery(document).ready(function($) {
-
-  "use strict";
-
-  [].slice.call( document.querySelectorAll( 'select.cs-select' ) ).forEach( function(el) {
-    new SelectFx(el);
-  });
-
-  jQuery('.selectpicker').selectpicker;
-
-
-  
-
-  $('.search-trigger').on('click', function(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    $('.search-trigger').parent('.header-left').addClass('open');
-  });
-
-  $('.search-close').on('click', function(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    $('.search-trigger').parent('.header-left').removeClass('open');
-  });
-
-  $('.equal-height').matchHeight({
-    property: 'max-height'
-  });
-
-  // var chartsheight = $('.flotRealtime2').height();
-  // $('.traffic-chart').css('height', chartsheight-122);
-
-
-  // Counter Number
-  $('.count').each(function () {
-    $(this).prop('Counter',0).animate({
-      Counter: $(this).text()
-    }, {
-      duration: 3000,
-      easing: 'swing',
-      step: function (now) {
-        $(this).text(Math.ceil(now));
-      }
-    });
-  });
-
-
-   
-   
-  // Menu Trigger
-  $('#menuToggle').on('click', function(event) {
-    var windowWidth = $(window).width();       
-    if (windowWidth<1010) { 
-      $('body').removeClass('open'); 
-      if (windowWidth<760){ 
-        $('#left-panel').slideToggle(); 
-      } else {
-        $('#left-panel').toggleClass('open-menu');  
-      } 
-    } else {
-      $('body').toggleClass('open');
-      $('#left-panel').removeClass('open-menu');  
-    } 
-       
-  }); 
-
-   
-  $(".menu-item-has-children.dropdown").each(function() {
-    $(this).on('click', function() {
-      var $temp_text = $(this).children('.dropdown-toggle').html();
-      $(this).children('.sub-menu').prepend('<li class="subtitle">' + $temp_text + '</li>'); 
-    });
-  });
-
-
-  // Load Resize 
-  $(window).on("load resize", function(event) { 
-    var windowWidth = $(window).width();       
-    if (windowWidth<1010) {
-      $('body').addClass('small-device'); 
-    } else {
-      $('body').removeClass('small-device');  
-    } 
-    
-  });
-  
- 
-});
-  });
-</script>

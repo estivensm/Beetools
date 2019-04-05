@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @created_field.content %>
+</p>
+
+<p>
+  <strong>Document:</strong>
+  <%= @created_field.document_id %>
+</p>
+
+<p>
+  <strong>Field:</strong>
+  <%= @created_field.field_id %>
+</p>
+
+<p>
+  <strong>Admin user:</strong>
+  <%= @created_field.admin_user %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @created_field.user_id %>
+</p>
+
+<%= link_to 'Edit', edit_created_field_path(@created_field) %> |
+<%= link_to 'Back', created_fields_path %>

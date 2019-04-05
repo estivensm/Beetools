@@ -1,0 +1,2 @@
+class ProcessMap < ApplicationRecord
+end

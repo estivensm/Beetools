@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @proce.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @proce.description %>
+</p>
+
+<p>
+  <strong>Admin user:</strong>
+  <%= @proce.admin_user %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @proce.user_id %>
+</p>
+
+<p>
+  <strong>Proces type:</strong>
+  <%= @proce.proces_type %>
+</p>
+
+<%= link_to 'Edit', edit_proce_path(@proce) %> |
+<%= link_to 'Back', proces_path %>

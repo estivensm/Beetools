@@ -1,0 +1,2 @@
+class CreatedField < ApplicationRecord
+end

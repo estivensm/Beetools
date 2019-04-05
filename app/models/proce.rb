@@ -1,0 +1,2 @@
+class Proce < ApplicationRecord
+end
