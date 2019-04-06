@@ -9,7 +9,7 @@
         </h5>
       </div>
       <div class="modal-body">
-        <%= form_tag create_user_path, method: :post, remote: true do %>
+        <%= form_tag create_user_path, method: :post, remote: true, class: "needs-validation", :novalidate => true do %>
           <div class="row">
             <div class="col-md-3">
               <%= label_tag "Nombre" %>
@@ -20,7 +20,11 @@
 
             <div class="col-md-3">
               <%= label_tag "Segundo Nombre" %>
-              <%= text_field_tag :second_name, nil, class: "form form-control", :placeholder => "Segundo Nombre" %>
+              <%= text_field_tag :second_name, nil, class: "form form-control", :placeholder => "Segundo Nombre", id: "validationCustom01", :required => true %>
+
+              <div class="invalid-feedback">
+                Requerido!
+              </div>
             </div>
 
             <div class="col-md-3">

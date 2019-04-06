@@ -28,9 +28,9 @@
               </thead>
 
               <tbody>
-                <% @user.each do |user| %>
+                <% @user.each_with_index do |user, position| %>
                   <tr id="dele<%= user.id%>">
-                    <td class="serial">1.</td>
+                    <td class="serial"><%= position + 1 %>.</td>
                     <td class="avatar">
                     	<div class="round-img">
                     		<%= user.avatar? ? image_tag(user.avatar_url(), class: "rounded-circle",id: "user-avatar1") : image_tag("https://dnuba.s3.amazonaws.com/uploads/bank_image/achivo/44/user.jpeg", class: "rounded-circle")%>
