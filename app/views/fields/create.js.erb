@@ -2,23 +2,17 @@ jQuery(document).ready(function($){
 $('#product-modal').modal('hide')
 toastr["success"]("El Campo fue creado con <b> Exito!</b>");
 
-        	var user = $("#user").val();
-            var name = $("#name").val();
-            var type = $("#type").val();
-            var state = $("#state").val();
-            var form = $("#form").val();
-            var reque = $("#reque").val();
 
-            var markup = "<tr><td>1</td><td>" + user + "</td><td>" + type + "</td><td>" + name + "</td><td>" + state + "</td><td>" + reque + "</td><td>" + form + "</td>";
+            var markup = "<tr><td>1</td><td>" +  "<%= @field.user_id %>"  + "</td><td>" + "<%= @field.field_type %>" + "</td><td>" + "<%= @field.name %>" + "</td><td>" + '<%= get_icon(@field.state).html_safe %>' + "</td><td>" + '<%= get_icon(@field.required).html_safe %>' + "</td><td>" + "<%= @field.form %>" + "</td><td>" + '<%= link_to "Edit", edit_field_path(@field), remote:true %>' + '<%= link_to "Destroy", @field, method: :delete, data: { confirm: "Are you sure?" }, remote:true %>' + "</td>";
             $(".table_form tbody").append(markup);
 
         
         // Find and remove selected table rows
-        $(".delete-service").click(function(){
-            $(".table_services tbody").find('input[name="record"]').each(function(){
-            	if($(this).is(":checked")){
-                    $(this).parents("tr").remove();
-                }
-            });
-        });   
+        //$(".delete-service").click(function(){
+            //$(".table_services tbody").find('input[name="record"]').each(function(){
+            	//if($(this).is(":checked")){
+                    //$(this).parents("tr").remove();
+                //}
+            //});
+        //});   
 });

@@ -42,7 +42,7 @@ class FieldsController < ApplicationController
   def update
     respond_to do |format|
       if @field.update(field_params)
-        format.html { redirect_to @field, notice: 'Field was successfully updated.' }
+        format.js
         format.json { render :show, status: :ok, location: @field }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class FieldsController < ApplicationController
   def destroy
     @field.destroy
     respond_to do |format|
-      format.html { redirect_to fields_url, notice: 'Field was successfully destroyed.' }
+      format.js
       format.json { head :no_content }
     end
   end

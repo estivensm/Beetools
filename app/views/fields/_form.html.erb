@@ -1,21 +1,20 @@
-<div id="product-modal" class="modal fade">  
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header padding-lef">
-          <% if action_name == "new" %>
-            <h4 class="modal-title">Crear Nuevo Campo </h4>  
+<div class="modal fade" id="product-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          <% if action_name == "new"%>
+          Crear Nuevo Campo
           <% else %>
-            <h4 class="modal-title">Editar Campo </h4>
+            Editar Campo
           <% end -%>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-
-    <%= form_with(model: field, remote:true) do |form| %>
-      <div class="modal-body" style="background-color: #f7f7f7;">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        </h5>
+      </div>
+      <div class="modal-body">
+        <%= form_with(model: field, remote:true) do |form| %>
         <% if field.errors.any? %>
           <div id="error_explanation">
             <h2><%= pluralize(field.errors.count, "error") %> prohibited this field from being saved:</h2>
@@ -28,42 +27,52 @@
           </div>
         <% end %>
 
-        <div class="field">
+        <div class="col-md-12 no-padding-left">
           <%= form.label "Nombre" %>
-          <%= form.text_field :name, id: "name" %>
+          <%= form.text_field :name, class: "form form-control" %>
         </div>
 
-        <div class="field">
+        <br>
+
+        <div class="col-md-12 no-padding-left">
           <%= form.label "Tipo de Campo" %>
-          <%= form.text_field :field_type, id: "type" %>
+          <%= form.text_field :field_type, class: "form form-control" %>
         </div>
 
-        <div class="field">
-          <%= form.label "Estado" %>
-          <%= form.check_box :state, id: "state" %>
-        </div>
+        <br>
 
-        <div class="field">
-          <%= form.label "Requerido" %>
-          <%= form.check_box :required, id: "reque" %>
-        </div>
-
-        <div class="field">
+        <div class="col-md-12 no-padding-left">
           <%= form.label "Agregar Al Formulario" %>
-          <%= form.text_field :form, id: "form" %>
+          <%= form.text_field :form, class: "form form-control" %>
         </div>
+
+        <br>
+
+        <div class="row">
+          <div class="col-md-6 text-center">
+            <%= form.label "Estado" %>
+            <%= form.check_box :state, class: "form form-control" %>
+          </div>
+
+          <div class="col-md-6 text-center">
+            <%= form.label "Requerido" %>
+            <%= form.check_box :required, class: "form form-control" %>
+          </div>
+        </div>
+        
+        <br>
 
         <%= form.hidden_field :admin_user %>
-        <%= form.hidden_field :user_id, id: "user", :value => current_user.id %>
-
+        <%= form.hidden_field :user_id, :value => current_user.id %>
 
         <div class="col-md-12 modal-footer">
           <%= form.submit "Guardar", class: "btn btn-success add_service" %>
         </div>
 
       </div>
-    <% end %>
+      <% end %>
 
+    </div>
   </div>
 </div>
-</div>
+

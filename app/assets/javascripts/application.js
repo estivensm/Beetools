@@ -19,10 +19,8 @@
 //= require turbolinks
 //= require_tree .
 
-
-    $.noConflict();
-
 jQuery(document).ready(function($) {
+    $.noConflict();
 
   "use strict";
 

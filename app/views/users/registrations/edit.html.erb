@@ -1,43 +1,152 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="row">
+  <div class="col-xl-8">
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+    <div class="card">
+      <div class="card-body">
+        <legend>Editar Perfil</legend>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        <div class="col-md-12 no-padding">
+          <hr>
+        </div>
+
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, remote:true }) do |f| %>
+          <%= render "users/shared/error_messages", resource: resource %>
+
+          <div class="row">
+              <div class="col-md-4">
+                  <%= f.label "Primer Nombre" %><br />
+                  <%= f.text_field :first_name, class: "form form-control", :placeholder => "Primer Nombre" %>
+              </div>
+
+              <div class="col-md-4">
+                  <%= f.label "Segundo Nombre" %><br />
+                  <%= f.text_field :second_name, class: "form form-control", :placeholder => "Segundo Nombre" %>                
+              </div>
+
+              <div class="col-md-4">
+                  <%= f.label "Primer Apellido" %><br />
+                  <%= f.text_field :first_last_name, class: "form form-control", :placeholder => "Primer Apellido" %>                
+              </div>
+          </div>
+
+          <br>
+
+          <div class="row">
+              <div class="col-md-4">
+                  <%= f.label "Segundo Apellido" %><br />
+                  <%= f.text_field :second_last_name, class: "form form-control", :placeholder => "Segundo Apellido" %>
+              </div>
+
+              <div class="col-md-4">
+                  <%= f.label "Tipo de Documento" %><br />
+                  <%= f.select 'document_type', options_for_select(select_documento), {:prompt => 'Selecciona una Opcion'},{:class => 'form form-control'}%>               
+              </div>
+
+              <div class="col-md-4">
+                  <%= f.label "Numero de Documento" %><br />
+                  <%= f.text_field :document_number, class: "form form-control", :placeholder => "Numero de Documento" %>                
+              </div>
+          </div>
+
+          <br>
+
+          <div class="col-md-5 no-padding-left">
+            <%= f.label "Contraseña Actual" %><br>
+            <%= f.password_field :current_password, autocomplete: "current-password", class: "form form-control", :placeholder => "Contraseña actual" %>
+          </div>
+
+          <br>
+
+          <div class="row">
+
+            <div class="col-md-6">
+              <%= f.label "Fecha de Cumpleaños" %><br />
+              <%= f.date_field :birthday, class: "form form-control", :placeholder => "Fecha de Cumpleaños" %>  
+            </div>
+
+            <div class="col-md-6">
+              <%= f.label :email %><br>
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form form-control" %>
+            </div>
+
+          </div>
+
+          <br>
+
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+          <% end %>
+
+          <legend>Actualizacion de Contraseñas</legend>
+
+          <div class="col-md-12 no-padding">
+            <hr>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <%= f.label "Contraseña" %>
+              <%= f.password_field :password, autocomplete: "new-password", class: "form form-control" %>
+            </div>
+
+            <div class="col-md-6">
+              <%= f.label "Confirmar Contraseña" %><br />
+              <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form form-control" %>
+            </div>
+          </div>
+
+      </div>
+    </div>
+
+
   </div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+    <div class="col-xl-4">
+
+      <div class="card">
+        <div class="card-body">
+
+          <div class="col-md-12 text-center">
+             <%= current_user.avatar? ? image_tag(current_user.avatar_url(), class: "user-avatar rounded-circle",id: "user-avatar1") : image_tag("https://dnuba.s3.amazonaws.com/uploads/bank_image/achivo/44/user.jpeg", class: "user-avatar rounded-circle")%>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          
+          <div class="col-md-12 no-padding-left">
+            <p><i class="fas fa-user"></i> <%= current_user.email %></p>
+            <p><i class="fas fa-user"></i> <%= current_user.first_name %> - <%= current_user.second_name %></p>
+            <p><i class="fas fa-user"></i> <%= current_user.first_last_name %> -  <%= current_user.second_last_name %> </p>
+            <p><i class="far fa-address-book"></i> <%= current_user.document_type %>  </p>
+            <p><i class="far fa-address-book"></i> <%= current_user.document_number %>  </p>
+            <p><i class="fas fa-birthday-cake"></i> <%= current_user.birthday %> </p>
+          </div>
+
+
+          <div class="col-md-12 text-center">
+            <%= f.submit "Actualizar Informacion" %>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-xl-12">
+      <div class="card">
+        <div class="card-body">
+          <h3>Cancel my account</h3>
+
+            <div class="col-md-2 float-right">
+              <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %>
+            </div>
+        </div>
+      </div>
+    </div>
+
   <% end %>
+</div>
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
