@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
-  respond_to :html, :js, :only => [:new, :update, :create]
+  respond_to :html, :js, :only => [:new, :update, :create, :create_user]
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
@@ -19,6 +19,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def edit
   #   super
   # end
+
+
+  def create_user
+    @users = User.create(user_params)
+    if @users.save
+        flash[:success] = "El Registro de creo con"
+      else 
+        flash[:error] = "El Registro No se puedo crear"
+    end
+  end
 
   # PUT /resource
    def update
@@ -60,4 +70,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+  private 
+
+  def user_params
+    params.permit(:email, :password, :password_confirmation, :first_name, :second_name, :first_last_name, :second_last_name, :document_type, :document_number, :avatar, :admin_user, :is_account)
+  end
 end

@@ -1,0 +1,111 @@
+<div class="modal fade bd-example-modal-lg" id="product-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog  modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Crear Nuevo Usuario
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        </h5>
+      </div>
+      <div class="modal-body">
+        <%= form_tag create_user_path, method: :post, remote: true do %>
+          <div class="row">
+            <div class="col-md-3">
+              <%= label_tag "Nombre" %>
+              <%= text_field_tag :first_name, nil, class: "form form-control", :placeholder => "Nombre" %>
+            </div>
+
+            <br>
+
+            <div class="col-md-3">
+              <%= label_tag "Segundo Nombre" %>
+              <%= text_field_tag :second_name, nil, class: "form form-control", :placeholder => "Segundo Nombre" %>
+            </div>
+
+            <div class="col-md-3">
+              <%= label_tag "Primer Apellido" %>
+              <%= text_field_tag :first_last_name, nil, class: "form form-control", :placeholder => "Primer Apellido" %>
+            </div>
+
+            <div class="col-md-3">
+              <%= label_tag "Segundo Apellido" %>
+              <%= text_field_tag :second_last_name, nil, class: "form form-control", :placeholder => "Segundo Apellido" %>
+            </div>
+
+          </div>
+        <br>
+
+          <div class="row">
+            <div class="col-md-4">
+              <%= label_tag "Tipo de Documento" %>
+              <%= select_tag 'document_type', options_for_select(select_documento),{:class => 'form form-control'}%>  
+            </div>
+
+            <br>
+
+            <div class="col-md-4">
+              <%= label_tag "Numero de Documento" %>
+              <%= text_field_tag :document_number, nil, class: "form form-control", :placeholder => "Numero de Documento" %>
+            </div>
+
+            <div class="col-md-4">
+              <%= label_tag "Email" %>
+              <%= email_field_tag :email, nil, class: "form form-control", :placeholder => "Email" %>
+            </div>
+
+          </div>
+
+          <br>
+
+          <div class="row">
+            <div class="col-xl-8">
+
+              <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                      
+                    <div class="col-md-6">
+                      <%= label_tag "Contraseña" %>
+                      <%= password_field_tag :password, nil, class: "form form-control", :placeholder => "Contraseña" %>
+                    </div>
+
+                    <div class="col-md-6">
+                      <%= label_tag "Confirmar Contraseña" %>
+                      <%= password_field_tag :password_confirmation, nil, class: "form form-control", :placeholder => "Confirmar Contraseña" %>
+                    </div>
+
+                    </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="col-xl-4">
+              <div class="card">
+                <div class="card-body">
+
+                  <div class="col-md-12 text-center">
+                    <img id="blah1" class="user-avatar rounded-circle" src="https://dnuba.s3.amazonaws.com/uploads/bank_image/achivo/44/user.jpeg" alt="" />
+                  </div>
+
+                  <div class="col-md-12 text-center">
+                    <%= file_field_tag :avatar, class: "form form-control", id: "img1" %>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+        <%# form.hidden_field :admin_user, :value => true %>
+        <%# form.hidden_field :is_account, :value => true %>
+        <div class="col-md-12 modal-footer">
+          <%= submit_tag "Guardar", class: "btn btn-success" %>
+        </div>
+      </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>

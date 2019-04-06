@@ -4,6 +4,13 @@ class HomeController < ApplicationController
   end
 
   def create_user
-  	
+  	@user = User.all
   end
+
+  def user
+  	respond_to do |format|
+  		format.js
+    end
+  end
+  
 end

@@ -1,1 +1,59 @@
-<h1>asdasd</h1>
+<p id="notice"><%= notice %></p>
+
+
+<div class="orders">
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="card">
+
+        <div class="card-body">
+          <h4 class="box-title">Usuarios Registrados </h4>
+        </div>
+
+        <div class="card-body">
+          <div class="table-stats order-table ov-h">
+            <table class="table table_form ">
+
+              <thead>
+                <tr>
+                  <th class="serial">#</th>
+                  <th class="avatar">Avatar </th>
+                  <th>Nombre</th>
+                  <th>Apellido</th>
+                  <th>Segundo Apellido</th>
+                  <th>Tipo de Documento</th>
+                  <th>Numero de Documento</th>
+                  <th colspan="3">Email</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <% @user.each do |user| %>
+                  <tr id="dele<%= user.id%>">
+                    <td class="serial">1.</td>
+                    <td class="avatar">
+                    	<div class="round-img">
+                    		<%= user.avatar? ? image_tag(user.avatar_url(), class: "rounded-circle",id: "user-avatar1") : image_tag("https://dnuba.s3.amazonaws.com/uploads/bank_image/achivo/44/user.jpeg", class: "rounded-circle")%>
+                        </div>
+                    </td>
+                    <td><%= user.first_name if user.first_name %></td>
+                    <td><%= user.first_last_name if user.first_last_name %></td>
+                    <td><%= user.second_last_name if user.second_last_name %></td>
+                    <td><%= user.document_type if user.document_type %></td>
+                    <td><%= user.document_number if user.document_number %></td>
+                    <td><%= user.email %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div> 
+        </div>
+
+        <div class="col-md-12 modal-footer">
+          <%= link_to 'Crear Usuario', user_path, class: "btn btn-success ", remote:true %>
+        </div>
+
+      </div> 
+    </div>  
+  </div>
+</div>
