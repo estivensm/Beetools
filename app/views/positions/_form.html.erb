@@ -1,42 +1,60 @@
-<%= form_with(model: position, local: true) do |form| %>
-  <% if position.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(position.errors.count, "error") %> prohibited this position from being saved:</h2>
+<div class="modal fade" id="product-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          <% if action_name == "new" %>
+            Nuevo Cargo
+            <% else %>
+            Editar Cargo 
+          <% end -%>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        </h5>
+      </div>
+      <div class="modal-body">
+      <%= form_with(model: position, local: true) do |form| %>
+        <% if position.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(position.errors.count, "error") %> prohibited this position from being saved:</h2>
 
-      <ul>
-      <% position.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+            <ul>
+            <% position.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="row">
+          <div class="col-md-6">
+            <%= form.label "Nombre" %>
+            <%= form.text_field :name, class: "form form-control" %>
+          </div>
+
+          <div class="col-md-6">
+            <%= form.label "Al Procceso" %>
+            <%= form.select 'proces_id', options_for_select(select_type_proces), {:prompt => 'Selecciona El Tipo de Procceso'},{:class => 'form form-control'}%>
+          </div>
+        </div>
+
+        <br>
+        <div class="field">
+          <%= form.label "Descripcion" %>
+          <%= form.text_area :description, class: "form form-control", :rows => 9 %>
+        </div>
+
+        <br>
+        <%= form.hidden_field :admin_user, :value => current_user.admin_user  %>
+        <%= form.hidden_field :user_id, :value => current_user.id %>
+
+        <div class="col-md-12 modal-footer">
+          <%= form.submit "Guardar", class: "btn btn-success" %>
+        </div>
       <% end %>
-      </ul>
+
+      </div>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
   </div>
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :admin_user %>
-    <%= form.number_field :admin_user %>
-  </div>
-
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.number_field :user_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :proces_id %>
-    <%= form.number_field :proces_id %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

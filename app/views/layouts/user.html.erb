@@ -6,7 +6,7 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
     <%= favicon_link_tag "https://mybc1.s3.amazonaws.com/uploads/rseguimiento/evidencia/430/WhatsApp_Image_2019-04-05_at_11.55.04_AM.jpeg" %>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta charset="utf-8">
@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
-
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
    <style>
     #weatherWidget .currentDesc {
         color: #ffffff!important;
@@ -68,16 +68,27 @@
                     </li>
                     <li class="menu-title">UI elements</li><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>Components</a>
-                        <ul class="sub-menu children dropdown-menu">                            <li><i class="fa fa-puzzle-piece"></i><a href="ui-buttons.html">Buttons</a></li>
-                            <li><i class="fa fa-id-badge"></i><a href="ui-badges.html">Badges</a></li>
-                            <li><i class="fa fa-bars"></i><a href="ui-tabs.html">Tabs</a></li>
-
-                            <li><i class="fa fa-id-card-o"></i><a href="ui-cards.html">Cards</a></li>
-                            <li><i class="fa fa-exclamation-triangle"></i><a href="ui-alerts.html">Alerts</a></li>
-                            <li><i class="fa fa-file-word-o"></i><a href="ui-typgraphy.html">Typography</a></li>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>Configuracion</a>
+                        <ul class="sub-menu children dropdown-menu">                            
+                            <li><i class="fa fa-id-badge"></i><a href="/positions">Cargos</a></li>
+                            <li><i class="fa fa-exclamation-triangle"></i><a href="/proces">Procesos</a></li>
+                            <li><i class="fa fa-bars"></i><a href="/fields">Configuaracion de Formularios</a></li>
+                            <li><i class="fa fa-exclamation-triangle"></i><a href="/process_maps">Mapa de Procesos</a></li>
                         </ul>
                     </li>
+
+                    <li class="">
+                        <%= link_to users_path do %>
+                            <i class="menu-icon fas fa-users"></i> Creacion de Usuarios
+                        <% end -%>
+                    </li>
+
+                    <li class="">
+                        <%= link_to edit_user_registration_path do %>
+                            <i class="menu-icon fas fa-users-cog"></i>Editar Cuenta
+                        <% end -%>
+                    </li>
+                    <!--
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Tables</a>
                         <ul class="sub-menu children dropdown-menu">
@@ -92,11 +103,7 @@
                             <li><i class="menu-icon fa fa-th"></i><a href="forms-advanced.html">Advanced Form</a></li>
                         </ul>
                     </li>
-                    <li class="">
-                        <%= link_to users_path do %>
-                            <i class="menu-icon fas fa-users"></i> Creacion de Usuarios
-                        <% end -%>
-                    </li>
+                -->
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>
@@ -1073,7 +1080,7 @@ canvas {
   .order-table tr th {
     background: #e8e9ef; }
   .order-table tr td:last-child, .order-table tr th:last-child {
-    text-align: right; }
+    text-align: center; }
   .order-table tr:last-child td {
     border: none; }
   .order-table .badge {

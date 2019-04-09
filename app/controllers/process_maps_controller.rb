@@ -28,7 +28,7 @@ class ProcessMapsController < ApplicationController
 
     respond_to do |format|
       if @process_map.save
-        format.html { redirect_to @process_map, notice: 'Process map was successfully created.' }
+        format.html { redirect_to process_maps_path, notice: 'Process map was successfully created.' }
         format.json { render :show, status: :created, location: @process_map }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class ProcessMapsController < ApplicationController
   def update
     respond_to do |format|
       if @process_map.update(process_map_params)
-        format.html { redirect_to @process_map, notice: 'Process map was successfully updated.' }
+        format.html { redirect_to process_maps_path, notice: 'Process map was successfully updated.' }
         format.json { render :show, status: :ok, location: @process_map }
       else
         format.html { render :edit }

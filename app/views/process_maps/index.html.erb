@@ -1,33 +1,97 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Process Maps</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>File</th>
-      <th>Admin user</th>
-      <th>User</th>
-      <th>Version</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="orders">
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="card">
 
-  <tbody>
-    <% @process_maps.each do |process_map| %>
-      <tr>
-        <td><%= process_map.file %></td>
-        <td><%= process_map.admin_user %></td>
-        <td><%= process_map.user_id %></td>
-        <td><%= process_map.version %></td>
-        <td><%= link_to 'Show', process_map %></td>
-        <td><%= link_to 'Edit', edit_process_map_path(process_map) %></td>
-        <td><%= link_to 'Destroy', process_map, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+        <div class="card-body">
+          <h4 class="box-title">Mapa de Processos </h4>
+        </div>
 
-<br>
+        <div class="card-body">
+          <div class="table-stats order-table ov-h">
+            <table class="table table_form ">
 
-<%= link_to 'New Process Map', new_process_map_path %>
+              <thead>
+                <tr>
+                  <th class="serial">#</th>
+                  <th class="avatar">Usuario </th>
+                  <th>Archivo</th>
+                  <th>Admin user</th>
+                  <th>Version</th>
+                  <th colspan="3">Acciones</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <% @process_maps.each_with_index do |process_map, position| %>
+                  <tr>
+                    <td class="serial"><%= position + 1 %>.</td>
+                    <td class="avatar">
+                      <div class="round-img">
+                        <%= process_map.user.avatar? ? image_tag(process_map.user.avatar_url(), class: "rounded-circle",id: "user-avatar1") : image_tag("https://dnuba.s3.amazonaws.com/uploads/bank_image/achivo/44/user.jpeg", class: "rounded-circle")%>
+                        </div>
+                    </td>
+                    <td>
+                      <% if process_map.file.present? %>
+                        <%= link_to "Archivo", process_map.file.url(), class: "btn btn-dark", target: "_blank"  %>
+                      <% end -%>
+                    </td>
+                    <td><%= process_map.admin_user %></td>
+                    <td><%= process_map.version %></td>
+                    <td><%= link_to 'Show', process_map %></td>
+                    <td><%= link_to 'Edit', edit_process_map_path(process_map), remote: true %></td>
+                    <td><%= link_to 'Destroy', process_map, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div> 
+        </div>
+
+        <div class="col-md-12 modal-footer">
+          <%= link_to 'Nuevo Mapa de Procceso', new_process_map_path, class: "btn btn-success ", remote:true %>
+        </div>
+   
+
+      </div> 
+    </div>  
+  </div>
+</div>
+
+
+<script>
+    
+ $(document).on( "change", '#img2', function () {
+    readURL(this);
+ });
+
+  function readURL(input) {
+
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function(e) {
+        
+        jQuery(document).ready(function($){
+          $('#blah1').attr('src', e.target.result);
+        });
+     
+      }
+
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+</script>
+
+
+<style type="text/css" media="screen">
+  #blah1{
+    margin-top: 20px;
+    height: 180px;
+    border-radius: 50%;
+  }
+</style>

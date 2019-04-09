@@ -28,7 +28,7 @@ class ProcesController < ApplicationController
 
     respond_to do |format|
       if @proce.save
-        format.html { redirect_to @proce, notice: 'Proce was successfully created.' }
+        format.html { redirect_to proces_path, notice: 'Proce was successfully created.' }
         format.json { render :show, status: :created, location: @proce }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class ProcesController < ApplicationController
   def update
     respond_to do |format|
       if @proce.update(proce_params)
-        format.html { redirect_to @proce, notice: 'Proce was successfully updated.' }
+        format.html { redirect_to proces_path, notice: 'Proce was successfully updated.' }
         format.json { render :show, status: :ok, location: @proce }
       else
         format.html { render :edit }

@@ -17,4 +17,14 @@ module ApplicationHelper
 	     
 	  	]
 	end
+
+	def select_type_proces
+		[
+
+			["Misionales", "Misionales"],
+			["Apollo", "Apollo"]
+
+
+		]
+	end
 end

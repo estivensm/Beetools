@@ -28,9 +28,9 @@
               </thead>
 
               <tbody>
-                <% @fields.each do |field| %>
+                <% @fields.each_with_index do |field, posicion| %>
                   <tr id="dele<%= field.id%>">
-                    <td class="serial">1.</td>
+                    <td class="serial"><%= posicion + 1%>.</td>
                       <td><%= field.user_id %></td>
                       <td><%= field.name %></td>
                       <td><%= field.field_type %></td>

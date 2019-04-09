@@ -1,24 +1,44 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>File:</strong>
-  <%= @process_map.file %>
-</p>
+  <div class="col-xl-12">
+    <div class="card">
+      <div class="card-body">
+      	<div class="row">
+      		
+      	<div class="card col-md-6">
+      		<div class="card-body">
+	      		<p>
+					<strong>Admin user:</strong>
+					<%= @process_map.admin_user %>
+				</p>
 
-<p>
-  <strong>Admin user:</strong>
-  <%= @process_map.admin_user %>
-</p>
+				<p>
+					<strong>User:</strong>
+					<%= @process_map.user_id %>
+				</p>
 
-<p>
-  <strong>User:</strong>
-  <%= @process_map.user_id %>
-</p>
+				<p>
+					<strong>Version:</strong>
+					<%= @process_map.version %>
+				</p>
+			</div>
+      	</div>
 
-<p>
-  <strong>Version:</strong>
-  <%= @process_map.version %>
-</p>
+      	<div class="card col-md-3">
+      		<div class="card-body">
+      			<%= @process_map.file? ? image_tag(@process_map.file_url(), class: "img-user") : image_tag("https://dnuba.s3.amazonaws.com/uploads/bank_image/achivo/44/user.jpeg", class: "img-user")%>
+      		</div>
+      	</div>
+      	</div>
 
-<%= link_to 'Edit', edit_process_map_path(@process_map) %> |
-<%= link_to 'Back', process_maps_path %>
+      </div>
+    </div>
+  </div>
+
+
+<style type="text/css" media="screen">
+	.img-user{
+		width: 170px;
+    	border-radius: 50%;
+	}
+</style>
+

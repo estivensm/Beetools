@@ -13,4 +13,6 @@
 #
 
 class Proce < ApplicationRecord
+	belongs_to :user
+	has_many :position
 end

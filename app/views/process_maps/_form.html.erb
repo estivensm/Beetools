@@ -1,37 +1,61 @@
-<%= form_with(model: process_map, local: true) do |form| %>
-  <% if process_map.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(process_map.errors.count, "error") %> prohibited this process_map from being saved:</h2>
+<div class="modal fade" id="product-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
-      <ul>
-      <% process_map.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          <% if action_name == "new" %>
+            Nuevo Mapa de Processo
+            <% else %>
+            Editar Mapa de Processo 
+          <% end -%>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        </h5>
+      </div>
+      <div class="modal-body">
+        <%= form_with(model: process_map, local: true) do |form| %>
+          <% if process_map.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(process_map.errors.count, "error") %> prohibited this process_map from being saved:</h2>
+
+              <ul>
+              <% process_map.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+        <div class="col-md-12">
+          <%= form.label "Archivo" %>
+          <%= form.file_field :file, class: "form form-control", :accept =>".png, .jpg, .jpeg", id: "img2" %>
+
+          <div class="col-md-12"  style="padding: 0px;">
+            <% if action_name == "edit"%>
+              <div class="col-md-12 text-center">
+                <img src="<%= @process_map.file()%>" alt="" id="blah1" >
+              </div>
+              <% else %>
+                <div class="col-md-12 text-center">
+                  <img id="blah1" src="#" alt="" />
+                </div>
+            <% end -%>
+          </div>
+        </div>
+
+        <% if action_name == "new" %>
+          <%= form.hidden_field :user_id, :value => current_user.id %>
+        <% end -%>
+        <%# form.hidden_field :is_account, :value => true %>
+        <br>
+        <div class="col-md-12 modal-footer">
+          <%= form.submit "Guardar", class: "btn btn-success" %>
+        </div>
       <% end %>
-      </ul>
+
+      </div>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :file %>
-    <%= form.text_field :file %>
   </div>
-
-  <div class="field">
-    <%= form.label :admin_user %>
-    <%= form.number_field :admin_user %>
-  </div>
-
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.number_field :user_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :version %>
-    <%= form.number_field :version %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

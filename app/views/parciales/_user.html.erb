@@ -40,6 +40,8 @@
           </div>
         <br>
 
+        <%= hidden_field_tag :admin_user , :value => current_user.admin_user %>
+
           <div class="row">
             <div class="col-md-4">
               <%= label_tag "Tipo de Documento" %>
