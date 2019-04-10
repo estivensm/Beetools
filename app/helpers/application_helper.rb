@@ -22,7 +22,7 @@ module ApplicationHelper
 		[
 
 			["Misionales", "Misionales"],
-			["Apollo", "Apollo"]
+			["Apoyo", "Apoyo"]
 
 
 		]
