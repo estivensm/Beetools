@@ -9,7 +9,7 @@
           <hr>
         </div>
 
-        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, remote:true }) do |f| %>
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
           <%= render "users/shared/error_messages", resource: resource %>
 
           <div class="row">
@@ -122,12 +122,12 @@
             <p><i class="fas fa-user"></i> <%= current_user.first_last_name %> -  <%= current_user.second_last_name %> </p>
             <p><i class="far fa-address-book"></i> <%= current_user.document_type %>  </p>
             <p><i class="far fa-address-book"></i> <%= current_user.document_number %>  </p>
-            <p><i class="fas fa-birthday-cake"></i> <%= current_user.birthday %> </p>
+            <p><i class="fas fa-birthday-cake"></i> <%= get_date(current_user.birthday) %> </p>
           </div>
 
 
-          <div class="col-md-12 text-center">
-            <%= button_to "Actualizar Informacion", :method => :post, :form_class => "my_class" %>
+          <div class="col-md-12 modal-footer">
+            <%= f.submit "Guardar", class: "btn btn-success" %>
           </div>
 
         </div>

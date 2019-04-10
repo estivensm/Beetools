@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
-  respond_to :html, :js, :only => [:new, :update, :create, :create_user]
+  #respond_to :html, :js, :only => [:new, :create, :create_user]
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
@@ -31,9 +31,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   # PUT /resource
-   def update
-     puts "aaaaaaaaaaaaaaaaaaaaaaaaaa"
-   end
+  #def update
+    #super
+  #end
 
   # DELETE /resource
   # def destroy
@@ -72,6 +72,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   private 
+
+  def after_update_path_for(resource)
+    edit_user_registration_path
+  end
 
   def user_params
     params.permit(:email, :password, :password_confirmation, :first_name, :second_name, :first_last_name, :second_last_name, :document_type, :document_number, :avatar, :admin_user, :is_account)
