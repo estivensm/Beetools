@@ -1,0 +1,45 @@
+es:
+  errors:
+    messages:
+      blank: "no puede estar en blanco"
+      invalid: "es inválido"
+      not_saved: 
+        one: "Ha ocurrido 1 error:"
+        other: "Han ocurrido %{count} errores:"
+      confirmation: "y contraseña deberian ser iguales." 
+      required: debe existir 
+      
+  activerecord:
+    attributes:
+      
+      user:
+        names: "Usuario"
+        password: "Contraseña"
+        password_confirmation: "Confirmación de contraseña"
+        user_name: "Nombre de Usuario"
+        phone: "Telefono"
+        current_password: "La Contraseña Actual"
+
+      admin:
+        name: "Usuario"
+        password: "Contraseña"
+        password_confirmation: "Confirmación de contraseña"
+        user_name: "Nombre de Usuario"
+        phone: "Telefono"
+
+  devise:
+    failure:
+      not_found_in_database: "Usuario o Contraseña inválido"
+      invalid: "El Usuario no puede estar vacío"
+      unauthenticated: "Debes iniciar sesion para ingresar a esta pagina"
+    sessions:
+      signed_in: "Bienvenido a Reemp"  
+      signed_out: "Cerraste Sesión Gracias por usar Reemp"
+    registrations:
+      signed_up: "Bienvenido, has iniciado Sesión correctamente"
+      updated: "Tu password a sido cambiado correctamente"
+    passwords:
+      send_instructions: "Un email ha sido enviado a tu correo con las instrucciones para restablecer tu contraseña"    
+      updated: "Tu Conraseña se actualizo correctamente"
+
+

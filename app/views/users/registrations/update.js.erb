@@ -1,0 +1,9 @@
+<% if devise_error_messages!.present? %>
+	toastr["error"]("Error <br> <b><%= resource.errors.full_messages.first %></b>");
+<% else %>
+	toastr["success"]("Tu Informacion se Actulizo con <b> Exito!</b>");
+	<% if @user.avatar.present? %>
+		document.getElementById("user-avatar1").src = '<%= @user.avatar.url() %>';
+	<% end %>
+
+<% end %>

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
-  #respond_to :html, :js, :only => [:new, :create, :create_user]
+  respond_to :html, :js, :only => [:new, :create, :create_user, :update]
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 

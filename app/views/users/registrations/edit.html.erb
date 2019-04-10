@@ -1,3 +1,10 @@
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <strong>Error</strong> You should check in on some of those fields below.
+
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
 <div class="row">
   <div class="col-xl-8">
 
@@ -9,8 +16,8 @@
           <hr>
         </div>
 
-        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-          <%= render "users/shared/error_messages", resource: resource %>
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, remote: true}) do |f| %>
+          <%# render "users/shared/error_messages", resource: resource %>
 
           <div class="row">
               <div class="col-md-4">
@@ -151,3 +158,8 @@
   <% end %>
 </div>
 
+<style type="text/css" media="screen">
+  .alert{
+    display: none;
+  }
+</style>
