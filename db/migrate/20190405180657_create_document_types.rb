@@ -4,6 +4,7 @@ class CreateDocumentTypes < ActiveRecord::Migration[5.2]
       t.string :name
       t.text :description
       t.boolean :file
+      t.string :prefix
       t.boolean :responsible
 
       t.timestamps

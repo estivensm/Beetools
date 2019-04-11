@@ -79,4 +79,9 @@ module ApplicationHelper
 	    end
 
 	 end 
+
+
+	 def get_fields
+	 	Field.all
+	 end
 end

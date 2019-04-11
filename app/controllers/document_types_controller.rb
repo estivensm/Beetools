@@ -15,6 +15,7 @@ class DocumentTypesController < ApplicationController
   # GET /document_types/new
   def new
     @document_type = DocumentType.new
+    @fiels = Field.all
   end
 
   # GET /document_types/1/edit
@@ -69,6 +70,6 @@ class DocumentTypesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def document_type_params
-      params.require(:document_type).permit(:name, :description, :file, :responsible)
+      params.require(:document_type).permit(:name, :description, :file, :responsible, :fileds_id => [])
     end
 end

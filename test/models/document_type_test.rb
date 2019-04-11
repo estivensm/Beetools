@@ -6,6 +6,7 @@
 #  name        :string
 #  description :text
 #  file        :boolean
+#  prefix      :string
 #  responsible :boolean
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
