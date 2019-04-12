@@ -66,17 +66,6 @@ function allowDrop(ev) {
   ev.preventDefault();
 
   jQuery(document).ready(function($) {
-    $(".parent_right").hover(function() {
-            console.log("estroy en el hover de la derecha");
-    }, function() {
-      console.log("sali");
-    });
-
-    $(".parent_left").hover(function() {
-      console.log("estroy en el hover de la izquierda");
-    }, function() {
-      console.log("sali");
-    });
 
   });
 }
@@ -95,20 +84,46 @@ function drop(ev) {
   var data = ev.dataTransfer.getData("text");
   ev.target.appendChild(document.getElementById(data));
   console.log(ev.dataTransfer.getData("text")); // son los valores que arrastra
-  items.push(data); 
-  console.log(items);
+ 
+
+  
+  
 
 
   var valor = data.replace("drag", "")
-
+  console.log(valor);
   jQuery(document).ready(function($) {
+
+  let parent = $("#"+data).parent();
+  console.log(parent.attr('class'));
+
+  console.log('afdsasdasdafdsadsf')
+    //$(document).on( "change", '#selec_edit', function () {
+      //var value = $(this).val()
+   if  (parent.attr('id') == "left"   )
+   { 
+    console.log("left");
+    items.push(data); 
     $('#sle').append('<option value="' + valor + '" selected>1</option>')
+   }
+   else
+   {
+    console.log("right");
+        $('#sle [value="'+ valor+ '"]').remove();
+        $('#selec_edit [value="'+ valor+ '"]').remove();
+      
+   }
+     
+console.log(items);
+    //});
+    //
+
+
+
   });
 
+
 }
-
-
-
 
 
 

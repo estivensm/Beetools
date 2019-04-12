@@ -48,14 +48,14 @@
                 <br>
 
                 <select class="form form-control" id="sle" multiple="multiple" name="document_type[field_ids][]" style="display: none;">
-                  <option value="">Campos</option>
+                  
                 </select>
           
-                <%# form.select 'field_ids', get_fields.map { |u| [u.name, u.id] }, {:prompt => 'subespecialidades'},{:class => 'form form-control', multiple: true, style: "display" }%>
+                <%= form.select 'field_ids', get_fields.map { |u| [u.name, u.id] }, {:prompt => 'subespecialidades'},{:class => 'form form-control', multiple: true, id: "selec_edit", style: "display: none" }%>
 
 
                 <div class="card col-md-12">
-                  <div class="cord-body parent_left" ondrop="drop(event)" ondragover="allowDrop(event)"  style="border: 1px solid red; min-height: 100px;" >
+                  <div class="cord-body parent_left" id ="left" ondrop="drop(event)" ondragover="allowDrop(event)"  style="border: 1px solid red; min-height: 100px;" >
 
                   <% if action_name == "edit" %>
                       <% @document_type.field.order(id: :desc).each do |rela| %>
@@ -91,7 +91,7 @@
                 <h5 align="center">Campos</h5>
                 <br>
 
-                <div class="col-md-12 no-padding parent_right" ondrop="drop(event)" ondragover="allowDrop(event)" style="border: 1px solid red; min-height: 100px;">
+                <div class="col-md-12 no-padding parent_right" id ="right" ondrop="drop(event)" ondragover="allowDrop(event)" style="border: 1px solid red; min-height: 100px;">
 
                     <% @fiels.each do |campo| %>
                       <div class="card" draggable="true" ondragstart="drag(event)" id="drag<%= campo.id %>">
@@ -132,4 +132,3 @@
     </div>
   </div>
 </div>
-
