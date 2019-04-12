@@ -24,11 +24,6 @@
                 <% @document_types.each_with_index do |document_type, position| %>
                   <tr>
                     <td class="serial"><%= position + 1 %>.</td>
-                    <td class="avatar">
-                      <div class="round-img">
-                        <%# proce.user.avatar? ? image_tag(proce.user.avatar_url(), class: "rounded-circle",id: "user-avatar1") : image_tag("https://dnuba.s3.amazonaws.com/uploads/bank_image/achivo/44/user.jpeg", class: "rounded-circle")%>
-                        </div>
-                    </td>
                     <td><%= document_type.name %></td>
                     <td><%= document_type.description %></td>
                     <td><%= link_to 'Show', document_type %></td>
@@ -50,22 +45,7 @@
     </div>  
   </div>
 </div>
-<form onsubmit="guardarNumeros()" data-remote="true">
- <p>Please insert the items</p>
- <input type="text" id="box">
- <input type="submit" value="Submit">
-</form>
 
-<script type="text/javascript">
-  function guardarNumeros(){
-
- var items = [];
- boxvalue = document.getElementById('box').value;
- items.push(boxvalue);  
- console.log(items);
-
-}
-</script>
 
 <style type="text/css" media="screen">
   .card-drop{
@@ -84,14 +64,31 @@
 
 function allowDrop(ev) {
   ev.preventDefault();
+
+  jQuery(document).ready(function($) {
+    $(".parent_right").hover(function() {
+            console.log("estroy en el hover de la derecha");
+    }, function() {
+      console.log("sali");
+    });
+
+    $(".parent_left").hover(function() {
+      console.log("estroy en el hover de la izquierda");
+    }, function() {
+      console.log("sali");
+    });
+
+  });
 }
 
 function drag(ev) {
   ev.dataTransfer.setData("text", ev.target.id);
   console.log(ev.target.id);
 }
- var items = [];
- var a =  1;
+
+var items = [];
+var a =  1;
+
 function drop(ev) {
  
   ev.preventDefault();
@@ -100,11 +97,12 @@ function drop(ev) {
   console.log(ev.dataTransfer.getData("text")); // son los valores que arrastra
   items.push(data); 
   console.log(items);
-  
-  jQuery(document).ready(function($) {
 
-    $('#sle').append('<option value="' + a + '" selected>1</option>')
-    a++;
+
+  var valor = data.replace("drag", "")
+
+  jQuery(document).ready(function($) {
+    $('#sle').append('<option value="' + valor + '" selected>1</option>')
   });
 
 }

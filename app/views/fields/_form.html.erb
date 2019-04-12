@@ -36,7 +36,7 @@
 
         <div class="col-md-12 no-padding-left">
           <%= form.label "Tipo de Campo" %>
-          <%= form.text_field :field_type, class: "form form-control" %>
+          <%= form.select 'field_type', get_field_type, {:prompt => 'Tipo de Campo'},{:class => 'form form-control'}%>
         </div>
 
         <br>

@@ -20,6 +20,7 @@ class DocumentTypesController < ApplicationController
 
   # GET /document_types/1/edit
   def edit
+    @fiels = Field.where.not(id: @document_type.field)
   end
 
   # POST /document_types
@@ -29,7 +30,7 @@ class DocumentTypesController < ApplicationController
 
     respond_to do |format|
       if @document_type.save
-        format.html { redirect_to @document_type, notice: 'Document type was successfully created.' }
+        format.html { redirect_to document_types_path, notice: 'Document type was successfully created.' }
         format.json { render :show, status: :created, location: @document_type }
       else
         format.html { render :new }
@@ -43,7 +44,7 @@ class DocumentTypesController < ApplicationController
   def update
     respond_to do |format|
       if @document_type.update(document_type_params)
-        format.html { redirect_to @document_type, notice: 'Document type was successfully updated.' }
+        format.html { redirect_to document_types_path, notice: 'Document type was successfully updated.' }
         format.json { render :show, status: :ok, location: @document_type }
       else
         format.html { render :edit }
@@ -70,6 +71,6 @@ class DocumentTypesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def document_type_params
-      params.require(:document_type).permit(:name, :description, :file, :responsible, :fileds_id => [])
+      params.require(:document_type).permit(:name, :description, :file, :responsible, :field_ids => [])
     end
 end

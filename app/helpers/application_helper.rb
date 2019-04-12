@@ -28,6 +28,16 @@ module ApplicationHelper
 		]
 	end
 
+	def get_field_type
+		[
+
+			["Texto", "Texto"],
+			["Select", "Select"]
+
+
+		]
+	end
+
 	def get_date(fecha)
    
 	    if fecha != nil
