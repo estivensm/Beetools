@@ -55,6 +55,10 @@ gem 'jquery-rails'
 #bootstrap
 gem 'bootstrap', '~> 4.3.1'
 #buscador
+
+#ckditor
+gem "wysiwyg-rails"
+
 gem 'chosen-rails'
 gem 'bootstrap-chosen-rails'
 # Use CoffeeScript for .coffee assets and views

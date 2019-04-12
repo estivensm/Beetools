@@ -94,4 +94,8 @@ module ApplicationHelper
 	 def get_fields
 	 	Field.all
 	 end
+
+	 def get_document_type
+	 	DocumentType.all
+	 end
 end

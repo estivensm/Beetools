@@ -1,0 +1,65 @@
+<div class="orders">
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="card">
+
+        <div class="card-body">
+          <h4 class="box-title">Documentos </h4>
+        </div>
+
+        <div class="card-body">
+          <div class="table-stats order-table ov-h">
+            <table class="table table_form ">
+
+              <thead>
+                <tr>
+                  <th class="serial">#</th>
+                  <th>Tipo de Documento</th>
+                  <th>Procceso</th>
+                  <th>Version</th>
+                  <th>Codigo</th>
+                  <th>Header</th>
+                  <th>Footer</th>
+                  <th colspan="3">Acciones</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <% @documents.each_with_index do |document, position| %>
+                  <tr>
+                    <td class="serial"><%= position + 1 %>.</td>
+                      <td><%= document.document_type.name %></td>
+                      <td><%= document.process_id %></td>
+                      <td><%= document.version %></td>
+                      <td><%= document.coding %></td>
+
+                      <td>
+                        <% if document.header.present? %>
+                          <i class="fas fa-info-circle" data-toggle="modal" data-target="#exampleModal"></i>
+                        <% end -%>
+                      </td>
+
+                      <td>
+                        <% if document.footer.present? %>
+                           <i class="fas fa-info-circle" data-toggle="modal" data-target="#exampleModal"></i>
+                        <% end -%>
+                      </td>
+                      <td><%= link_to 'Show', document %></td>
+                      <td><%= link_to 'Edit', edit_document_path(document) %></td>
+                      <td><%= link_to 'Destroy', document, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div> 
+        </div>
+
+        <div class="col-md-12 modal-footer">
+          <%= link_to 'Nuevo Documento', new_document_path, class: "btn btn-success " %>
+        </div>
+   
+
+      </div> 
+    </div>  
+  </div>
+</div>

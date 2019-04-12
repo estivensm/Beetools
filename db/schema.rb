@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_10_212834) do
+ActiveRecord::Schema.define(version: 2019_04_12_154506) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,29 @@ ActiveRecord::Schema.define(version: 2019_04_10_212834) do
   create_table "document_types_fields", id: false, force: :cascade do |t|
     t.bigint "field_id", null: false
     t.bigint "document_type_id", null: false
+  end
+
+  create_table "documents", force: :cascade do |t|
+    t.text "header"
+    t.text "footer"
+    t.string "logo"
+    t.string "ubication_logo"
+    t.integer "process_id"
+    t.string "coding_type"
+    t.string "coding"
+    t.integer "document_type_id"
+    t.integer "user_id"
+    t.integer "user_create_id"
+    t.integer "user_review_id"
+    t.integer "user_aprove_id"
+    t.date "create_date"
+    t.date "review_date"
+    t.date "aprove_date"
+    t.integer "version"
+    t.integer "review"
+    t.boolean "is_last"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "fields", force: :cascade do |t|

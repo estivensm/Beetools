@@ -1,0 +1,170 @@
+
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="col-md-12 no-padding-left">
+            <h3>
+              <% if action_name == "new" %>
+                Nuevo Documento
+                <% else %>
+                Editar Documento
+              <% end -%>
+            </h3>
+          </div>
+          <br>
+          <%= form_with(model: document, local: true) do |form| %>
+            <% if document.errors.any? %>
+              <div id="error_explanation">
+                <h2><%= pluralize(document.errors.count, "error") %> prohibited this document from being saved:</h2>
+
+                <ul>
+                <% document.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+                </ul>
+              </div>
+            <% end %>
+
+            <div class="row">
+
+              <div class="col-md-4">
+                <%= form.label "Procceso" %><br>
+                <%= form.number_field :process_id, class: "form form-control" %>
+              </div>
+
+              <div class="col-md-4">
+                <%= form.label "Tipo de Documento" %><br>
+                  <%= form.select 'document_type_id', get_document_type.map { |u| [u.name, u.id] }, {:prompt => 'Tipo de Documento'},{:class => 'form form-control'}%>
+              </div>
+            </div>
+            <br>
+
+            <% if action_name == "edit" %>
+                  <% @document.document_type.field.each do |docu| %>
+                    <div class="col-md-12 no-padding">
+                      <label><%= docu.name %></label>
+                      <% if docu.field_type == "Texto"%>
+                        <% if CreatedField.where(document_id: @document.id, field_id: docu.id).any? %>
+                          <% create = CreatedField.where(document_id: @document.id, field_id: docu.id).last %>
+                          <textarea rows="4" name="<%= docu.name %>" cols="50" id="field<%= docu.id %>"><%= create.content %></textarea>
+                          <% else %>
+                          <textarea rows="4" name="<%= docu.name %>" cols="50" id="field<%= docu.id %>"></textarea>
+                        <% end -%>
+                      <% end -%>
+
+                      <script type="text/javascript">
+                        $('#field<%= docu.id %>').froalaEditor({
+                            height: 200,
+                            charCounterCount: false,
+                            language: 'es',
+                            placeholderText: '<%= docu.name %>',
+                            toolbarButtons: ['undo', 'redo' , '|', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'outdent', 'indent', 'clearFormatting', 'insertTable', 'html'],
+                            toolbarButtonsXS: ['undo', 'redo' , '-', 'bold', 'italic', 'underline']
+
+                        })
+                      </script>
+                    </div>
+                  <% end %>
+
+                <div class="col-md-12 no-padding">
+                  <%= form.label :header %>
+                  <%= form.text_area :header, id: "wysiwyg" %>
+                </div>
+                <br>
+                <div class="col-md-12 no-padding">
+                  <%= form.label :footer %>
+                  <%= form.text_area :footer, id: "wysiwyg1" %>
+                </div>
+              <% end -%>
+
+            <br>
+
+            <div class="col-md-12 modal-footer">
+              <%= form.submit "Siguiente", class: "btn btn-success" %>
+              <%= link_to "Volver", documents_path, class: "btn btn-light" %>
+            </div>
+
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style type="text/css" media="screen">
+    .fr-toolbar{
+          border-top: 5px solid #fbcf00 !important;
+    }
+  </style>
+
+
+              <div class="field">
+              <%# form.label :logo %>
+              <%# form.text_field :logo %>
+            </div>
+
+            <div class="field">
+              <%# form.label :ubication_logo %>
+              <%# form.text_field :ubication_logo %>
+            </div>
+
+            <div class="field">
+              <%# form.label :coding_type %>
+              <%# form.text_field :coding_type %>
+            </div>
+
+            <div class="field">
+              <%# form.label :coding %>
+              <%# form.text_field :coding %>
+            </div>
+
+
+            <div class="field">
+              <%# form.label :user_id %>
+              <%# form.number_field :user_id %>
+            </div>
+
+            <div class="field">
+              <%# form.label :user_create_id %>
+              <%# form.number_field :user_create_id %>
+            </div>
+
+            <div class="field">
+              <%# form.label :user_review_id %>
+              <%# form.number_field :user_review_id %>
+            </div>
+
+            <div class="field">
+              <%# form.label :user_aprove_id %>
+              <%# form.number_field :user_aprove_id %>
+            </div>
+
+            <div class="field">
+              <%# form.label :create_date %>
+              <%# form.date_select :create_date %>
+            </div>
+
+            <div class="field">
+              <%# form.label :review_date %>
+              <%# form.date_select :review_date %>
+            </div>
+
+            <div class="field">
+              <%# form.label :aprove_date %>
+              <%# form.date_select :aprove_date %>
+            </div>
+
+            <div class="field">
+              <%# form.label :version %>
+              <%# form.number_field :version %>
+            </div>
+
+            <div class="field">
+              <%# form.label :review %>
+              <%# form.number_field :review %>
+            </div>
+
+            <div class="field">
+              <%# form.label :is_last %>
+              <%# form.check_box :is_last %>
+            </div>

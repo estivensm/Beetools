@@ -1,0 +1,105 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Header:</strong>
+  <%== @document.header%>
+</p>
+
+<p>
+  <strong>Footer:</strong>
+  <%= simple_format(@document.footer) %>
+</p>
+
+<p>
+  <strong>Logo:</strong>
+  <%= @document.logo %>
+</p>
+
+<p>
+  <strong>Ubication logo:</strong>
+  <%= @document.ubication_logo %>
+</p>
+
+<p>
+  <strong>Process:</strong>
+  <%= @document.process_id %>
+</p>
+
+<p>
+  <strong>Coding type:</strong>
+  <%= @document.coding_type %>
+</p>
+
+<p>
+  <strong>Coding:</strong>
+  <%= @document.coding %>
+</p>
+
+<p>
+  <strong>Document type:</strong>
+  <%= @document.document_type_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @document.user_id %>
+</p>
+
+<p>
+  <strong>User create:</strong>
+  <%= @document.user_create_id %>
+</p>
+
+<p>
+  <strong>User review:</strong>
+  <%= @document.user_review_id %>
+</p>
+
+<p>
+  <strong>User aprove:</strong>
+  <%= @document.user_aprove_id %>
+</p>
+
+<p>
+  <strong>Create date:</strong>
+  <%= @document.create_date %>
+</p>
+
+<p>
+  <strong>Review date:</strong>
+  <%= @document.review_date %>
+</p>
+
+<p>
+  <strong>Aprove date:</strong>
+  <%= @document.aprove_date %>
+</p>
+
+<p>
+  <strong>Version:</strong>
+  <%= @document.version %>
+</p>
+
+<p>
+  <strong>Review:</strong>
+  <%= @document.review %>
+</p>
+
+<p>
+  <strong>Is last:</strong>
+  <%= @document.is_last %>
+</p>
+
+<%= link_to 'Edit', edit_document_path(@document) %> |
+<%= link_to 'Back', documents_path %>
+
+
+<style type="text/css" media="screen">
+  table{
+    border: 1px solid red;
+  }
+
+  table td{
+    border: 1px solid red;
+  }
+</style>

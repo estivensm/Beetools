@@ -14,4 +14,5 @@
 
 class DocumentType < ApplicationRecord
 	has_and_belongs_to_many :field
+	has_many :document
 end
