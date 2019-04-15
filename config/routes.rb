@@ -14,5 +14,6 @@ Rails.application.routes.draw do
     post "create_user", to: "users/registrations#create_user", as: "create_user" 
   end
   get "all_users", to: "home#create_user", as: "users"
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  patch "document_update/:id/:number", to: "documents#update_docu", as: "document_update"
+   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

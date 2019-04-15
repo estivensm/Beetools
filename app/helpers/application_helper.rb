@@ -98,4 +98,13 @@ module ApplicationHelper
 	 def get_document_type
 	 	DocumentType.all
 	 end
+
+	 def get_user
+	 	User.where.not(id: current_user.id)
+	 end
+
+	 def get_review
+	 	Document.where(user_review_id: current_user.id)
+	 end
+
 end

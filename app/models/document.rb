@@ -27,4 +27,7 @@
 
 class Document < ApplicationRecord
 	belongs_to :document_type, optional: true
+	belongs_to :user
+	belongs_to :user_aprove, :class_name => 'User', optional: true
+	belongs_to :user_review, :class_name => 'User', optional: true
 end

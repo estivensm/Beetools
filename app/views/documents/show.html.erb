@@ -1,98 +1,99 @@
-<p id="notice"><%= notice %></p>
+<div class="col-xl-12">
+  <div class="card">
+    <div class="card-body">
+          <p>
+            <strong>Header:</strong>
+            <%== @document.header%>
+          </p>
 
-<p>
-  <strong>Header:</strong>
-  <%== @document.header%>
-</p>
+          <p>
+            <strong>Footer:</strong>
+            <%== @document.footer %>
+          </p>
 
-<p>
-  <strong>Footer:</strong>
-  <%= simple_format(@document.footer) %>
-</p>
+          <p>
+            <strong>Logo:</strong>
+            <%= @document.logo %>
+          </p>
 
-<p>
-  <strong>Logo:</strong>
-  <%= @document.logo %>
-</p>
+          <p>
+            <strong>Ubication logo:</strong>
+            <%= @document.ubication_logo %>
+          </p>
 
-<p>
-  <strong>Ubication logo:</strong>
-  <%= @document.ubication_logo %>
-</p>
+          <p>
+            <strong>Process:</strong>
+            <%= @document.process_id %>
+          </p>
 
-<p>
-  <strong>Process:</strong>
-  <%= @document.process_id %>
-</p>
+          <p>
+            <strong>Coding type:</strong>
+            <%= @document.coding_type %>
+          </p>
 
-<p>
-  <strong>Coding type:</strong>
-  <%= @document.coding_type %>
-</p>
+          <p>
+            <strong>Coding:</strong>
+            <%= @document.coding %>
+          </p>
 
-<p>
-  <strong>Coding:</strong>
-  <%= @document.coding %>
-</p>
+          <p>
+            <strong>Tipo de Documento:</strong>
+            <%= @document.document_type.name  %>
+          </p>
 
-<p>
-  <strong>Document type:</strong>
-  <%= @document.document_type_id %>
-</p>
+          <p>
+            <strong>Documento creado por:</strong>
+            <%= @document.user.first_name if @document.user%>
+          </p>
 
-<p>
-  <strong>User:</strong>
-  <%= @document.user_id %>
-</p>
+            <%# @document.user_create_id %>
 
-<p>
-  <strong>User create:</strong>
-  <%= @document.user_create_id %>
-</p>
+          <p>
+            <strong>Usuario Asignado para Revisar el Documento:</strong>
+            <%= @document.user_review.first_name if @document.user_review %>
+          </p>
 
-<p>
-  <strong>User review:</strong>
-  <%= @document.user_review_id %>
-</p>
+          <p>
+            <strong>Usuario Asignado para Aprobar el Documento:</strong>
+            <%= @document.user_aprove.first_name if @document.user_aprove  %>
+          </p>
 
-<p>
-  <strong>User aprove:</strong>
-  <%= @document.user_aprove_id %>
-</p>
+          <p>
+            <strong>Fecha de Creacion:</strong>
+            <%= get_date(@document.created_at)%>
+          </p>
 
-<p>
-  <strong>Create date:</strong>
-  <%= @document.create_date %>
-</p>
+          <p>
+            <strong>Fecha de Revision:</strong>
+            <%= get_date(@document.review_date) %>
+          </p>
 
-<p>
-  <strong>Review date:</strong>
-  <%= @document.review_date %>
-</p>
+          <p>
+            <strong>Fecha de Aprobación:</strong>
+            <%= get_date(@document.aprove_date) %>
+          </p>
 
-<p>
-  <strong>Aprove date:</strong>
-  <%= @document.aprove_date %>
-</p>
+          <p>
+            <strong>Version:</strong>
+            <%= @document.version %>
+          </p>
 
-<p>
-  <strong>Version:</strong>
-  <%= @document.version %>
-</p>
+          <p>
+            <strong>Review:</strong>
+            <%= @document.review %>
+          </p>
 
-<p>
-  <strong>Review:</strong>
-  <%= @document.review %>
-</p>
+          <p>
+            <strong>Is last:</strong>
+            <%= @document.is_last %>
+          </p>
+      <div class="col-md-12 modal-footer">
+          <%= link_to 'Volver', root_path, class: "btn btn-success " %>
+      </div>
 
-<p>
-  <strong>Is last:</strong>
-  <%= @document.is_last %>
-</p>
-
-<%= link_to 'Edit', edit_document_path(@document) %> |
-<%= link_to 'Back', documents_path %>
-
+    </div>
+  </div>
+</div>
 
 <style type="text/css" media="screen">
   table{

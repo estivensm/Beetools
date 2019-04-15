@@ -25,9 +25,8 @@
                 </ul>
               </div>
             <% end %>
-
             <div class="row">
-
+            <% if !get_review.exists? %>
               <div class="col-md-4">
                 <%= form.label "Procceso" %><br>
                 <%= form.number_field :process_id, class: "form form-control" %>
@@ -36,6 +35,16 @@
               <div class="col-md-4">
                 <%= form.label "Tipo de Documento" %><br>
                   <%= form.select 'document_type_id', get_document_type.map { |u| [u.name, u.id] }, {:prompt => 'Tipo de Documento'},{:class => 'form form-control'}%>
+              </div>
+              <br><br><br><br> 
+              <div class="col-md-5">
+                <%= form.label "lo Revisa" %><br>
+                <%= form.select 'user_review_id', get_user.map { |u| [u.first_name, u.id] }, {:prompt => 'lo Revisa'},{:class => 'form form-control'}%>
+              </div>
+
+              <div class="col-md-5">
+                <%= form.label "lo Aprueba" %><br>
+                <%= form.select 'user_aprove_id', get_user.map { |u| [u.first_name, u.id] }, {:prompt => 'lo Aprueba'},{:class => 'form form-control'}%>
               </div>
             </div>
             <br>
@@ -78,7 +87,12 @@
                 </div>
               <% end -%>
 
+              <% end %>
             <br>
+
+            <% if action_name == "new" %>
+                <%= form.hidden_field :user_id, :value => current_user.id %>
+            <% end -%>
 
             <div class="col-md-12 modal-footer">
               <%= form.submit "Siguiente", class: "btn btn-success" %>

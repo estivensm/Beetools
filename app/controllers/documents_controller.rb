@@ -1,10 +1,10 @@
 class DocumentsController < ApplicationController
-  before_action :set_document, only: [:show, :edit, :update, :destroy]
+  before_action :set_document, only: [:show, :edit, :update, :destroy, :update_docu]
 
   # GET /documents
   # GET /documents.json
   def index
-    @documents = Document.all
+    @documents = Document.where(user_id: current_user.id )
   end
 
   # GET /documents/1
@@ -35,6 +35,15 @@ class DocumentsController < ApplicationController
         format.html { render :new }
         format.json { render json: @document.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+
+  def update_docu
+    if params[:number].to_i == 1
+        @document.update(aprove_date: params[:aprove_date])
+      else
+        @document.update(review_date: params[:review_date])
     end
   end
 

@@ -32,6 +32,7 @@ class User < ApplicationRecord
          has_many :process_map
          has_many :proce
          has_many :position
+         has_many :document
 
   mount_uploader :avatar, AvatarUploader         
 end
