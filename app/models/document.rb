@@ -21,6 +21,8 @@
 #  version          :integer
 #  review           :integer
 #  is_last          :boolean
+#  state_review     :boolean
+#  state_aprove     :boolean
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #

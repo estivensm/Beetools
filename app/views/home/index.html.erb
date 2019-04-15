@@ -53,6 +53,7 @@
 										      </div>
 										      <div class="modal-footer">
 										        <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+										        <%= link_to "Apruebas Este Documento", document_update_path(review.id, 2), class: "btn btn-success", method: :patch, remote: true %>
 										      </div>
 										    </div>
 										  </div>
@@ -116,6 +117,7 @@
 										      </div>
 										      <div class="modal-footer">
 										        <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+										         <%= link_to "Apruebas Este Documento", document_update_path(aprove.id, 1), class: "btn btn-success", method: :patch, remote: true %>
 										      </div>
 										    </div>
 										  </div>

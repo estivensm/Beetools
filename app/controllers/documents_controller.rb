@@ -41,9 +41,9 @@ class DocumentsController < ApplicationController
 
   def update_docu
     if params[:number].to_i == 1
-        @document.update(aprove_date: params[:aprove_date])
+        @document.update(aprove_date: Time.now, state_aprove: true)
       else
-        @document.update(review_date: params[:review_date])
+        @document.update(review_date: Time.now, state_review: true)
     end
   end
 

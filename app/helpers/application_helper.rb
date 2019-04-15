@@ -104,7 +104,7 @@ module ApplicationHelper
 	 end
 
 	 def get_review
-	 	Document.where(user_review_id: current_user.id)
+	 	Document.where(user_review_id: current_user.id, state_review: false)
 	 end
 
 end

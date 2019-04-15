@@ -19,6 +19,8 @@ class CreateDocuments < ActiveRecord::Migration[5.2]
       t.integer :version
       t.integer :review
       t.boolean :is_last
+      t.boolean :state_review, default: false
+      t.boolean :state_aprove, default: false
 
       t.timestamps
     end
