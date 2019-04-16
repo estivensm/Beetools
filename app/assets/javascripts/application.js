@@ -66,18 +66,26 @@ jQuery(document).ready(function($) {
       codeMirror: false,
       inlineMode: false,
       language: 'es',
+       imageUploadURL: '/upload_image',
+
+      imageUploadParams: {
+          id: 'wysiwyg'
+      },
       placeholderText: 'Encabezado',
-      toolbarButtons: ['undo', 'redo' , '|', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'outdent', 'indent', 'clearFormatting', 'insertTable', 'html'],
-      toolbarButtonsXS: ['undo', 'redo' , '-', 'bold', 'italic', 'underline']
+      toolbarButtons: ['bold', 'italic', 'underline', 'fontFamily', 'fontSize', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'insertLink', 'insertImage', 'insertTable']
     })
 
     $('#wysiwyg1').froalaEditor({
       height: 200,
       charCounterCount: false,
       language: 'es',
+      imageUploadURL: '/upload_image',
+
+      imageUploadParams: {
+          id: 'wysiwyg1'
+      },
       placeholderText: 'Parte Inferior',
-      toolbarButtons: ['undo', 'redo' , '|', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'outdent', 'indent', 'clearFormatting', 'insertTable', 'html'],
-      toolbarButtonsXS: ['undo', 'redo' , '-', 'bold', 'italic', 'underline']
+      toolbarButtons: ['bold', 'italic', 'underline', 'fontFamily', 'fontSize', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'insertLink', 'insertImage', 'insertTable']
 
     })
 });

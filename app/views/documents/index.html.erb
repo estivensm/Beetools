@@ -28,7 +28,7 @@
                 <% @documents.each_with_index do |document, position| %>
                   <tr>
                     <td class="serial"><%= position + 1 %>.</td>
-                      <td><%= document.document_type.name %></td>
+                      <td><%= document.document_type.name if document.document_type %></td>
                       <td><%= document.process_id %></td>
                       <td><%= get_icon(document.state_review).html_safe %></td>
                       <td><%= get_icon(document.state_aprove).html_safe %></td>
@@ -44,9 +44,23 @@
                            <i class="fas fa-info-circle" data-toggle="modal" data-target="#exampleModal"></i>
                         <% end -%>
                       </td>
-                      <td><%= link_to 'Show', document %></td>
-                      <td><%= link_to 'Edit', edit_document_path(document) %></td>
-                      <td><%= link_to 'Destroy', document, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                      <td>
+                        <%= link_to document, class: "btn", data: {toggle: "tooltip", placement: "bottom" }, title: "Ver Documento" do %>
+                          <i class="fas fa-eye"></i>
+                        <% end -%>
+
+                        <%= link_to edit_document_path(document), data: {toggle: "tooltip", placement: "bottom" }, title: "Editar", class: "btn" do %>
+                          <i class="fas fa-pencil-alt"></i>
+                        <% end -%>
+
+                        <a href="/documents/<%= document.id %>" class="btn" data-method="delete" data-toggle="tooltip" data-placement="top" title="Eliminar Documento" data-confirm="Estas Seguro?">
+                          <i class="fas fa-trash-alt"></i>
+                        </a>
+
+                        <%= link_to pdf_document_path(document.id, :format => "pdf"), data: {toggle: "tooltip", placement: "bottom" }, title: "Generar Pdf", target:"_blank", class: "btn" do %>
+                          <i class="fas fa-file-alt"></i>
+                        <% end -%>
+                      </td>
                   </tr>
                 <% end %>
               </tbody>
@@ -74,3 +88,9 @@
     color: red;
   }
 </style>
+
+<script type="text/javascript">
+  $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+</script>

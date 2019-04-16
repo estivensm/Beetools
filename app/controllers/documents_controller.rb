@@ -1,5 +1,5 @@
 class DocumentsController < ApplicationController
-  before_action :set_document, only: [:show, :edit, :update, :destroy, :update_docu]
+  before_action :set_document, only: [:show, :edit, :update, :destroy, :update_docu, :ready, :documents_pdf]
 
   # GET /documents
   # GET /documents.json
@@ -17,9 +17,29 @@ class DocumentsController < ApplicationController
     @document = Document.new
   end
 
+
+  def documents_pdf
+      respond_to do |format|
+        format.html
+        format.pdf do
+          render :pdf => "formatos1",
+          :template => 'documents/pdfs/document.pdf.erb',
+          :layout => 'pdf.html.erb',
+          :show_as_html => params[:debug].present?
+      end
+    end 
+  end
+
+
+  def ready
+    @document.update(finish_document: true);
+  end
+
   # GET /documents/1/edit
   def edit
-
+    unless @document.user.id == current_user.id  
+      render file: "#{Rails.root}/public/404", :layout => false, :status => :not_found
+    end
   end
 
   # POST /documents

@@ -5,6 +5,7 @@
       	<br>
       	<div class="row">
       		<% if @review.any? %>
+      		  <% if get_state_ready == true %>
 	      		<div class="col-xl-6">
 	      			<div class="table-stats order-table ov-h">
 			            <table class="table table_form ">
@@ -33,32 +34,10 @@
 			                    </td>
 			                     <td>
 			                    	<div class="text-center">
-			         					<i class="fas fa-info-circle" data-toggle="modal" data-target="#exampleModal<%= review.id %>"></i>
+			                    		<a href="/documents/<%= review.id %>">
+			         						<i class="fas fa-info-circle"></i>
+			         					</a>
 			                    	</div>
-
-									<!-- Modal -->
-									<div class="text-left">
-										<div class="modal fade bd-example-modal-lg" id="exampleModal<%= review.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-										  <div class="modal-dialog modal-lg" role="document">
-										    <div class="modal-content">
-										      <div class="modal-header">
-										        <h5 class="modal-title" id="exampleModalLabel">Informacion
-										        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										          <span aria-hidden="true">&times;</span>
-										        </button>
-										        </h5>
-										      </div>
-										      <div class="modal-body">
-										        <%= render "parciales/review", review: review %>
-										      </div>
-										      <div class="modal-footer">
-										        <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
-										        <%= link_to "Apruebas Este Documento", document_update_path(review.id, 2), class: "btn btn-success", method: :patch, remote: true %>
-										      </div>
-										    </div>
-										  </div>
-										</div>
-									</div>
 			                    </td>
 			                  </tr>
 			                <% end %>
@@ -66,9 +45,11 @@
 			            </table>
 	          		</div> 
 	      		</div>
+	      		<% end %>
       		<% end %>
 
 			<% if @aprove.any? %>
+			  <% if get_state_ready == true %>
 	      		<div class="col-xl-6">
 	      			<div class="table-stats order-table ov-h">
 			            <table class="table table_form ">
@@ -97,32 +78,10 @@
 			                    </td>
 			                    <td>
 			                    	<div class="text-center">
-			         					<i class="fas fa-info-circle" data-toggle="modal" data-target="#exampleModal<%= aprove.id %>"></i>
+			        					<a href="/documents/<%= aprove.id %>">
+			         						<i class="fas fa-info-circle"></i>
+			         					</a>
 			                    	</div>
-
-									<!-- Modal -->
-									<div class="text-left">
-										<div class="modal fade bd-example-modal-lg" id="exampleModal<%= aprove.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-										  <div class="modal-dialog modal-lg" role="document">
-										    <div class="modal-content">
-										      <div class="modal-header">
-										        <h5 class="modal-title" id="exampleModalLabel">Informacion
-										        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										          <span aria-hidden="true">&times;</span>
-										        </button>
-										        </h5>
-										      </div>
-										      <div class="modal-body">
-										        <%= render "parciales/aprove", aprove: aprove %>
-										      </div>
-										      <div class="modal-footer">
-										        <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
-										         <%= link_to "Apruebas Este Documento", document_update_path(aprove.id, 1), class: "btn btn-success", method: :patch, remote: true %>
-										      </div>
-										    </div>
-										  </div>
-										</div>
-									</div>
 			                    </td>	
 			                  </tr>
 			                <% end %>
@@ -130,6 +89,7 @@
 			            </table>
 	          		</div> 
 	      		</div>
+	      		<% end %>
       		<% end %>
       	</div>
 

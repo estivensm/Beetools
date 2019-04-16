@@ -21,8 +21,9 @@
 #  version          :integer
 #  review           :integer
 #  is_last          :boolean
-#  state_review     :boolean
-#  state_aprove     :boolean
+#  state_review     :boolean          default(FALSE)
+#  state_aprove     :boolean          default(FALSE)
+#  finish_document  :boolean          default(FALSE)
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #

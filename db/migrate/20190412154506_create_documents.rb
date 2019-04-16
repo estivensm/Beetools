@@ -21,6 +21,7 @@ class CreateDocuments < ActiveRecord::Migration[5.2]
       t.boolean :is_last
       t.boolean :state_review, default: false
       t.boolean :state_aprove, default: false
+      t.boolean :finish_document, default: false
 
       t.timestamps
     end

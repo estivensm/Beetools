@@ -107,4 +107,8 @@ module ApplicationHelper
 	 	Document.where(user_review_id: current_user.id, state_review: false)
 	 end
 
+	 def get_state_ready
+	 	Document.where(user_review_id: current_user.id, user_aprove_id: current_user.id).first
+	 end
+
 end
