@@ -4,7 +4,7 @@ class ProcesController < ApplicationController
   # GET /proces
   # GET /proces.json
   def index
-    @proces = Proce.all
+    @proces = Proces.all
   end
 
   # GET /proces/1
@@ -14,7 +14,7 @@ class ProcesController < ApplicationController
 
   # GET /proces/new
   def new
-    @proce = Proce.new
+    @proces = Proces.new
   end
 
   # GET /proces/1/edit
@@ -24,15 +24,16 @@ class ProcesController < ApplicationController
   # POST /proces
   # POST /proces.json
   def create
-    @proce = Proce.new(proce_params)
+    @proces = Proces.new(proce_params)
 
     respond_to do |format|
-      if @proce.save
-        format.html { redirect_to proces_path, notice: 'Proce was successfully created.' }
-        format.json { render :show, status: :created, location: @proce }
+      if @proces.save
+        format.html { redirect_to proce_path, notice: 'Proce was successfully created.' }
+        puts "oooooooooooooooooooooooooooooooooooo"
       else
-        format.html { render :new }
-        format.json { render json: @proce.errors, status: :unprocessable_entity }
+        puts "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        format.html { render :index }
+        format.json { render json: @proces.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -41,12 +42,12 @@ class ProcesController < ApplicationController
   # PATCH/PUT /proces/1.json
   def update
     respond_to do |format|
-      if @proce.update(proce_params)
+      if @proces.update(proce_params)
         format.html { redirect_to proces_path, notice: 'Proce was successfully updated.' }
-        format.json { render :show, status: :ok, location: @proce }
+        format.json { render :show, status: :ok, location: @proces }
       else
         format.html { render :edit }
-        format.json { render json: @proce.errors, status: :unprocessable_entity }
+        format.json { render json: @proces.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -64,11 +65,11 @@ class ProcesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_proce
-      @proce = Proce.find(params[:id])
+      @proces = Proces.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def proce_params
-      params.require(:proce).permit(:name, :description, :admin_user, :user_id, :proces_type)
+      params.require(:proces).permit(:name, :description, :admin_user, :user_id, :proces_type)
     end
 end

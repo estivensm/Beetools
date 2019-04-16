@@ -13,8 +13,6 @@
 
               <thead>
                 <tr>
-                  <th class="serial">#</th>
-                  <th class="avatar">Usuario </th>
                   <th>Nombre</th>
                   <th>Descripcion</th>
                   <th>Processo</th>
@@ -23,20 +21,23 @@
               </thead>
 
               <tbody>
-                <% @positions.each_with_index do |position, posicion| %>
+                <% @positions.each do |position| %>
                   <tr>
-                    <td class="serial"><%= posicion + 1 %>.</td>
-                    <td class="avatar">
-                      <div class="round-img">
-                        <%= position.user.avatar? ? image_tag(position.user.avatar_url(), class: "rounded-circle",id: "user-avatar1") : image_tag("https://dnuba.s3.amazonaws.com/uploads/bank_image/achivo/44/user.jpeg", class: "rounded-circle")%>
-                        </div>
-                    </td>
                     <td><%= position.name %></td>
                     <td><%= position.description %></td>
-                    <td><%= position.proces_id %></td>
-                    <td><%= link_to 'Show', position %></td>
-                    <td><%= link_to 'Edit', edit_position_path(position), remote: true %></td>
-                    <td><%= link_to 'Destroy', position, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                    <td><%= position.proces.name if position.proces  %></td>
+
+                    <td>
+
+                        <%= link_to edit_position_path(position), data: {toggle: "tooltip", placement: "bottom" }, remote: true, title: "Editar", class: "btn" do %>
+                          <i class="fas fa-pencil-alt"></i>
+                        <% end -%>
+
+                        <a href="/positions/<%= position.id %>" class="btn" data-method="delete" data-toggle="tooltip" data-placement="right" title="Eliminar Documento" data-confirm="Estas Seguro?">
+                          <i class="fas fa-trash-alt"></i>
+                        </a>
+
+                    </td>
                   </tr>
                 <% end %>
               </tbody>
@@ -55,5 +56,8 @@
 </div>
 
 
-                    <%# position.admin_user %>
-                    <%# position.user_id %>
+<script type="text/javascript">
+  $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+</script>

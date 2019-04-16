@@ -26,6 +26,7 @@ class DocumentTypesController < ApplicationController
   # POST /document_types
   # POST /document_types.json
   def create
+
     @document_type = DocumentType.new(document_type_params)
 
     respond_to do |format|

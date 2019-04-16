@@ -1,19 +1,4 @@
-<div class="modal fade bd-example-modal-lg" id="product-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">
-          <% if action_name == "new" %>
-            Nuevo Tipo de Documento
-            <% else %>
-            Editar Tipo de Documento 
-          <% end -%>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        </h5>
-      </div>
-      <div class="modal-body">
+
         <%= form_with(model: document_type, local: true) do |form| %>
           <% if document_type.errors.any? %>
             <div id="error_explanation">
@@ -27,18 +12,39 @@
             </div>
           <% end %>
 
-          <div class="row">
-            <div class="card col-md-6 card-drop">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card card-drop">
               <div class="card-body">
-                <div class="col-md-12 no-padding">
-                    <%= form.label "Nombre" %>
-                    <%= form.text_field :name, class: "form form-control" %>
+                <h3>
+                  <% if action_name == "new" %>
+                    Nuevo Tipo de Documento
+                    <% else %>
+                    Editar Tipo de Documento
+                  <% end -%>
+                </h3>
+             </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card card-drop">
+              <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <%= form.label "Nombre" %>
+                        <%= form.text_field :name, class: "form form-control" %>
+                    </div>
+
+                    <div class="col-md-6 ">
+                      <%= form.label "Prefijo" %>
+                      <%= form.text_field :prefix, class: "form form-control" %>
+                    </div>
                 </div>
                 <br>
 
                 <div class="col-md-12 no-padding">
                   <%= form.label "Descripcion" %>
-                  <%= form.text_area :description, class: "form form-control", :rows => 9  %>
+                  <%= form.text_area :description, class: "form form-control", :rows => 5  %>
                 </div>
 
                 
@@ -55,7 +61,7 @@
 
 
                 <div class="card col-md-12">
-                  <div class="cord-body parent_left" id ="left" ondrop="drop(event)" ondragover="allowDrop(event)"  style="border: 1px solid red; min-height: 100px;" >
+                  <div class="cord-body parent_left" id ="left" ondrop="drop(event)" ondragover="allowDrop(event)"  style="padding: 10px;min-height: 100px;" >
 
                   <% if action_name == "edit" %>
                       <% @document_type.field.order(id: :desc).each do |rela| %>
@@ -85,50 +91,135 @@
 
               </div>
             </div>
+          </div>
+            <div class="col-md-6">
+              <div class="card card-drop">
+                <div class="card-body">
+                  <h5 align="center">Campos</h5>
+                  <br>
 
-            <div class="card col-md-6 card-drop">
-              <div class="card-body">
-                <h5 align="center">Campos</h5>
-                <br>
+                  <div class="col-md-12 no-padding parent_right" id ="right" ondrop="drop(event)" ondragover="allowDrop(event)" style="    padding: 10px !important; min-height: 100px;">
 
-                <div class="col-md-12 no-padding parent_right" id ="right" ondrop="drop(event)" ondragover="allowDrop(event)" style="border: 1px solid red; min-height: 100px;">
+                      <% @fiels.each do |campo| %>
+                        <div class="card" draggable="true" ondragstart="drag(event)" id="drag<%= campo.id %>">
+                          <div class="card-body">
+                              <div class="col-md-12 no-padding">
+                                <label><%= campo.name %></label>
+                                <% if campo.field_type == "Texto" %>
+                                  <input type="text" name="" class="form form-control" placeholder="Campo de Texto">
+                                  <% else %>
 
-                    <% @fiels.each do |campo| %>
-                      <div class="card" draggable="true" ondragstart="drag(event)" id="drag<%= campo.id %>">
-                        <div class="card-body">
-                            <div class="col-md-12 no-padding">
-                              <label><%= campo.name %></label>
-                              <% if campo.field_type == "Texto" %>
-                                <input type="text" name="" class="form form-control" placeholder="Campo de Texto">
-                                <% else %>
+                                  <select class="form form-control">
+                                    <option value="">Campos</option>
+                                    <option value="">Campos</option>
+                                    <option value="">Campos</option>
+                                    <option value="">Campos</option>
+                                  </select>
 
-                                <select class="form form-control">
-                                  <option value="">Campos</option>
-                                  <option value="">Campos</option>
-                                  <option value="">Campos</option>
-                                  <option value="">Campos</option>
-                                </select>
-
-                              <% end -%>
-                            </div>
+                                <% end -%>
+                              </div>
+                          </div>
                         </div>
-                      </div>
 
-                    <% end -%> 
+                      <% end -%> 
+                  </div>
+
                 </div>
-
               </div>
             </div>
 
-
           </div>
 
-        <div class="col-md-12 modal-footer">
-          <%= form.submit "Guardar", class: "btn btn-success" %>
-        </div>
+          <div class="card card-drop col-md-12">
+            <div class="card-body">
+              <div class="col-md-12 text-right">
+                <%= form.submit "Guardar", class: "btn btn-success" %>
+                <%= link_to "Volver", document_types_path, class: "btn btn-light" %>
+              </div>
+            </div>
+          </div>
       <% end %>
 
-      </div>
-    </div>
-  </div>
-</div>
+<style type="text/css" media="screen">
+  .card-drop{
+    -webkit-box-shadow: none !important;
+    box-shadow: initial !important;
+  }
+
+  #div1, #div2 {
+  height: 400px;
+  border: 1px solid black;
+}
+</style>
+
+<script>
+
+
+function allowDrop(ev) {
+  ev.preventDefault();
+
+  jQuery(document).ready(function($) {
+
+  });
+}
+
+function drag(ev) {
+  ev.dataTransfer.setData("text", ev.target.id);
+  console.log(ev.target.id);
+}
+
+var items = [];
+var a =  1;
+
+function drop(ev) {
+ 
+  ev.preventDefault();
+  var data = ev.dataTransfer.getData("text");
+  ev.target.appendChild(document.getElementById(data));
+  console.log(ev.dataTransfer.getData("text")); // son los valores que arrastra
+ 
+
+  
+  
+
+
+  var valor = data.replace("drag", "")
+  console.log(valor);
+  jQuery(document).ready(function($) {
+
+  let parent = $("#"+data).parent();
+  console.log(parent.attr('class'));
+
+  console.log('afdsasdasdafdsadsf')
+    //$(document).on( "change", '#selec_edit', function () {
+      //var value = $(this).val()
+   if  (parent.attr('id') == "left"   )
+   { 
+    console.log("left");
+    items.push(data); 
+    $('#sle').append('<option value="' + valor + '" selected>1</option>')
+   }
+   else
+   {
+    console.log("right");
+        $('#sle [value="'+ valor+ '"]').remove();
+        $('#selec_edit [value="'+ valor+ '"]').remove();
+      
+   }
+     
+console.log(items);
+    //});
+    //
+
+
+
+  });
+
+
+}
+
+
+
+
+
+</script>

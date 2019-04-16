@@ -3,7 +3,7 @@ $('#product-modal').modal('hide')
 toastr["success"]("El Campo fue creado con <b> Exito!</b>");
 
 
-            var markup = "<tr><td>1</td><td>" +  "<%= @field.user_id %>"  + "</td><td>" + "<%= @field.field_type %>" + "</td><td>" + "<%= @field.name %>" + "</td><td>" + '<%= get_icon(@field.state).html_safe %>' + "</td><td>" + '<%= get_icon(@field.required).html_safe %>' + "</td><td>" + "<%= @field.form %>" + "</td><td>" + '<%= link_to "Edit", edit_field_path(@field), remote:true %>' + '<%= link_to "Destroy", @field, method: :delete, data: { confirm: "Are you sure?" }, remote:true %>' + "</td>";
+            var markup = "<tr><td>" + "<%= @field.field_type %>" + "</td><td>" + "<%= @field.name %>" + "</td><td>" + '<%= link_to "Edit", edit_field_path(@field), remote:true %>' + '<%= link_to "Destroy", @field, method: :delete, data: { confirm: "Are you sure?" }, remote:true %>' + "</td>";
             $(".table_form tbody").append(markup);
 
         

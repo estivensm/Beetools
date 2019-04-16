@@ -16,11 +16,14 @@
                   <th class="serial">#</th>
                   <th>Tipo de Documento</th>
                   <th>Procceso</th>
-                  <th>Estado de Revisado</th>
-                  <th>Estado de Aprobacion</th>
-                  <th>Header</th>
-                  <th>Footer</th>
-                  <th colspan="3">Acciones</th>
+                  <th class="text-center">¿Es EL Ultimo?</th>
+                                        <!--
+                  <th class="text-center">Creado</th>
+                  <th class="text-center">Estado de Revisado</th>
+                  <th class="text-center">Estado de Aprobacion</th>
+                  <th>Estado del Documento</th>
+                                  -->
+                  <th colspan="4">Acciones</th>
                 </tr>
               </thead>
 
@@ -29,21 +32,14 @@
                   <tr>
                     <td class="serial"><%= position + 1 %>.</td>
                       <td><%= document.document_type.name if document.document_type %></td>
-                      <td><%= document.process_id %></td>
-                      <td><%= get_icon(document.state_review).html_safe %></td>
-                      <td><%= get_icon(document.state_aprove).html_safe %></td>
-
-                      <td>
-                        <% if document.header.present? %>
-                          <i class="fas fa-info-circle" data-toggle="modal" data-target="#exampleModal"></i>
-                        <% end -%>
-                      </td>
-
-                      <td>
-                        <% if document.footer.present? %>
-                           <i class="fas fa-info-circle" data-toggle="modal" data-target="#exampleModal"></i>
-                        <% end -%>
-                      </td>
+                      <td><%= document.proces_id %></td>
+                      <td class="text-center"><%= get_last(document.is_last) %></td>
+                      <!--
+                      <td class="text-center"><%= get_icon(document.finish_document).html_safe %></td>
+                      <td class="text-center"><%= get_icon(document.state_review).html_safe %></td>
+                      <td class="text-center"><%= get_icon(document.state_aprove).html_safe %></td>
+                      <td class="text-center"><%= get_traslate(document.document_state) %></td>
+                      -->
                       <td>
                         <%= link_to document, class: "btn", data: {toggle: "tooltip", placement: "bottom" }, title: "Ver Documento" do %>
                           <i class="fas fa-eye"></i>
@@ -60,6 +56,10 @@
                         <%= link_to pdf_document_path(document.id, :format => "pdf"), data: {toggle: "tooltip", placement: "bottom" }, title: "Generar Pdf", target:"_blank", class: "btn" do %>
                           <i class="fas fa-file-alt"></i>
                         <% end -%>
+
+                        <a data-toggle="tooltip" data-placement="bottom" title="" data-confirm="Estas Seguro?" rel="nofollow" data-method="post" href="/version_document/<%= document.id %>" data-original-title="Duplicar">
+                          <i class="fas fa-copy"></i>
+                        </a>
                       </td>
                   </tr>
                 <% end %>

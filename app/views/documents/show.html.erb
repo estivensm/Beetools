@@ -1,6 +1,7 @@
 <div class="col-xl-12">
   <div class="card">
     <div class="card-body">
+      
       <% if @document.user.id == current_user.id %>
         <div class="col-md-12 text-right no-padding-left">
           <% if @document.finish_document == true %>
@@ -18,97 +19,61 @@
               <%= link_to "Apruebas Este Documento?", document_update_path(@document.id, 1), class: "btn btn-info", method: :patch, remote: true %>
           </div>        
       <% end -%>
+
       <br>
       <div class="col-md-12 no-padding">
         <%== @document.header%>
       </div>
       <br><br>
 
-        <%#                           <strong>Tipo de Documento:</strong> @document.document_type.name  %>
+      <table class="table">
+        <thead class="text-center">
+          <tr>
+            <th>Creado por </th>
+            <th>
+              <% if @document.state_review == true %> 
+                Revisado
+                <% else %>
+                Pendiente de Revisar
+              <% end -%>
+            </th>
+            <th>
+              <% if @document.state_aprove == true %> 
+                Aprobado
+                <% else %>
+                Pendiente de Aprobar
+              <% end -%>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-center">
+              <strong><%= @document.user.first_name %> - <%= @document.user.first_last_name %></strong>
+              <p><%= get_date(@document.create_date) %></p>
+            </td>
 
-      <div class="col-md-12">
-        <div class="col-md-6 offset-md-3" >
+            <td class="text-center">
+              <strong><%= @document.user_review.first_name %> - <%= @document.user_review.first_last_name %></strong>
+              <% if @document.aprove_date.present? %>
+                <p><%= get_date(@document.review_date) %></p>
+              <% else %>
+                <p>Pendiente de Revisar</p>
+              <% end -%>
+            </td>
 
-          <div class="card">
-            <h5 class="card-header"><%= @document.user.first_name %> <span class="badge badge-info float-right">Creador del Documento</span> </h5>
-            <div class="card-body">
-              <div class="row">
-                <div class="col-md-5 no-padding-right">
-                  <%= @document.user.avatar? ? image_tag(@document.user.avatar_url(), class: "user rounded-circle",id: "user-avatar1") : image_tag("https://dnuba.s3.amazonaws.com/uploads/bank_image/achivo/44/user.jpeg", class: "user rounded-circle") %>
-                </div>
+            <td class="text-center">
+              <strong><%= @document.user_aprove.first_name %> - <%= @document.user_aprove.first_last_name %></strong>
+              <% if @document.aprove_date.present? %>
+                <p><%= get_date(@document.aprove_date) %></p>
+              <% else %>
+                <p>Pendiente de Aprobacion</p>
+              <% end -%>
+            </td>
 
-                <div class="col-md-6">
-
-                  <strong>Fecha de Creacion</strong>
-                  <p><%= get_date(@document.created_at)%></p>
-                  
-                  <strong>Email</strong>
-                  <p><%= @document.user.email %></p>
-
-                </div>
-
-              </div>
-            </div>
-          </div> 
-
-        </div>
-      </div> 
-
-    <div class="col-md-12">
-      <div class="row">
-          <div class="col-md-6">
-
-          <div class="card">
-             <h5 class="card-header"><%= @document.user_review.first_name %> <span class="badge badge-info float-right">Revisar Documento</span> </h5>
-            <div class="card-body">
-              <div class="row">
-                <div class="col-md-5">
-                  <%= @document.user_review.avatar? ? image_tag(@document.user_review.avatar_url(), class: "user rounded-circle",id: "user-avatar1") : image_tag("https://dnuba.s3.amazonaws.com/uploads/bank_image/achivo/44/user.jpeg", class: "user rounded-circle") %>
-                </div>
-
-                <div class="col-md-6">
-                    <strong>Fecha de Revision</strong>
-                    <p><%= get_date(@document.review_date) %></p>
-
-                    <strong>Email</strong>
-                    <p><%= @document.user_review.email %></p>
-                </div>
-
-              </div>
-              
-
-            </div>
-          </div>  
-
-        </div>
-
-          <div class="col-md-6 float-right">
-
-            <div class="card">
-               <h5 class="card-header"><%= @document.user_aprove.first_name %> <span class="badge badge-info float-right">Aprobar Documento</span> </h5>
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-md-5">
-                    <%= @document.user_aprove.avatar? ? image_tag(@document.user_aprove.avatar_url(), class: "user rounded-circle",id: "user-avatar1") : image_tag("https://dnuba.s3.amazonaws.com/uploads/bank_image/achivo/44/user.jpeg", class: "user rounded-circle") %>
-                  </div>
-
-                  <div class="col-md-6">
-                      <strong>Fecha de Aprobación</strong>
-                      <p><%= get_date(@document.aprove_date) %></p>
-
-                    <strong>Email</strong>
-                    <p><%= @document.user_aprove.email %></p>
-                  </div>
-                </div>
-
-                
-              </div>
-            </div> 
-
-          </div>
-
-        </div>
-      </div>  
+          </tr>
+        </tbody>
+      </table>
 
       <div class="col-md-12 no-padding">
         <%== @document.footer %>

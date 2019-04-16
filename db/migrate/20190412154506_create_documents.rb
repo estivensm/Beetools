@@ -5,7 +5,7 @@ class CreateDocuments < ActiveRecord::Migration[5.2]
       t.text :footer
       t.string :logo
       t.string :ubication_logo
-      t.integer :process_id
+      t.integer :proces_id
       t.string :coding_type
       t.string :coding
       t.integer :document_type_id
@@ -21,7 +21,12 @@ class CreateDocuments < ActiveRecord::Migration[5.2]
       t.boolean :is_last
       t.boolean :state_review, default: false
       t.boolean :state_aprove, default: false
-      t.boolean :finish_document, default: false
+      t.boolean :finish_document
+      t.string :document_state
+      t.string :document_source
+      t.integer :coutn
+      t.string :document_file
+      t.text :change_description 
 
       t.timestamps
     end

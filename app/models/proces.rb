@@ -12,7 +12,7 @@
 #  updated_at  :datetime         not null
 #
 
-class Proce < ApplicationRecord
+class Proces < ApplicationRecord
 	belongs_to :user
 	has_many :position
 end

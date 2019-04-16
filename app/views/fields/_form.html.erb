@@ -34,31 +34,31 @@
 
         <br>
 
-        <div class="col-md-12 no-padding-left">
-          <%= form.label "Tipo de Campo" %>
-          <%= form.select 'field_type', get_field_type, {:prompt => 'Tipo de Campo'},{:class => 'form form-control'}%>
-        </div>
+        <%= form.hidden_field :field_type, :value => "Texto" %>
+
 
         <br>
 
         <div class="col-md-12 no-padding-left">
-          <%= form.label "Agregar Al Formulario" %>
-          <%= form.text_field :form, class: "form form-control" %>
+          <%# form.label "Agregar Al Formulario" %>
+          <%# form.text_field :form, class: "form form-control" %>
         </div>
 
         <br>
 
+        <!--
         <div class="row">
           <div class="col-md-6 text-center">
-            <%= form.label "Estado" %>
-            <%= form.check_box :state, class: "form form-control" %>
+            <%# form.label "Estado" %>
+            <%# form.check_box :state, class: "form form-control" %>
           </div>
 
           <div class="col-md-6 text-center">
-            <%= form.label "Requerido" %>
-            <%= form.check_box :required, class: "form form-control" %>
+            <%# form.label "Requerido" %>
+            <%# form.check_box :required, class: "form form-control" %>
           </div>
         </div>
+        -->
         
         <br>
 

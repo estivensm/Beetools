@@ -1,34 +1,25 @@
 class UploadController < ActionController::Base
  skip_before_action :verify_authenticity_token
-  IMAGE_EXT = [".gif", ".jpeg", ".jpg", ".png", ".svg"]
+  def index
+    options = {
+      # The name of your bucket.
+      bucket: '<%= ENV["AWS_BUCKET"]%>',
 
-  def upload_image
-    if params[:file]
-      FileUtils::mkdir_p(Rails.root.join("public/uploads/files"))
+      # S3 region. If you are using the default us-east-1, it this can be ignored.
+      region: 'eu-west-1',
 
-      ext = File.extname(params[:file].original_filename)
-      ext = image_validation(ext)
-      file_name = "#{SecureRandom.urlsafe_base64}#{ext}"
-      path = Rails.root.join("public/uploads/files/", file_name)
+      # The folder where to upload the images.
+      keyStart: 'fog',
 
-      File.open(path, "wb") {|f| f.write(params[:file].read)}
-      view_file = Rails.root.join("/download_file/", file_name).to_s
-      render :json => {:link => view_file}.to_json
+      # File access.
+      acl: 'public-read',
 
-    else
-      render :text => {:link => nil}.to_json
-    end
-  end
+      # AWS keys.
+      accessKey: '<%= ENV["AWS_ACCESS_KEY"] %>',
+      secretKey: '<%= ENV["AWS_SECRET_KEY"] %>'
+    }
 
-  def image_validation(ext)
-    raise "Not allowed" unless IMAGE_EXT.include?(ext)
-  end
-
-  def access_file
-    if File.exists?(Rails.root.join("public", "uploads", "files", params[:name]))
-      send_data File.read(Rails.root.join("public", "uploads", "files", params[:name])), :disposition => "attachment"
-    else
-      render :nothing => true
-    end
+    # Compute the signature.
+    @aws_data = FroalaEditorSDK::S3.data_hash(options)
   end
 end

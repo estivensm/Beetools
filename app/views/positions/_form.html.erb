@@ -35,14 +35,14 @@
 
           <div class="col-md-6">
             <%= form.label "Al Procceso" %>
-            <%= form.select 'proces_id', options_for_select(select_type_proces), {:prompt => 'Selecciona El Tipo de Procceso'},{:class => 'form form-control'}%>
+            <%= form.select 'proces_id', options_for_select(select_type_proces), {:prompt => 'Tipo de Procceso'},{:class => 'form form-control'}%>
           </div>
         </div>
 
         <br>
         <div class="field">
           <%= form.label "Descripcion" %>
-          <%= form.text_area :description, class: "form form-control", :rows => 9 %>
+          <%= form.text_area :description, class: "form form-control", :rows => 6 %>
         </div>
 
         <br>

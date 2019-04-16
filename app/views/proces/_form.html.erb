@@ -16,17 +16,6 @@
       </div>
       <div class="modal-body">
         <%= form_with(model: proce, local: true) do |form| %>
-          <% if proce.errors.any? %>
-            <div id="error_explanation">
-              <h2><%= pluralize(proce.errors.count, "error") %> prohibited this proce from being saved:</h2>
-
-              <ul>
-              <% proce.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-              <% end %>
-              </ul>
-            </div>
-          <% end %>
 
         <div class="row">
           <div class="col-md-6">
@@ -36,14 +25,14 @@
 
           <div class="col-md-6">
             <%= form.label "Tipo de Procceso" %>
-            <%= form.select 'proces_type', options_for_select(select_type_proces), {:prompt => 'Selecciona El Tipo de Procceso'},{:class => 'form form-control'}%>
+            <%= form.select 'proces_type', options_for_select(select_type_proces), {:prompt => 'Tipo de Procceso'},{:class => 'form form-control'}%>
           </div>
         </div>
 
         <br>
         <div class="field">
           <%= form.label "Descripcion" %>
-          <%= form.text_area :description, class: "form form-control", :rows => 9 %>
+          <%= form.text_area :description, class: "form form-control", :rows => 6 %>
         </div>
 
         <br>

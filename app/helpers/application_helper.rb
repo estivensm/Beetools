@@ -21,7 +21,7 @@ module ApplicationHelper
 	def select_type_proces
 		[
 
-			["Misionales", "Misionales"],
+			["Misional", "Misional"],
 			["Apoyo", "Apoyo"]
 
 
@@ -31,8 +31,7 @@ module ApplicationHelper
 	def get_field_type
 		[
 
-			["Texto", "Texto"],
-			["Select", "Select"]
+			["Texto", "Texto"]
 
 
 		]
@@ -90,6 +89,29 @@ module ApplicationHelper
 
 	 end 
 
+
+	 def get_traslate(value)
+	 	if value == "in_creation"
+		 		return "En Creacion"
+		 	elsif value == "create"
+		 		return "Creado"
+		 	elsif value == "review"
+		 		return "Revisado"
+		 	elsif value == "aprove"
+		 		return "Aprobado"
+		 	elsif value == "ready"
+		 		return "Listo"	 
+	 	end	 		
+	 end
+
+
+	 def get_last(state)
+	 	if state == true
+	 		return "Si"
+	 		else 
+	 		return "No"
+	 	end
+	 end
 
 	 def get_fields
 	 	Field.all

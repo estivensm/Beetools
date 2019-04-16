@@ -14,5 +14,5 @@
 
 class Position < ApplicationRecord
 	belongs_to :user
-	belongs_to :proce, optional: true
+	belongs_to :proces, optional: true
 end

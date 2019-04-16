@@ -13,8 +13,6 @@
 
               <thead>
                 <tr>
-                  <th class="serial">#</th>
-                  <th class="avatar">Usuario </th>
                   <th>Nombre</th>
                   <th>Descripcion</th>
                   <th>Tipo de Processo</th>
@@ -23,14 +21,8 @@
               </thead>
 
               <tbody>
-                <% @proces.each_with_index do |proce, position| %>
+                <% @proces.each do |proce| %>
                   <tr>
-                    <td class="serial"><%= position + 1 %>.</td>
-                    <td class="avatar">
-                      <div class="round-img">
-                        <%= proce.user.avatar? ? image_tag(proce.user.avatar_url(), class: "rounded-circle",id: "user-avatar1") : image_tag("https://dnuba.s3.amazonaws.com/uploads/bank_image/achivo/44/user.jpeg", class: "rounded-circle")%>
-                        </div>
-                    </td>
                     <td><%= proce.name %></td>
                     <td><%= proce.description %></td>
                     <td><%= proce.proces_type %></td>

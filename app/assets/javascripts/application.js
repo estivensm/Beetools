@@ -60,17 +60,14 @@
 //= require_tree .
 
 jQuery(document).ready(function($) {
+
     $('#wysiwyg').froalaEditor({
       height: 200,
       charCounterCount: false,
       codeMirror: false,
       inlineMode: false,
       language: 'es',
-       imageUploadURL: '/upload_image',
-
-      imageUploadParams: {
-          id: 'wysiwyg'
-      },
+      imageUploadToS3: '<%= @aws_data.to_json.html_safe %>',
       placeholderText: 'Encabezado',
       toolbarButtons: ['bold', 'italic', 'underline', 'fontFamily', 'fontSize', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'insertLink', 'insertImage', 'insertTable']
     })
@@ -79,12 +76,18 @@ jQuery(document).ready(function($) {
       height: 200,
       charCounterCount: false,
       language: 'es',
-      imageUploadURL: '/upload_image',
-
-      imageUploadParams: {
-          id: 'wysiwyg1'
-      },
+      imageUploadToS3: '<%= @aws_data.to_json.html_safe %>',
       placeholderText: 'Parte Inferior',
+      toolbarButtons: ['bold', 'italic', 'underline', 'fontFamily', 'fontSize', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'insertLink', 'insertImage', 'insertTable']
+
+    })
+
+    $('#wysiwyg3').froalaEditor({
+      height: 200,
+      charCounterCount: false,
+      language: 'es',
+      imageUploadToS3: '<%= @aws_data.to_json.html_safe %>',
+      placeholderText: 'Cambiar Descripcion',
       toolbarButtons: ['bold', 'italic', 'underline', 'fontFamily', 'fontSize', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'insertLink', 'insertImage', 'insertTable']
 
     })

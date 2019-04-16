@@ -26,8 +26,8 @@ gem 'popper_js', '~> 1.14.5'
 #ingresar con google
 gem 'omniauth-google'
 #mensajes de alerta
-gem 'rails-assets-sweetalert2', '~> 5.1.1', source: 'https://rails-assets.org'
-gem 'sweet-alert2-rails'
+#gem 'rails-assets-sweetalert2', '~> 5.1.1', source: 'https://rails-assets.org'
+#gem 'sweet-alert2-rails'
 gem 'ckeditor_rails', '~> 4.5', '>= 4.5.10'
 gem 'toastr_rails'
 #subir Archivos
@@ -38,6 +38,9 @@ gem 'annotate'
 #Guardar en amazon
 gem 'fog', '~> 1.38'
 gem 'figaro'
+
+#subir archivos save
+gem 'roo'
 #Sub Formularios
 gem "nested_form", :git => 'https://github.com/ryanb/nested_form.git'
 #paginacion
@@ -55,7 +58,8 @@ gem 'jquery-rails'
 #bootstrap
 gem 'bootstrap', '~> 4.3.1'
 #buscador
-
+#AASM para maquina de estados
+gem "aasm"
 #ckditor
 gem "wysiwyg-rails"
 

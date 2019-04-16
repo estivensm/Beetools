@@ -16,34 +16,35 @@
 
               <thead>
                 <tr>
-                  <th class="serial">#</th>
-                  <th class="avatar">Usuario </th>
-                  <th>Archivo</th>
-                  <th>Admin user</th>
+                  <th class="text-center">Archivo</th>
                   <th>Version</th>
                   <th colspan="3">Acciones</th>
                 </tr>
               </thead>
 
               <tbody>
-                <% @process_maps.each_with_index do |process_map, position| %>
+                <% @process_maps.each do |process_map| %>
                   <tr>
-                    <td class="serial"><%= position + 1 %>.</td>
-                    <td class="avatar">
-                      <div class="round-img">
-                        <%= process_map.user.avatar? ? image_tag(process_map.user.avatar_url(), class: "rounded-circle",id: "user-avatar1") : image_tag("https://dnuba.s3.amazonaws.com/uploads/bank_image/achivo/44/user.jpeg", class: "rounded-circle")%>
-                        </div>
-                    </td>
-                    <td>
+                    <td class="text-center">
                       <% if process_map.file.present? %>
                         <%= link_to "Archivo", process_map.file.url(), class: "btn btn-dark", target: "_blank"  %>
                       <% end -%>
                     </td>
-                    <td><%= process_map.admin_user %></td>
                     <td><%= process_map.version %></td>
-                    <td><%= link_to 'Show', process_map %></td>
-                    <td><%= link_to 'Edit', edit_process_map_path(process_map), remote: true %></td>
-                    <td><%= link_to 'Destroy', process_map, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                    <td>
+                        <%= link_to process_map, class: "btn", data: {toggle: "tooltip", placement: "bottom" }, title: "Ver Mapa" do %>
+                          <i class="fas fa-eye"></i>
+                        <% end -%>
+
+                        <%= link_to edit_process_map_path(process_map), data: {toggle: "tooltip", placement: "bottom" }, remote: true, title: "Editar", class: "btn" do %>
+                          <i class="fas fa-pencil-alt"></i>
+                        <% end -%>
+
+                        <a href="/process_maps/<%= process_map.id %>" class="btn" data-method="delete" data-toggle="tooltip" data-placement="right" title="Eliminar Mapa" data-confirm="Estas Seguro?">
+                          <i class="fas fa-trash-alt"></i>
+                        </a>
+
+                    </td>
                   </tr>
                 <% end %>
               </tbody>
@@ -95,3 +96,9 @@
     border-radius: 50%;
   }
 </style>
+
+<script type="text/javascript">
+  $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+</script>

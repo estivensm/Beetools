@@ -1,5 +1,5 @@
 class DocumentsController < ApplicationController
-  before_action :set_document, only: [:show, :edit, :update, :destroy, :update_docu, :ready, :documents_pdf]
+  before_action :set_document, only: [:show, :edit, :update, :destroy, :update_docu, :ready, :documents_pdf, :new_document]
 
   # GET /documents
   # GET /documents.json
@@ -8,6 +8,12 @@ class DocumentsController < ApplicationController
   end
 
   # GET /documents/1
+
+    #counter = 0
+    #loop do
+    #counter += 1
+    #  print "Ruby"
+    #end
   # GET /documents/1.json
   def show
   end
@@ -17,6 +23,25 @@ class DocumentsController < ApplicationController
     @document = Document.new
   end
 
+  def new_document
+    nuevo = {
+      user_id: @document.user.id,
+      document_type_id: @document.document_type.id,
+      user_review_id: @document.user_review.id,
+      user_aprove_id: @document.user_aprove.id,
+      header: @document.header,
+      footer: @document.footer,
+      is_last: true,
+    }
+
+    @document.update(is_last: false)
+    @new = Document.create(nuevo)
+
+    if @new.save
+        redirect_to edit_document_path(@new.id)
+    end
+
+  end
 
   def documents_pdf
       respond_to do |format|
@@ -33,6 +58,7 @@ class DocumentsController < ApplicationController
 
   def ready
     @document.update(finish_document: true);
+    @document.document_create!
   end
 
   # GET /documents/1/edit
@@ -45,15 +71,31 @@ class DocumentsController < ApplicationController
   # POST /documents
   # POST /documents.json
   def create
-    @document = Document.new(document_params)
+    if params[:document_file].present?
+      file = Document.create(document_file: params[:document_file], user_id: current_user.id)
+      if file.save
+        redirect_to edit_document_path(@document.id)
+      end
+    else 
+      puts valor = 0
 
-    respond_to do |format|
-      if @document.save
-        format.html { redirect_to edit_document_path(@document.id), notice: 'Document was successfully created.' }
-        format.json { render :show, status: :created, location: @document }
-      else
-        format.html { render :new }
-        format.json { render json: @document.errors, status: :unprocessable_entity }
+      @document = Document.new(document_params)
+
+      respond_to do |format|
+        if @document.save
+          format.html { 
+            if @document.document_file.present?
+              redirect_to documents_path
+              else
+
+              redirect_to edit_document_path(@document.id), notice: 'Document was successfully created.' 
+            end
+          }
+          format.json { render :show, status: :created, location: @document }
+        else
+          format.html { render :new }
+          format.json { render json: @document.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -62,8 +104,10 @@ class DocumentsController < ApplicationController
   def update_docu
     if params[:number].to_i == 1
         @document.update(aprove_date: Time.now, state_aprove: true)
+        @document.document_aprove!
       else
         @document.update(review_date: Time.now, state_review: true)
+        @document.document_review!
     end
   end
 

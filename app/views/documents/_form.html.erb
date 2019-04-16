@@ -29,24 +29,45 @@
             <% if !get_review.exists? %>
               <div class="col-md-4">
                 <%= form.label "Procceso" %><br>
-                <%= form.number_field :process_id, class: "form form-control" %>
+                <%= form.select 'proces_id', get_document_type.map { |u| [u.name, u.id] }, {:prompt => 'Tipo de Procceso'},{:class => 'form form-control'}%>
               </div>
 
               <div class="col-md-4">
                 <%= form.label "Tipo de Documento" %><br>
                   <%= form.select 'document_type_id', get_document_type.map { |u| [u.name, u.id] }, {:prompt => 'Tipo de Documento'},{:class => 'form form-control'}%>
               </div>
+
+              <div class="col-md-4">
+                <%= form.label "Fecha de Creacion" %><br>
+                  <%= form.date_field :create_date, class: "form form-control" %>
+              </div>
               <br><br><br><br> 
-              <div class="col-md-5">
+              <div class="col-md-4">
                 <%= form.label "lo Revisa" %><br>
                 <%= form.select 'user_review_id', get_user.map { |u| [u.first_name, u.id] }, {:prompt => 'lo Revisa'},{:class => 'form form-control'}%>
               </div>
 
-              <div class="col-md-5">
+              <div class="col-md-4">
                 <%= form.label "lo Aprueba" %><br>
                 <%= form.select 'user_aprove_id', get_user.map { |u| [u.first_name, u.id] }, {:prompt => 'lo Aprueba'},{:class => 'form form-control'}%>
               </div>
             </div>
+            <br>
+            <% if action_name == "new" %>
+              <div class="row">
+
+                <div class="col-md-2 text-center">
+                  <%= form.label "Documento Existente" %><br>
+                    <input type="checkbox" id="check" class="form form-control">
+                </div>
+
+                <div class="col-md-5 form-import" style="display: none;">
+                  <label>Importar</label>
+                  <%= form.file_field :document_file, class: "form form-control"  %>
+                </div>
+
+              </div>
+            <% end -%>
             <br>
 
             <% if action_name == "edit" %>
@@ -55,7 +76,7 @@
                       <label><%= docu.name %></label>
                       <% if docu.field_type == "Texto"%>
                         <% if CreatedField.where(document_id: @document.id, field_id: docu.id).any? %>
-                          <% create = CreatedField.where(document_id: @document.id, field_id: docu.id).last %>
+                          <% create = CreatedField.where(document_id: @document.id, field_id: docu.id).last %>}
                           <textarea rows="4" name="<%= docu.name %>" cols="50" id="field<%= docu.id %>"><%= create.content %></textarea>
                           <% else %>
                           <textarea rows="4" name="<%= docu.name %>" cols="50" id="field<%= docu.id %>"></textarea>
@@ -75,7 +96,7 @@
                       </script>
                     </div>
                   <% end %>
-
+                <br>
                 <div class="col-md-12 no-padding">
                   <%= form.label :header %>
                   <%= form.text_area :header, id: "wysiwyg" %>
@@ -85,6 +106,11 @@
                   <%= form.label :footer %>
                   <%= form.text_area :footer, id: "wysiwyg1" %>
                 </div>
+                <br>
+                <div class="col-md-12 no-padding">
+                  <%= form.label "Cambiar Descripcion" %>
+                  <%= form.text_area :change_description, id: "wysiwyg3" %>
+                </div>
               <% end -%>
 
               <% end %>
@@ -92,10 +118,12 @@
 
             <% if action_name == "new" %>
                 <%= form.hidden_field :user_id, :value => current_user.id %>
+                <%= form.hidden_field :is_last, :value => true %>
+                <%= form.hidden_field :review, :value => 1 %>
             <% end -%>
 
             <div class="col-md-12 modal-footer">
-              <%= form.submit "Siguiente", class: "btn btn-success" %>
+              <%= form.submit "Siguiente", class: "btn btn-success", id: "btn-save" %>
               <%= link_to "Volver", documents_path, class: "btn btn-light" %>
             </div>
 
@@ -111,74 +139,23 @@
     }
   </style>
 
+<script type="text/javascript">
+jQuery(document).ready(function($) {
 
-              <div class="field">
-              <%# form.label :logo %>
-              <%# form.text_field :logo %>
-            </div>
+    $("#check").change(function() {
+    var $input = $( this );
 
-            <div class="field">
-              <%# form.label :ubication_logo %>
-              <%# form.text_field :ubication_logo %>
-            </div>
+    if ($input.prop("checked") == true){
+      console.log('true');
+       $(".form-import").fadeIn("show");
+    }else {
+      $(".form-import").fadeOut("show");
+      console.log('false');
+    }
 
-            <div class="field">
-              <%# form.label :coding_type %>
-              <%# form.text_field :coding_type %>
-            </div>
-
-            <div class="field">
-              <%# form.label :coding %>
-              <%# form.text_field :coding %>
-            </div>
+  });
 
 
-            <div class="field">
-              <%# form.label :user_id %>
-              <%# form.number_field :user_id %>
-            </div>
+});
 
-            <div class="field">
-              <%# form.label :user_create_id %>
-              <%# form.number_field :user_create_id %>
-            </div>
-
-            <div class="field">
-              <%# form.label :user_review_id %>
-              <%# form.number_field :user_review_id %>
-            </div>
-
-            <div class="field">
-              <%# form.label :user_aprove_id %>
-              <%# form.number_field :user_aprove_id %>
-            </div>
-
-            <div class="field">
-              <%# form.label :create_date %>
-              <%# form.date_select :create_date %>
-            </div>
-
-            <div class="field">
-              <%# form.label :review_date %>
-              <%# form.date_select :review_date %>
-            </div>
-
-            <div class="field">
-              <%# form.label :aprove_date %>
-              <%# form.date_select :aprove_date %>
-            </div>
-
-            <div class="field">
-              <%# form.label :version %>
-              <%# form.number_field :version %>
-            </div>
-
-            <div class="field">
-              <%# form.label :review %>
-              <%# form.number_field :review %>
-            </div>
-
-            <div class="field">
-              <%# form.label :is_last %>
-              <%# form.check_box :is_last %>
-            </div>
+</script>
