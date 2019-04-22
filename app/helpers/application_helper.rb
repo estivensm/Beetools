@@ -154,4 +154,8 @@ module ApplicationHelper
 	 	Document.where(user_review_id: current_user.id, user_aprove_id: current_user.id).first
 	 end
 
+	 def get_cargo
+	 	Position.all
+	 end
+
 end
