@@ -1,10 +1,10 @@
 class DocumentsController < ApplicationController
   before_action :set_document, only: [:show, :edit, :update, :destroy, :update_docu, :ready, :documents_pdf, :new_document]
-
+  before_action :authenticate_user!
   # GET /documents
   # GET /documents.json
   def index
-    @documents = Document.all
+    @documents = Document.where(user_id: current_user.id)
   end
 
   # GET /documents/1
@@ -92,6 +92,8 @@ class DocumentsController < ApplicationController
     
   end
 
+  #bundle exec rake jobs:work
+  #heroku run bundle exec rake jobs:work
 
   def update_docu
     if params[:number].to_i == 1

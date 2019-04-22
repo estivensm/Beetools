@@ -1,6 +1,6 @@
 class ProcesosController < ApplicationController
   before_action :set_proceso, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!
   # GET /procesos
   # GET /procesos.json
   def index
