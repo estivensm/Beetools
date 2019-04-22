@@ -55,8 +55,8 @@
 //= require third_party/spell_checker.min.js
 
 //= require toastr_rails
-//= require bootstrap-sprockets
 //= require turbolinks
+//= require bootstrap-sprockets
 //= require_tree .
 
 jQuery(document).ready(function($) {

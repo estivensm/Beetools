@@ -107,7 +107,9 @@
         <div class="card-body">
 
           <div class="col-md-12 text-center">
-             <%= current_user.avatar? ? image_tag(current_user.avatar_url(), class: "user-avatar rounded-circle",id: "user-avatar1") : image_tag("https://dnuba.s3.amazonaws.com/uploads/bank_image/achivo/44/user.jpeg", class: "user-avatar rounded-circle")%>
+             <%= current_user.avatar? ? image_tag(current_user.avatar_url(), class: "user-avatar rounded-circle",id: "edit-avatar1") : image_tag("https://dnuba.s3.amazonaws.com/uploads/bank_image/achivo/44/user.jpeg", class: "user-avatar rounded-circle",id: "edit-avatar")%>
+             <br><br>
+             <%= f.file_field :avatar, class: "form form-control" %>
           </div>
 
         </div>
@@ -140,9 +142,9 @@
       <div class="card">
         <div class="card-body">
           <h3>Cancel my account</h3>
-
-            <div class="col-md-2 float-right">
-              <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %>
+            <br>
+            <div class="col-md-12 modal-footer">
+              <%= link_to "Eliminar Cuenta", registration_path(resource_name), data: { confirm: "Are you sure?" }, class: "btn btn-danger", method: :delete %>
             </div>
         </div>
       </div>
@@ -152,7 +154,14 @@
 </div>
 
 <style type="text/css" media="screen">
-  .alert{
-    display: none;
+
+  #edit-avatar{
+    height: 117px;
   }
+
+  #edit-avatar1{
+    height: 117px;
+    width: 123px;
+  }
+
 </style>

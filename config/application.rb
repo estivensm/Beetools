@@ -19,5 +19,7 @@ module BeeTools
     config.active_record.default_timezone = :local 
     config.i18n.default_locale = :es
     config.i18n.enforce_available_locales = true
+    #adaptador para el active job
+    #config.active_job.queue_adapter = :sidekiq
   end
 end

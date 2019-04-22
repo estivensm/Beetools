@@ -66,11 +66,11 @@
                   <% if action_name == "edit" %>
                       <% @document_type.field.order(id: :desc).each do |rela| %>
                         <div class="card" draggable="true" ondragstart="drag(event)" id="drag<%= rela.id %>">
-                          <div class="card-body">
+                          <div class="card-body input-drag">
                               <div class="col-md-12 no-padding">
-                                <label><%= rela.name %></label>
+                           
                                 <% if rela.field_type == "Texto" %>
-                                  <input type="text" name="" class="form form-control" placeholder="Campo de Texto">
+                                   <h5 style="color: gray"> <%= rela.name %></h5>
                                   <% else %>
 
                                   <select class="form form-control">
@@ -102,11 +102,11 @@
 
                       <% @fiels.each do |campo| %>
                         <div class="card" draggable="true" ondragstart="drag(event)" id="drag<%= campo.id %>">
-                          <div class="card-body">
+                          <div class="card-body input-drag">
                               <div class="col-md-12 no-padding">
-                                <label><%= campo.name %></label>
+                              
                                 <% if campo.field_type == "Texto" %>
-                                  <input type="text" name="" class="form form-control" placeholder="Campo de Texto">
+                                  <h5 style="color: gray"> <%= campo.name %></h5>
                                   <% else %>
 
                                   <select class="form form-control">
@@ -149,6 +149,13 @@
   #div1, #div2 {
   height: 400px;
   border: 1px solid black;
+}
+.input-drag
+{
+      border: 1px solid #cccccc;
+    padding: 8px !important;
+    cursor: pointer;
+    border-radius: 7px;
 }
 </style>
 

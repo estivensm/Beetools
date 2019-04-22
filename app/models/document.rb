@@ -7,7 +7,7 @@
 #  footer             :text
 #  logo               :string
 #  ubication_logo     :string
-#  process_id         :integer
+#  proces_id          :integer
 #  coding_type        :string
 #  coding             :string
 #  document_type_id   :integer
@@ -31,6 +31,8 @@
 #  change_description :text
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
+#  proceso_id         :integer
+#  name               :string
 #
 
 #  created_at       :datetime         not null
@@ -39,13 +41,17 @@
 
 class Document < ApplicationRecord
 
+  
+  before_create :create_code  
+
 
 	include AASM
 	belongs_to :document_type, optional: true
 	belongs_to :user
+  belongs_to :proceso
 	belongs_to :user_aprove, :class_name => 'User', optional: true
 	belongs_to :user_review, :class_name => 'User', optional: true
-
+  has_many :created_fields
 
 	aasm column: "document_state" do
     state :in_creation, initial: true
@@ -70,6 +76,20 @@ class Document < ApplicationRecord
   		transitions from: [:review, :aprove], to: [:ready]
   	end
 
+  end
+
+  def create_code
+
+    count = Document.where(document_type_id: self.document_type_id, proceso_id: proceso_id).maximum(:coutn)
+    type_document_prefix = DocumentType.find(self.document_type_id).prefix
+    proceso_prefix = Proceso.find(self.proceso_id).prefix
+
+
+    self.coutn = count == 0  || count.blank? || count.nil?   ?  1 :  count + 1
+   
+    
+    self.coding = type_document_prefix + "-" + proceso_prefix +"-" + self.coutn.to_s 
+    
   end
 
 end

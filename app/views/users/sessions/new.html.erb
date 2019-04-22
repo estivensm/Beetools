@@ -1,5 +1,54 @@
+
 <div class="container">
   <div class="row">
+    <div class="col-md-4 offset-md-4" style="margin-top: 40px;">
+
+      <div class="card">
+        <h5 class="card-header">Ingresar</h5>
+        <div class="card-body" style="border: 1px solid #f1f1f1;">
+           <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+              <div class="col-md-12 no-padding">
+                <label>Email</label>
+                <%= f.email_field :email, autofocus: true, autocomplete: "email", :placeholder => "Email", class: "form form-control" %>
+              </div>
+
+              <br>
+
+              <div class="col-md-12 no-padding">
+                <label>Contraseña</label>
+                <%= f.password_field :password, autocomplete: "current-password", :placeholder => "Password", class: "form form-control" %>
+              </div>
+
+              <br>
+
+              <div class="col-md-12 no-padding">
+                <% if devise_mapping.rememberable? %>
+                    <%= f.check_box :remember_me %>
+                    <%= f.label "Recordarme"%>
+                <% end %>
+              </div>
+
+              <br>
+
+              <div class="col-md-12 text-center">              
+                <% if devise_mapping.registerable? && controller_name != 'registrations' %>
+                  ¿No tienes una cuenta? <br> <%= link_to "Registrarme", new_registration_path(resource_name) %><br />
+                <% end %>
+              </div>
+
+              <br>
+
+              <div class="col-md-12 modal-footer">
+                <%= f.submit "Ingresar", class: "btn btn-outline-success" %>
+              </div>
+
+           <% end -%>
+        </div>
+      </div>
+
+    </div>
+    <!--
 
     <div class="card col-md-6">
       <div class="card-body">
@@ -62,27 +111,7 @@
 
       </div>
     </div>
-    
+    -->
   </div>
 </div>
 
-<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<%= render "parciales/css_login"%>

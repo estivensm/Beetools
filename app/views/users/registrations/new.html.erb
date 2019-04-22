@@ -1,90 +1,56 @@
+
 <div class="container">
   <div class="row">
+    <div class="col-md-4 offset-md-4" style="margin-top: 40px;">
 
-    <div class="card col-md-6">
-      <div class="card-body">
-
-      <h1>Administre su cuenta de negocios</h1><br>
-      <p>Donec dictum nisl nec mi lacinia, sed maximus tellus eleifend. Proin molestie cursus sapien ac eleifend.</p>
-
-      <img src="https://demo.w3layouts.com/demos_new/template_demo/23-02-2019/business_login_form-demo_Free/123711373/web/images/image.jpg" alt="">
-
-      </div>
-    </div>
-
-    <div class="card col-md-6" style="background-color: #f5f5f5;">
-      <div class="card-body">
-        <h1>Registrate</h1><br>
-        <p>Ingrese sus datos para iniciar sesión.</p><br>
-
-        <div class="col-md-12 no-padding">
+      <div class="card">
+        <h5 class="card-header">Registro</h5>
+        <div class="card-body" style="border: 1px solid #f1f1f1;">
           <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-            <div class="col-md-12 no-padding">
-              <label>Email</label>
-              <%= f.email_field :email, autofocus: true, autocomplete: "email", :placeholder => "Email", class: "form form-control" %>
-            </div>
 
-            <br>
-
-            <div class="col-md-12 no-padding">
-              <label>Contraseña</label>
-              <%= f.password_field :password, autocomplete: "new-password", :placeholder => "Password", class: "form form-control" %>
-            </div>
-
-            <br>   
+              <div class="col-md-12 no-padding">
+                <label>Email</label>
+                <%= f.email_field :email, autofocus: true, autocomplete: "email", :placeholder => "Email", class: "form form-control" %>
+              </div>
 
               <%= f.hidden_field :is_account, :value => true %>
 
-            <div class="col-md-12 no-padding">
-                <label>Confirmar Contraseña</label>
-                <%= f.password_field :password_confirmation, autocomplete: "new-password", :placeholder => "Confirmar Contraseña", class: "form form-control" %>
-            </div>
+              <br>
 
+              <div class="col-md-12 no-padding">
+                <label>Contraseña</label>
+                <%= f.password_field :password, autocomplete: "new-password", :placeholder => "Password", class: "form form-control" %>
+              </div>
 
-            <br>
+              <br>
 
-            <div class="col-md-12 text-center">
-              Al hacer clic en iniciar sesión aceptas nuestros, <a href="" title="" data-toggle="modal" data-target="#exampleModalLong">Términos y condiciones.</a>
-              <br><br>
+              <div class="col-md-12 no-padding">
+                  <label>Confirmar Contraseña</label>
+                  <%= f.password_field :password_confirmation, autocomplete: "new-password", :placeholder => "Confirmar Contraseña", class: "form form-control" %>
+              </div>
 
-              <%- if controller_name != 'sessions' %>
-                 ¿ya tienes una cuenta?  <%= link_to "Ingresa", new_session_path(resource_name) %><br />
-              <% end %>
+              <br>
 
-            </div>
+              <div class="col-md-12 text-center">              
+                <% if devise_mapping.registerable? && controller_name != 'registrations' %>
+                  ¿No tienes una cuenta? <br> <%= link_to "Registrarme", new_registration_path(resource_name) %><br />
+                <% end %>
+              </div>
 
-            <br>
+              <br>
 
-            <div class="col-md-12 text-center no-padding">
-              <%= f.submit "Ingresar", class: "btn btn-outline-success" %>
-            </div>
+              <div class="col-md-12 modal-footer">
+                <%= f.submit "Registrame", class: "btn btn-outline-success" %>
 
-          <% end %>
+                <%- if controller_name != 'sessions' %>
+                 <%= link_to "Ingresar", new_session_path(resource_name), class: "btn btn-light" %><br />
+                <% end %>
+              </div>
+
+           <% end -%>
         </div>
+      </div>
 
-      </div>
-    </div>
-    
-  </div>
-</div>
-
-<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-      </div>
     </div>
   </div>
 </div>
-
-<%= render "parciales/css_login"%>

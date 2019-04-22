@@ -7,7 +7,7 @@
 #  footer             :text
 #  logo               :string
 #  ubication_logo     :string
-#  process_id         :integer
+#  proces_id          :integer
 #  coding_type        :string
 #  coding             :string
 #  document_type_id   :integer
@@ -31,6 +31,8 @@
 #  change_description :text
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
+#  proceso_id         :integer
+#  name               :string
 #
 
 require 'test_helper'

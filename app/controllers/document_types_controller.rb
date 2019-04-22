@@ -1,6 +1,6 @@
 class DocumentTypesController < ApplicationController
   before_action :set_document_type, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!
   # GET /document_types
   # GET /document_types.json
   def index
@@ -72,6 +72,6 @@ class DocumentTypesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def document_type_params
-      params.require(:document_type).permit(:name, :description, :file, :responsible, :field_ids => [])
+      params.require(:document_type).permit(:name, :description, :file,:prefix, :responsible, :field_ids => [])
     end
 end

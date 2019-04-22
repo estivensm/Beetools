@@ -14,6 +14,7 @@
               <thead>
                 <tr>
                   <th>Nombre</th>
+                  <th>Prefijo</th>
                   <th>Descripcion</th>
                   <th>Tipo de Processo</th>
                   <th colspan="3">Acciones</th>
@@ -24,6 +25,7 @@
                 <% @proces.each do |proce| %>
                   <tr>
                     <td><%= proce.name %></td>
+                    <td><%= proce.prefix %></td>
                     <td><%= proce.description %></td>
                     <td><%= proce.proces_type %></td>
                     <td><%= link_to 'Show', proce %></td>

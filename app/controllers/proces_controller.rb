@@ -24,14 +24,14 @@ class ProcesController < ApplicationController
   # POST /proces
   # POST /proces.json
   def create
-    @proces = Proces.new(proce_params)
+    @proce = Proces.new(proce_params)
 
     respond_to do |format|
       if @proces.save
         format.html { redirect_to proce_path, notice: 'Proce was successfully created.' }
-        puts "oooooooooooooooooooooooooooooooooooo"
+        
       else
-        puts "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        
         format.html { render :index }
         format.json { render json: @proces.errors, status: :unprocessable_entity }
       end
@@ -70,6 +70,6 @@ class ProcesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def proce_params
-      params.require(:proces).permit(:name, :description, :admin_user, :user_id, :proces_type)
+      params.require(:proces).permit(:name, :description, :admin_user, :user_id, :proces_type, :prefix)
     end
 end

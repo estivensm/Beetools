@@ -1,0 +1,57 @@
+<div class="orders">
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="card">
+
+        <div class="card-body">
+          <h4 class="box-title">Procesos </h4>
+        </div>
+
+        <div class="card-body">
+          <div class="table-stats order-table ov-h">
+            <table class="table table_form ">
+
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Prefijo</th>
+                  <th>Descripcion</th>
+                  <th>Tipo de Processo</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <% @procesos.each do |proce| %>
+                  <tr>
+                    <td><%= proce.name %></td>
+                    <td><%= proce.prefix %></td>
+                    <td><%= proce.description %></td>
+                    <td><%= proce.proces_type %></td>
+
+                    <td>
+                       <%= link_to edit_proceso_path(proce), data: {toggle: "tooltip", placement: "bottom" }, remote: true, title: "Editar", class: "btn" do %>
+                          <i class="fas fa-pencil-alt"></i>
+                        <% end -%>
+
+                        <a href="/procesos/<%= proce.id %>" class="btn" data-method="delete" data-toggle="tooltip" data-placement="right" title="Eliminar Documento" data-confirm="Estas Seguro?">
+                          <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </td>
+                  
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div> 
+        </div>
+
+        <div class="col-md-12 modal-footer">
+          <%= link_to 'Nuevo Procceso', new_proceso_path, class: "btn btn-success ", remote:true %>
+        </div>
+   
+
+      </div> 
+    </div>  
+  </div>
+</div>

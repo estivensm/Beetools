@@ -34,13 +34,15 @@
           </div>
 
           <div class="col-md-6">
-            <%= form.label "Al Procceso" %>
-            <%= form.select 'proces_id', options_for_select(select_type_proces), {:prompt => 'Tipo de Procceso'},{:class => 'form form-control'}%>
+            <%= form.label "Proceso" %>
+             <%= form.select :proceso_id, Proceso.all.map { |u| [u.name, u.id] },{ include_blank: false },{ class: 'form-control'  }%>
           </div>
-        </div>
+
+          </div>
+       
 
         <br>
-        <div class="field">
+       <div class="col-md-12">
           <%= form.label "Descripcion" %>
           <%= form.text_area :description, class: "form form-control", :rows => 6 %>
         </div>

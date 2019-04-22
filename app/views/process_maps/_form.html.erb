@@ -44,6 +44,16 @@
             <% end -%>
           </div>
         </div>
+         <div class="col-md-3">
+           <%= form.label "Versión" %>
+            <% if action_name == "new" %>
+            <%= form.number_field :version, :value => (ProcessMap.count + 1),class: "form form-control" %>
+             <% else -%> 
+             <%= form.number_field :version, :value => @process_map.version ,class: "form form-control" %>
+
+             <% end -%>
+         
+         </div>
 
         <% if action_name == "new" %>
           <%= form.hidden_field :user_id, :value => current_user.id %>

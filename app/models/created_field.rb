@@ -13,4 +13,6 @@
 #
 
 class CreatedField < ApplicationRecord
+
+	belongs_to :document
 end

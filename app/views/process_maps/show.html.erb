@@ -4,17 +4,8 @@
       <div class="card-body">
       	<div class="row">
       		
-      	<div class="card col-md-6">
+      	<div class="card col-md-12">
       		<div class="card-body">
-	      		<p>
-					<strong>Admin user:</strong>
-					<%= @process_map.admin_user %>
-				</p>
-
-				<p>
-					<strong>User:</strong>
-					<%= @process_map.user_id %>
-				</p>
 
 				<p>
 					<strong>Version:</strong>
@@ -23,7 +14,7 @@
 			</div>
       	</div>
 
-      	<div class="card col-md-3">
+      	<div class="card col-md-12 text-center">
       		<div class="card-body">
       			<%= @process_map.file? ? image_tag(@process_map.file_url(), class: "img-user") : image_tag("https://dnuba.s3.amazonaws.com/uploads/bank_image/achivo/44/user.jpeg", class: "img-user")%>
       		</div>
@@ -37,8 +28,8 @@
 
 <style type="text/css" media="screen">
 	.img-user{
-		width: 170px;
-    	border-radius: 50%;
+		width:700px;
+    	
 	}
 </style>
 

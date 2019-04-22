@@ -4,16 +4,10 @@ class DocumentsController < ApplicationController
   # GET /documents
   # GET /documents.json
   def index
-    @documents = Document.where(user_id: current_user.id )
+    @documents = Document.all
   end
 
   # GET /documents/1
-
-    #counter = 0
-    #loop do
-    #counter += 1
-    #  print "Ruby"
-    #end
   # GET /documents/1.json
   def show
   end
@@ -28,7 +22,12 @@ class DocumentsController < ApplicationController
       user_id: @document.user.id,
       document_type_id: @document.document_type.id,
       user_review_id: @document.user_review.id,
+      name: @document.name,
+      version: @document.version + 1,
+      coding: @document.coding,
+      document_source: @document.document_source,
       user_aprove_id: @document.user_aprove.id,
+      proceso_id: @document.proceso.id,
       header: @document.header,
       footer: @document.footer,
       is_last: true,
@@ -58,6 +57,7 @@ class DocumentsController < ApplicationController
 
   def ready
     @document.update(finish_document: true);
+    SendEmailJob.set(wait: 30.seconds).perform_later(@document, 1)
     @document.document_create!
   end
 
@@ -71,20 +71,12 @@ class DocumentsController < ApplicationController
   # POST /documents
   # POST /documents.json
   def create
-    if params[:document_file].present?
-      file = Document.create(document_file: params[:document_file], user_id: current_user.id)
-      if file.save
-        redirect_to edit_document_path(@document.id)
-      end
-    else 
-      puts valor = 0
-
       @document = Document.new(document_params)
 
       respond_to do |format|
         if @document.save
           format.html { 
-            if @document.document_file.present?
+            if @document.document_source == "Existente"
               redirect_to documents_path
               else
 
@@ -97,7 +89,7 @@ class DocumentsController < ApplicationController
           format.json { render json: @document.errors, status: :unprocessable_entity }
         end
       end
-    end
+    
   end
 
 
@@ -108,6 +100,7 @@ class DocumentsController < ApplicationController
       else
         @document.update(review_date: Time.now, state_review: true)
         @document.document_review!
+        SendEmailJob.set(wait: 30.seconds).perform_later(@document, 2)
     end
   end
 

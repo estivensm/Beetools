@@ -1,4 +1,5 @@
-jQuery(document).ready(function($){
-    $('#exampleModal<%= @document.id %>').modal('hide');
-    toastr["success"]("Tu Confirmacion fue Enviada con <b> Exito!</b>");
-});
+<% if params[:number].to_i == 1 %>
+	toastr["success"]('<b><%= @document.user_aprove.first_name? ? @document.user_aprove.first_name : @document.user_aprove.email %></b>' + 'La Confirmacion fue Enviada con <b> Exito!</b>');
+<% else %>
+	toastr["success"]('<b><%= @document.user_review.first_name? ? @document.user_review.first_name : @document.user_review.email %></b>' + 'La Confirmacion fue Enviada con <b> Exito!</b>');
+<% end %>

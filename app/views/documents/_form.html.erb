@@ -3,14 +3,14 @@
     <div class="col-xl-12">
       <div class="card">
         <div class="card-body">
-          <div class="col-md-12 no-padding-left">
-            <h3>
-              <% if action_name == "new" %>
-                Nuevo Documento
-                <% else %>
-                Editar Documento
-              <% end -%>
-            </h3>
+          <div class="col-md-3 no-padding-left">
+              <h3>
+                <% if action_name == "new" %>
+                  Nuevo Documento
+                  <% else %>
+                  Editar Documento
+                <% end -%>
+              </h3>
           </div>
           <br>
           <%= form_with(model: document, local: true) do |form| %>
@@ -27,9 +27,15 @@
             <% end %>
             <div class="row">
             <% if !get_review.exists? %>
+
+              <div class="col-md-12">
+                <%= form.label "Nombre" %><br>
+                 <%= form.text_field :name, class: "form form-control" %>
+                 <br>
+              </div>
               <div class="col-md-4">
                 <%= form.label "Procceso" %><br>
-                <%= form.select 'proces_id', get_document_type.map { |u| [u.name, u.id] }, {:prompt => 'Tipo de Procceso'},{:class => 'form form-control'}%>
+                <%= form.select 'proceso_id', get_procesos.map { |u| [u.name, u.id] }, {:prompt => 'Procceso'},{:class => 'form form-control'}%>
               </div>
 
               <div class="col-md-4">
@@ -43,40 +49,64 @@
               </div>
               <br><br><br><br> 
               <div class="col-md-4">
-                <%= form.label "lo Revisa" %><br>
-                <%= form.select 'user_review_id', get_user.map { |u| [u.first_name, u.id] }, {:prompt => 'lo Revisa'},{:class => 'form form-control'}%>
+                <%= form.label "Revisa" %><br>
+                <%= form.select 'user_review_id', get_user.map { |u| [u.first_name, u.id] }, {:prompt => 'Revisa'},{:class => 'form form-control', id: "user1"}%>
               </div>
 
               <div class="col-md-4">
-                <%= form.label "lo Aprueba" %><br>
-                <%= form.select 'user_aprove_id', get_user.map { |u| [u.first_name, u.id] }, {:prompt => 'lo Aprueba'},{:class => 'form form-control'}%>
+                <%= form.label "Aprueba" %><br>
+                <%= form.select 'user_aprove_id', get_user.map { |u| [u.first_name, u.id] }, {:prompt => 'Aprueba'},{:class => 'form form-control', id: "user2"}%>
               </div>
+
+
+              <div class="col-md-4">
+                <%= form.label "Version" %><br>
+                  <% if action_name == "new" %>
+            <%= form.number_field :version, :value => 1,class: "form form-control" %>
+             <% else -%> 
+             <%= form.number_field :version, :value => @document.version ,class: "form form-control" %>
+
+             <% end -%>
+              </div>
+
+
+
+
+
+             
             </div>
             <br>
             <% if action_name == "new" %>
               <div class="row">
 
-                <div class="col-md-2 text-center">
-                  <%= form.label "Documento Existente" %><br>
-                    <input type="checkbox" id="check" class="form form-control">
+                <div class="col-md-4">
+                  <%= form.label "Tipo de Creación" ,style: "display:inline-block"%>
+                    <%= form.select 'document_source', options_for_select(select_document_source), {},{:class => 'form form-control document_source'}%>
                 </div>
 
-                <div class="col-md-5 form-import" style="display: none;">
+                <div class="col-md-4 form-import" style="display: none;">
                   <label>Importar</label>
                   <%= form.file_field :document_file, class: "form form-control"  %>
                 </div>
 
+                <div class="col-md-6 float-right" id="message">
+                  <br>
+                  <div class="alert alert-warning" role="alert">
+                          El Usuario que <b>Revisa</b> no puede ser el mismo que <b>Aprueba</b>
+                  </div>
+                </div>
+
+
               </div>
             <% end -%>
             <br>
-
-            <% if action_name == "edit" %>
-                  <% @document.document_type.field.each do |docu| %>
+            <% if action_name == "edit"  && @document.document_source != "Existente" %>
+                  <% @document.document_type.field.order(id: :desc).each do |docu| %>
                     <div class="col-md-12 no-padding">
                       <label><%= docu.name %></label>
                       <% if docu.field_type == "Texto"%>
                         <% if CreatedField.where(document_id: @document.id, field_id: docu.id).any? %>
-                          <% create = CreatedField.where(document_id: @document.id, field_id: docu.id).last %>}
+                          <% create = CreatedField.where(document_id: @document.id, field_id: docu.id).last %>
                           <textarea rows="4" name="<%= docu.name %>" cols="50" id="field<%= docu.id %>"><%= create.content %></textarea>
                           <% else %>
                           <textarea rows="4" name="<%= docu.name %>" cols="50" id="field<%= docu.id %>"></textarea>
@@ -102,14 +132,29 @@
                   <%= form.text_area :header, id: "wysiwyg" %>
                 </div>
                 <br>
-                <div class="col-md-12 no-padding">
-                  <%= form.label :footer %>
-                  <%= form.text_area :footer, id: "wysiwyg1" %>
-                </div>
-                <br>
-                <div class="col-md-12 no-padding">
+                <div class="col-md-6 no-padding">
                   <%= form.label "Cambiar Descripcion" %>
-                  <%= form.text_area :change_description, id: "wysiwyg3" %>
+                  <%= form.text_area :change_description, class: "form form-control" %>
+                </div>
+
+                <% elsif  @document.document_source == "Existente" %>
+                <div class="row">
+                    
+                  <div class="col-md-4">
+                    <%= form.label "Tipo de Creación" ,style: "display:inline-block"%>
+                      <%= form.select 'document_source', options_for_select(select_document_source), {},{:class => 'form form-control document_source'}%>
+                  </div>
+
+                  <div class="col-md-4">
+                      <label>Cargar Archivo</label>
+                      <%= form.file_field :document_file, class: "form form-control"  %>
+                  </div>
+
+                  </div>
+                  <br>
+                <div class="col-md-6 no-padding">
+                  <%= form.label "Cambiar Descripcion" %>
+                  <%= form.text_area :change_description, class: "form form-control" %>
                 </div>
               <% end -%>
 
@@ -119,7 +164,6 @@
             <% if action_name == "new" %>
                 <%= form.hidden_field :user_id, :value => current_user.id %>
                 <%= form.hidden_field :is_last, :value => true %>
-                <%= form.hidden_field :review, :value => 1 %>
             <% end -%>
 
             <div class="col-md-12 modal-footer">
@@ -133,19 +177,40 @@
     </div>
   </div>
 
+
   <style type="text/css" media="screen">
     .fr-toolbar{
           border-top: 5px solid #fbcf00 !important;
     }
+    #check
+    {
+          display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin-left: 11px;
+    position: relative;
+    top: 10px;
+    }
+
+    #message{
+      display: none;
+    }
+
+    .opacidad{
+         opacity: 0.5;
+        filter: alpha(opacity=50); /* For IE8 and earlier */
+        cursor: default;
+    }
+
   </style>
 
 <script type="text/javascript">
 jQuery(document).ready(function($) {
 
-    $("#check").change(function() {
+    $(".document_source").change(function() {
     var $input = $( this );
 
-    if ($input.prop("checked") == true){
+    if ($input.val() == "Existente"){
       console.log('true');
        $(".form-import").fadeIn("show");
     }else {
@@ -155,7 +220,37 @@ jQuery(document).ready(function($) {
 
   });
 
+    $("#user1").change(function() {
+      var $input1 = $( this );
+      $("#user2").change(function() {
+
+        var $input = $( this );
+        select($input1.val(),$input.val())
+      });
+
+    });
+
+
 
 });
+
+
+function select(valor1, valor2) {
+  var mensaje = document.getElementById("message")
+  var btn = document.getElementById("btn-save")
+
+  jQuery(document).ready(function($) {
+    
+  if (valor1 == valor2){
+    mensaje.style.display = 'block'
+    $(btn).attr('disabled', true);
+    $(btn).addClass("opacidad");
+  }else {
+    mensaje.style.display = 'none'
+    $(btn).removeAttr("disabled");
+    $(btn).removeClass("opacidad");
+  }
+    });
+}
 
 </script>

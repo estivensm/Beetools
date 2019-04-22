@@ -1,23 +1,62 @@
 <div class="col-xl-12">
   <div class="card">
     <div class="card-body">
-      
-      <% if @document.user.id == current_user.id %>
-        <div class="col-md-12 text-right no-padding-left">
-          <% if @document.finish_document == true %>
-              <button type="button" class="btn btn-outline-success" disabled>Pendiente de Aprobación</button>
+      <!--
+      <div class="col-md-4 float-right">
+        <div class="row text-center">
+
+          <div class="col-md-3 text-center">
+            <small><b>Revisado</b></small>
+            <i class="fas fa-check true"></i>
+          </div>
+
+          <div class="col-md-3 text-center no-padding-right">
+            <small><b>Aprobado</b></small>
+            <i class="fas fa-check true"></i>
+          </div>
+
+          <div class="col-md-3 text-center no-padding-right">
+            <button class="btn btn-outline-success"><i class="fas fa-check true"></i></button>
+          </div>
+
+        </div>
+      </div>
+      -->
+
+      <div class="col-md-12 text-right no-padding-right">
+        <% if @document.user.id == current_user.id %>
+          <% if get_finish_document(@document.state_review, @document.state_aprove) == true %>
+            <button type="button" class="btn btn-outline-success" disabled>Este Documento Fue Aprobado Por Todos <%= @document.user.first_name? ? @document.user.first_name : @document.user.email %></button>
           <% else %>
-            <%= link_to 'Esta listo?', documents_ready_path(@document.id), method: :post, remote: true, class: "btn btn-info " %>
+            <% if @document.finish_document == true %>
+              <button type="button" class="btn btn-outline-success" disabled>Pendiente de Aprobación</button>
+              <% else %>
+              <%= link_to "¿Esta listo #{@document.user.first_name? ? @document.user.first_name : @document.user.email}?", documents_ready_path(@document.id), method: :post, remote: true, class: "btn btn-info " %>
+            <% end -%>
+          <% end -%>
+        <% end %>
+      </div>
+
+
+
+      <% if @document.user_review.id == current_user.id %>
+        <div class="col-md-12 text-right no-padding-left">
+          <% if @document.state_review == true %>
+            <button type="button" class="btn btn-outline-success" disabled>Revision Aprobada <%= @document.user_review.first_name %></button>
+          <% else %>
+            <%= link_to "¿Apruebas Este Documento #{@document.user_review.first_name? ? @document.user_review.first_name : @document.user_review.email }?", document_update_path(@document.id, 2), class: "btn btn-info", method: :patch, remote: true %>
           <% end -%>
         </div>
-          <% elsif @document.user_review.id == current_user.id %>
-          <div class="col-md-12 text-right no-padding-right">
-              <%= link_to "Apruebas Este Documento?", document_update_path(@document.id, 2), class: "btn btn-info", method: :patch, remote: true %>
-          </div>
-          <% elsif @document.user_aprove.id == current_user.id %>
-          <div class="col-md-12 text-right no-padding-right">
-              <%= link_to "Apruebas Este Documento?", document_update_path(@document.id, 1), class: "btn btn-info", method: :patch, remote: true %>
-          </div>        
+      <% end -%>
+
+      <% if @document.user_aprove.id == current_user.id %>
+        <div class="col-md-12 text-right no-padding-left">
+          <% if @document.state_aprove == true %>
+            <button type="button" class="btn btn-outline-success" disabled>Aprobastes Este Documento <%= @document.user_aprove.first_name %></button>
+          <% else %>
+            <%= link_to "¿Apruebas Este Documento #{@document.user_aprove.first_name? ? @document.user_aprove.first_name : @document.user_aprove.email }?", document_update_path(@document.id, 1), class: "btn btn-info", method: :patch, remote: true %>
+          <% end -%>
+        </div>
       <% end -%>
 
       <br>
@@ -26,7 +65,16 @@
       </div>
       <br><br>
 
-      <table class="table">
+      <% @document.created_fields.each do |field|%>
+
+        <%== field.content%>
+
+      <%end%>
+
+
+
+
+      <table class="table" style="margin-top: 40px;">
         <thead class="text-center">
           <tr>
             <th>Creado por </th>
@@ -49,13 +97,13 @@
         <tbody>
           <tr>
             <td class="text-center">
-              <strong><%= @document.user.first_name %> - <%= @document.user.first_last_name %></strong>
+              <strong><%= @document.user.first_name %>  <%= @document.user.first_last_name %></strong>
               <p><%= get_date(@document.create_date) %></p>
             </td>
 
             <td class="text-center">
-              <strong><%= @document.user_review.first_name %> - <%= @document.user_review.first_last_name %></strong>
-              <% if @document.aprove_date.present? %>
+              <strong><%= @document.user_review.first_name %>  <%= @document.user_review.first_last_name %></strong>
+              <% if @document.state_review == true %>
                 <p><%= get_date(@document.review_date) %></p>
               <% else %>
                 <p>Pendiente de Revisar</p>
@@ -63,8 +111,8 @@
             </td>
 
             <td class="text-center">
-              <strong><%= @document.user_aprove.first_name %> - <%= @document.user_aprove.first_last_name %></strong>
-              <% if @document.aprove_date.present? %>
+              <strong><%= @document.user_aprove.first_name %>  <%= @document.user_aprove.first_last_name %></strong>
+              <% if @document.state_aprove == true  %>
                 <p><%= get_date(@document.aprove_date) %></p>
               <% else %>
                 <p>Pendiente de Aprobacion</p>

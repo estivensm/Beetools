@@ -52,7 +52,10 @@
         #cellPaiChart{
             height: 160px;
         }
-
+        .sub-menu
+        {
+            width: 220px !important;
+        }
     </style>
 </head>
 <body class="open">
@@ -71,22 +74,16 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>Configuracion</a>
                         <ul class="sub-menu children dropdown-menu">    
                             <li><i class="fa fa-exclamation-triangle"></i><a href="/process_maps">Mapa de Procesos</a></li>       
-                            <li><i class="fa fa-exclamation-triangle"></i><a href="/proces">Procesos</a></li>
+                            <li><i class="fa fa-exclamation-triangle"></i><a href="/procesos">Procesos</a></li>
                             <li><i class="fa fa-id-badge"></i><a href="/positions">Cargos</a></li>
+                             <li><i class="menu-icon fas fa-users"></i>
+                        <%= link_to "Creacion de Usuarios", users_path%>
+                            
+                    </li>
                         </ul>
                     </li>
 
-                    <li class="">
-                        <%= link_to users_path do %>
-                            <i class="menu-icon fas fa-users"></i> Creacion de Usuarios
-                        <% end -%>
-                    </li>
-
-                    <li class="">
-                        <%= link_to edit_user_registration_path do %>
-                            <i class="menu-icon fas fa-users-cog"></i>Editar Cuenta
-                        <% end -%>
-                    </li>
+              
 
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fas fa-file-alt"></i></i>Gestion Documental</a>

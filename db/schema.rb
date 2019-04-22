@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_12_154506) do
+ActiveRecord::Schema.define(version: 2019_04_21_043242) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,21 @@ ActiveRecord::Schema.define(version: 2019_04_12_154506) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer "priority", default: 0, null: false
+    t.integer "attempts", default: 0, null: false
+    t.text "handler", null: false
+    t.text "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string "locked_by"
+    t.string "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
   create_table "document_types", force: :cascade do |t|
@@ -69,6 +84,8 @@ ActiveRecord::Schema.define(version: 2019_04_12_154506) do
     t.text "change_description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "proceso_id"
+    t.string "name"
   end
 
   create_table "fields", force: :cascade do |t|
@@ -91,6 +108,7 @@ ActiveRecord::Schema.define(version: 2019_04_12_154506) do
     t.integer "proces_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "proceso_id"
   end
 
   create_table "proces", force: :cascade do |t|
@@ -99,6 +117,18 @@ ActiveRecord::Schema.define(version: 2019_04_12_154506) do
     t.integer "admin_user"
     t.integer "user_id"
     t.string "proces_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "prefix"
+  end
+
+  create_table "procesos", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.integer "admin_user"
+    t.integer "user_id"
+    t.string "proces_type"
+    t.string "prefix"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :procesos
   resources :documents
   resources :document_types
   resources :created_fields

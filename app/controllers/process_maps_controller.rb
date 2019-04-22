@@ -1,10 +1,11 @@
 class ProcessMapsController < ApplicationController
   before_action :set_process_map, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /process_maps
   # GET /process_maps.json
   def index
-    @process_maps = ProcessMap.all
+    @process_maps = ProcessMap.all.order(version: :desc)
   end
 
   # GET /process_maps/1

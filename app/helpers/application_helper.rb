@@ -28,6 +28,17 @@ module ApplicationHelper
 		]
 	end
 
+	def select_document_source
+		[
+
+			["Nuevo Documento", "Nuevo Documento"],
+			["Existente o Adjunto", "Existente"]
+
+
+		]
+		
+	end
+
 	def get_field_type
 		[
 
@@ -104,6 +115,12 @@ module ApplicationHelper
 	 	end	 		
 	 end
 
+	 def get_finish_document(state1, state2)
+	 	if state1 && state2 == true
+	 		return true
+	 	end
+	 end
+
 
 	 def get_last(state)
 	 	if state == true
@@ -115,6 +132,10 @@ module ApplicationHelper
 
 	 def get_fields
 	 	Field.all
+	 end
+
+	 def get_procesos
+	 	Proceso.all
 	 end
 
 	 def get_document_type

@@ -38,7 +38,7 @@ gem 'annotate'
 #Guardar en amazon
 gem 'fog', '~> 1.38'
 gem 'figaro'
-
+gem 'delayed_job_active_record'
 #subir archivos save
 gem 'roo'
 #Sub Formularios
@@ -51,9 +51,10 @@ gem 'will_paginate-bootstrap'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 #jquery
+gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jquery-validation-rails'
-gem 'jquery-rails'
+
 #Editor texto
 #bootstrap
 gem 'bootstrap', '~> 4.3.1'
@@ -62,7 +63,8 @@ gem 'bootstrap', '~> 4.3.1'
 gem "aasm"
 #ckditor
 gem "wysiwyg-rails"
-
+# active job
+# gem 'sidekiq'
 gem 'chosen-rails'
 gem 'bootstrap-chosen-rails'
 # Use CoffeeScript for .coffee assets and views

@@ -13,8 +13,10 @@
 
               <thead>
                 <tr>
-                  <th class="serial">#</th>
-                  <th>Tipo de Documento</th>
+                  <th>Codigo</th>
+                  <th>Versión</th>
+                  <th>Nombre</th>
+                  <th>Tipo</th>
                   <th>Procceso</th>
                   <th class="text-center">¿Es EL Ultimo?</th>
                                         <!--
@@ -28,11 +30,13 @@
               </thead>
 
               <tbody>
-                <% @documents.each_with_index do |document, position| %>
+                <% @documents.order(version: :desc).each do |document| %>
                   <tr>
-                    <td class="serial"><%= position + 1 %>.</td>
+                    <td><%= document.coding %></td>
+                    <td><%= document.version %></td>
+                     <td><%= document.name %></td>
                       <td><%= document.document_type.name if document.document_type %></td>
-                      <td><%= document.proces_id %></td>
+                      <td><%= document.proceso.name if document.proceso %></td>
                       <td class="text-center"><%= get_last(document.is_last) %></td>
                       <!--
                       <td class="text-center"><%= get_icon(document.finish_document).html_safe %></td>
@@ -45,7 +49,7 @@
                           <i class="fas fa-eye"></i>
                         <% end -%>
 
-                        <%= link_to edit_document_path(document), data: {toggle: "tooltip", placement: "bottom" }, title: "Editar", class: "btn" do %>
+                        <%= link_to edit_document_path(document), data: {toggle: "tooltip", placement: "bottom", turbolinks: false }, title: "Editar", class: "btn" do %>
                           <i class="fas fa-pencil-alt"></i>
                         <% end -%>
 
@@ -57,7 +61,7 @@
                           <i class="fas fa-file-alt"></i>
                         <% end -%>
 
-                        <a data-toggle="tooltip" data-placement="bottom" title="" data-confirm="Estas Seguro?" rel="nofollow" data-method="post" href="/version_document/<%= document.id %>" data-original-title="Duplicar">
+                        <a data-toggle="tooltip" data-placement="bottom" title="" class="btn" data-confirm="Estas Seguro?" rel="nofollow" data-method="post" href="/version_document/<%= document.id %>" data-original-title="Duplicar">
                           <i class="fas fa-copy"></i>
                         </a>
                       </td>

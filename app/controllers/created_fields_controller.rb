@@ -1,5 +1,6 @@
 class CreatedFieldsController < ApplicationController
   before_action :set_created_field, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /created_fields
   # GET /created_fields.json
