@@ -5,7 +5,7 @@ class CreatePositions < ActiveRecord::Migration[5.2]
       t.text :description
       t.integer :admin_user
       t.integer :user_id
-      t.integer :proces_id
+      t.integer :proceso_id
 
       t.timestamps
     end

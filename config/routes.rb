@@ -13,12 +13,14 @@ Rails.application.routes.draw do
   end
 
   root 'home#index'
-  get "user", to: "home#user", as: "user"
+  get "user/new", to: "home#user", as: "user"
   devise_for :users, :controllers => { :registrations => "users/registrations" }
+
   devise_scope :user do
     post "create_user", to: "users/registrations#create_user", as: "create_user" 
   end
   get "all_users", to: "home#create_user", as: "users"
+  
   patch "document_update/:id/:number", to: "documents#update_docu", as: "document_update"
   
   post "version_document/:id", to: "documents#new_document", as: "nuevo_document"

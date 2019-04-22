@@ -15,5 +15,6 @@
 
 class Proceso < ApplicationRecord
 	has_many :documents
+	belongs_to :user
 	has_many :positions
 end

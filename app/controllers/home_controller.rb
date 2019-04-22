@@ -10,9 +10,7 @@ class HomeController < ApplicationController
   end
 
   def user
-  	respond_to do |format|
-  		format.js
-    end
+
   end
   
 end

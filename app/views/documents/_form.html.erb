@@ -50,12 +50,12 @@
               <br><br><br><br> 
               <div class="col-md-4">
                 <%= form.label "Revisa" %><br>
-                <%= form.select 'user_review_id', get_user.map { |u| [u.first_name, u.id] }, {:prompt => 'Revisa'},{:class => 'form form-control', id: "user1"}%>
+                <%= form.select 'user_review_id', get_user.map { |u| [u.first_name, u.id] }, {:prompt => 'Revisa'},{:class => 'form form-control', id: ""}%>
               </div>
 
               <div class="col-md-4">
                 <%= form.label "Aprueba" %><br>
-                <%= form.select 'user_aprove_id', get_user.map { |u| [u.first_name, u.id] }, {:prompt => 'Aprueba'},{:class => 'form form-control', id: "user2"}%>
+                <%= form.select 'user_aprove_id', get_user.map { |u| [u.first_name, u.id] }, {:prompt => 'Aprueba'},{:class => 'form form-control', id: ""}%>
               </div>
 
 
@@ -88,14 +88,6 @@
                   <label>Importar</label>
                   <%= form.file_field :document_file, class: "form form-control"  %>
                 </div>
-
-                <div class="col-md-6 float-right" id="message">
-                  <br>
-                  <div class="alert alert-warning" role="alert">
-                          El Usuario que <b>Revisa</b> no puede ser el mismo que <b>Aprueba</b>
-                  </div>
-                </div>
-
 
               </div>
             <% end -%>
@@ -191,11 +183,6 @@
     position: relative;
     top: 10px;
     }
-
-    #message{
-      display: none;
-    }
-
     .opacidad{
          opacity: 0.5;
         filter: alpha(opacity=50); /* For IE8 and earlier */
@@ -219,38 +206,7 @@ jQuery(document).ready(function($) {
     }
 
   });
-
-    $("#user1").change(function() {
-      var $input1 = $( this );
-      $("#user2").change(function() {
-
-        var $input = $( this );
-        select($input1.val(),$input.val())
-      });
-
-    });
-
-
-
 });
 
-
-function select(valor1, valor2) {
-  var mensaje = document.getElementById("message")
-  var btn = document.getElementById("btn-save")
-
-  jQuery(document).ready(function($) {
-    
-  if (valor1 == valor2){
-    mensaje.style.display = 'block'
-    $(btn).attr('disabled', true);
-    $(btn).addClass("opacidad");
-  }else {
-    mensaje.style.display = 'none'
-    $(btn).removeAttr("disabled");
-    $(btn).removeClass("opacidad");
-  }
-    });
-}
 
 </script>

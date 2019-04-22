@@ -1,7 +1,0 @@
-jQuery(document).ready(function($){
-	$('<%= j render "form", proces: @proces %>').on('hidden.bs.modal', function (e) {
-	$(this).remove();
-	$('.modal-backdrop').remove();
-	}).modal();
-
-});

@@ -29,10 +29,11 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-         has_many :process_map
-         has_many :proce
-         has_many :position
-         has_many :document
+    has_many :process_map
+    has_many :proce
+   	has_many :position
+    has_many :document
+    belongs_to :position
 
   mount_uploader :avatar, AvatarUploader         
 end

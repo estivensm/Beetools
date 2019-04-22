@@ -27,6 +27,10 @@ class CreateDocuments < ActiveRecord::Migration[5.2]
       t.integer :coutn
       t.string :document_file
       t.text :change_description 
+      t.string :name
+      t.integer :proceso_id
+      t.boolean :is_copy
+
 
       t.timestamps
     end

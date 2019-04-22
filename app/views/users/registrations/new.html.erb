@@ -4,10 +4,11 @@
     <div class="col-md-4 offset-md-4" style="margin-top: 40px;">
 
       <div class="card">
-        <h5 class="card-header">Registro</h5>
+        <div class="card-header">
+          <img src="https://mybc1.s3.amazonaws.com/uploads/rseguimiento/evidencia/430/WhatsApp_Image_2019-04-05_at_11.55.04_AM.jpeg" alt="" class="img-bee"><b class="be">Bee</b><b class="tol">Tools</b>
+        </div>
         <div class="card-body" style="border: 1px solid #f1f1f1;">
           <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-
               <div class="col-md-12 no-padding">
                 <label>Email</label>
                 <%= f.email_field :email, autofocus: true, autocomplete: "email", :placeholder => "Email", class: "form form-control" %>
@@ -54,3 +55,21 @@
     </div>
   </div>
 </div>
+
+<style type="text/css" media="screen">
+
+  .img-bee{
+    border-radius: 50%;
+    height: 49px;
+  }
+
+  .be{
+    color: #f7ac00;
+    margin-left: 10px;
+  }
+
+  .tol{
+
+  }
+
+</style>

@@ -29,10 +29,11 @@
 #  coutn              :integer
 #  document_file      :string
 #  change_description :text
+#  name               :string
+#  proceso_id         :integer
+#  is_copy            :boolean
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
-#  proceso_id         :integer
-#  name               :string
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

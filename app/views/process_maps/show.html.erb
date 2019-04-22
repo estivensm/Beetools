@@ -3,22 +3,25 @@
     <div class="card">
       <div class="card-body">
       	<div class="row">
-      		
-      	<div class="card col-md-12">
-      		<div class="card-body">
 
-				<p>
-					<strong>Version:</strong>
-					<%= @process_map.version %>
-				</p>
-			</div>
-      	</div>
+          <div class="col-md-12 text-right">
 
-      	<div class="card col-md-12 text-center">
-      		<div class="card-body">
-      			<%= @process_map.file? ? image_tag(@process_map.file_url(), class: "img-user") : image_tag("https://dnuba.s3.amazonaws.com/uploads/bank_image/achivo/44/user.jpeg", class: "img-user")%>
-      		</div>
-      	</div>
+            <div class="col-md-1 float-right text-right no-padding">
+              <%= link_to "Volver", process_maps_path, class: "btn btn-light" %>
+            </div>
+
+            <div class="col-md-2 float-right text-center no-padding">
+              <strong>Version</strong>
+              <p><%= @process_map.version %></p>
+            </div>
+
+          </div>
+      	
+          <br><br>
+        	<div class="col-md-12 text-center">
+        			<%= @process_map.file? ? image_tag(@process_map.file_url(), class: "img-user") : image_tag("https://dnuba.s3.amazonaws.com/uploads/bank_image/achivo/44/user.jpeg", class: "img-user")%>
+        	</div>
+
       	</div>
 
       </div>

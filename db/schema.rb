@@ -82,10 +82,11 @@ ActiveRecord::Schema.define(version: 2019_04_21_043242) do
     t.integer "coutn"
     t.string "document_file"
     t.text "change_description"
+    t.string "name"
+    t.integer "proceso_id"
+    t.boolean "is_copy"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "proceso_id"
-    t.string "name"
   end
 
   create_table "fields", force: :cascade do |t|
@@ -105,21 +106,9 @@ ActiveRecord::Schema.define(version: 2019_04_21_043242) do
     t.text "description"
     t.integer "admin_user"
     t.integer "user_id"
-    t.integer "proces_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.integer "proceso_id"
-  end
-
-  create_table "proces", force: :cascade do |t|
-    t.string "name"
-    t.text "description"
-    t.integer "admin_user"
-    t.integer "user_id"
-    t.string "proces_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "prefix"
   end
 
   create_table "procesos", force: :cascade do |t|
@@ -160,6 +149,13 @@ ActiveRecord::Schema.define(version: 2019_04_21_043242) do
     t.integer "admin_user"
     t.boolean "is_account"
     t.integer "rol_id"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
+    t.integer "failed_attempts", default: 0, null: false
+    t.string "unlock_token"
+    t.datetime "locked_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true

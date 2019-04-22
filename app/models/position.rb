@@ -7,14 +7,13 @@
 #  description :text
 #  admin_user  :integer
 #  user_id     :integer
-#  proces_id   :integer
+#  proceso_id  :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  proceso_id  :integer
 #
 
 class Position < ApplicationRecord
-	belongs_to :user
 	belongs_to :proceso, optional: true
+	has_many :user
 
 end

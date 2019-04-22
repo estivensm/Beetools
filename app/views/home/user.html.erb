@@ -1,14 +1,7 @@
-<div class="modal fade bd-example-modal-lg" id="product-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog  modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Crear Nuevo Usuario
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        </h5>
-      </div>
-      <div class="modal-body">
+<div class="row">
+  <div class="col-xl-12">
+    <div class="card">
+       <div class="card-body">
         <%= form_tag create_user_path, method: :post, remote: true, class: "needs-validation", :novalidate => true do %>
           <div class="row">
             <div class="col-md-3">
@@ -108,10 +101,12 @@
         <%# form.hidden_field :is_account, :value => true %>
         <div class="col-md-12 modal-footer">
           <%= submit_tag "Guardar", class: "btn btn-success" %>
+          <%= link_to "Volver", documents_path, class: "btn btn-light" %>
         </div>
       </div>
       <% end %>
 
-    </div>
-  </div>
+      </div>
+   	</div>
+   </div>
 </div>

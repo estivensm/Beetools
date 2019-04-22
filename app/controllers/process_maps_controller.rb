@@ -5,7 +5,7 @@ class ProcessMapsController < ApplicationController
   # GET /process_maps
   # GET /process_maps.json
   def index
-    @process_maps = ProcessMap.all.order(version: :desc)
+    @process_maps = ProcessMap.all
   end
 
   # GET /process_maps/1
