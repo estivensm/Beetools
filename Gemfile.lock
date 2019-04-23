@@ -7,6 +7,13 @@ GIT
       tinymce-rails (~> 4.0)
 
 GIT
+  remote: https://github.com/galetahub/ckeditor.git
+  revision: f6ce3a98b29efec16fcff7bcf34b1e4e6827d835
+  specs:
+    ckeditor (5.0.0)
+      orm_adapter (~> 0.5.0)
+
+GIT
   remote: https://github.com/ryanb/nested_form.git
   revision: 1b0689dfb4d230ceabd278eba159fcb02f23c68a
   specs:
@@ -101,8 +108,6 @@ GEM
     chromedriver-helper (2.1.1)
       archive-zip (~> 0.10)
       nokogiri (~> 1.8)
-    ckeditor (5.0.0)
-      orm_adapter (~> 0.5.0)
     ckeditor_rails (4.10.0)
       railties (>= 3.0)
     coffee-rails (4.2.2)
@@ -507,7 +512,7 @@ DEPENDENCIES
   carrierwave
   chosen-rails
   chromedriver-helper
-  ckeditor
+  ckeditor!
   ckeditor_rails (~> 4.5, >= 4.5.10)
   coffee-rails (~> 4.2)
   delayed_job_active_record
