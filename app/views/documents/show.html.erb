@@ -89,15 +89,18 @@
             </div>
             <div class="modal-body">
               <% @comments.each do |comen| %>
-              
+
                 <div class="card">
                   <div class="card-body">
-                                        <div class="media">
+                    <div class="media">
                       <%= comen.user.avatar? ? image_tag(comen.user.avatar.avatar_url(), class: "align-self-center mr-3 rounded-circle height") : image_tag("https://dnuba.s3.amazonaws.com/uploads/bank_image/achivo/44/user.jpeg", class: "align-self-center mr-3 rounded-circle height")%>
                       <div class="media-body">
                         <h4 class="mt-0"><%= comen.title %></h4>
                         <br>
                         <p><%= comen.description %></p>
+                        <div class="col-md-4 float-right no-padding text-right">
+                          <small class="text-muted"><%= comen.user.first_name? ? comen.user.first_name : comen.user.email %>  <%= comen.user.first_last_name? ? comen.user.first_last_name : comen.user.email %></small>
+                        </div>
                       </div>
                     </div>
                   </div>
