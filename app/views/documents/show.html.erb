@@ -89,9 +89,22 @@
             </div>
             <div class="modal-body">
               <% @comments.each do |comen| %>
-                <p><%= comen.title %></p>
-                <p><%= comen.description %></p>
+              
+                <div class="card">
+                  <div class="card-body">
+                                        <div class="media">
+                      <%= comen.user.avatar? ? image_tag(comen.user.avatar.avatar_url(), class: "align-self-center mr-3 rounded-circle height") : image_tag("https://dnuba.s3.amazonaws.com/uploads/bank_image/achivo/44/user.jpeg", class: "align-self-center mr-3 rounded-circle height")%>
+                      <div class="media-body">
+                        <h4 class="mt-0"><%= comen.title %></h4>
+                        <br>
+                        <p><%= comen.description %></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
               <% end -%>
+
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -201,5 +214,9 @@
 
   .user{
         height: 148px;
+  }
+
+  .height{
+    height: 110px;
   }
 </style>

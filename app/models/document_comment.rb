@@ -13,4 +13,5 @@
 #
 
 class DocumentComment < ApplicationRecord
+	belongs_to :user
 end

@@ -38,6 +38,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
     has_many :process_map
    	has_many :position
+   	has_many :document_comment
     has_many :document
     #belongs_to :position
 
