@@ -63,7 +63,6 @@ gem 'bootstrap', '~> 4.3.1'
 gem "aasm"
 #ckditor
 gem "wysiwyg-rails"
-gem 'ckeditor'
 gem 'tinymce-rails'
 gem 'tinymce-rails-langs'
 gem 'tinymce-rails-imageupload', github: 'PerfectlyNormal/tinymce-rails-imageupload'

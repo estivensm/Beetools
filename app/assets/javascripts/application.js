@@ -17,7 +17,6 @@
 //= require popper
 
 //= require tinymce
-//= require ckeditor-jquery
 
 //= require froala_editor.min.js
 //= require plugins/align.min.js

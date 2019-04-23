@@ -101,8 +101,6 @@ GEM
     chromedriver-helper (2.1.1)
       archive-zip (~> 0.10)
       nokogiri (~> 1.8)
-    ckeditor (5.0.0)
-      orm_adapter (~> 0.5.0)
     ckeditor_rails (4.10.0)
       railties (>= 3.0)
     coffee-rails (4.2.2)
@@ -507,7 +505,6 @@ DEPENDENCIES
   carrierwave
   chosen-rails
   chromedriver-helper
-  ckeditor
   ckeditor_rails (~> 4.5, >= 4.5.10)
   coffee-rails (~> 4.2)
   delayed_job_active_record
