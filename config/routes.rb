@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'document_comments/create'
   resources :procesos
   resources :documents
   resources :document_types
@@ -7,14 +8,16 @@ Rails.application.routes.draw do
   resources :process_maps
   resources :proces
   resources :positions
+  resources :diagnosticos
 
-  resources :diagnosticos do
-    collection { post :import }
-  end
+  post "document_comment", to: "document_comments#create",  as: "document_comment"
+  get "comment_index", to: "document_comments#comment_index", as: "comment_index"
 
   root 'home#index'
   get "user/new", to: "home#user", as: "user"
   devise_for :users, :controllers => { :registrations => "users/registrations" }
+  
+  post '/tinymce_assets', to: 'tinymce_assets#create'
 
   devise_scope :user do
     post "create_user", to: "users/registrations#create_user", as: "create_user" 

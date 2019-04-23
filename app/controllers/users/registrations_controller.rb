@@ -24,8 +24,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create_user
     @users = User.create(user_params)
     if @users.save
+        redirect_to users_path
         flash[:success] = "El Registro de creo con"
       else 
+        puts "noguardaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
         flash[:error] = "El Registro No se puedo crear"
     end
   end
@@ -78,6 +80,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def user_params
-    params.permit(:email, :password, :password_confirmation, :first_name, :second_name, :first_last_name, :second_last_name, :document_type, :document_number, :avatar, :admin_user, :is_account)
+    params.permit(:email, :password, :password_confirmation, :first_name, :second_name, :first_last_name, :second_last_name, :document_type, :document_number, :avatar, :admin_user, :is_account, :position_id, :birthday)
   end
 end

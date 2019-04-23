@@ -13,7 +13,8 @@
               </h3>
           </div>
           <br>
-          <%= form_with(model: document, local: true) do |form| %>
+                          <%= tinymce_assets %>
+          <%= form_with(model: document, local: true, :html => {class: "needs-validation", :novalidate => true}) do |form| %>
             <% if document.errors.any? %>
               <div id="error_explanation">
                 <h2><%= pluralize(document.errors.count, "error") %> prohibited this document from being saved:</h2>
@@ -30,32 +31,50 @@
 
               <div class="col-md-12">
                 <%= form.label "Nombre" %><br>
-                 <%= form.text_field :name, class: "form form-control" %>
+                 <%= form.text_field :name, class: "form form-control", id: "validationCustom01", :required => true %>
+                  <div class="invalid-feedback">
+                      Requerido!
+                  </div>
                  <br>
               </div>
               <div class="col-md-4">
                 <%= form.label "Procceso" %><br>
-                <%= form.select 'proceso_id', get_procesos.map { |u| [u.name, u.id] }, {:prompt => 'Procceso'},{:class => 'form form-control'}%>
+                <%= form.select 'proceso_id', get_procesos.map { |u| [u.name, u.id] }, {:prompt => 'Procceso'},{:class => 'form form-control', id: "validationCustom01", :required => true}%>
+                <div class="invalid-feedback">
+                    Requerido!
+                </div>
               </div>
 
               <div class="col-md-4">
                 <%= form.label "Tipo de Documento" %><br>
-                  <%= form.select 'document_type_id', get_document_type.map { |u| [u.name, u.id] }, {:prompt => 'Tipo de Documento'},{:class => 'form form-control'}%>
+                  <%= form.select 'document_type_id', get_document_type.map { |u| [u.name, u.id] }, {:prompt => 'Tipo de Documento'},{:class => 'form form-control', id: "validationCustom01", :required => true}%>
+                  <div class="invalid-feedback">
+                      Requerido!
+                  </div>
               </div>
 
               <div class="col-md-4">
                 <%= form.label "Fecha de Creacion" %><br>
-                  <%= form.date_field :create_date, class: "form form-control" %>
+                  <%= form.date_field :create_date, class: "form form-control", id: "validationCustom01", :required => true %>
+                  <div class="invalid-feedback">
+                      Requerido!
+                  </div>
               </div>
               <br><br><br><br> 
               <div class="col-md-4">
                 <%= form.label "Revisa" %><br>
-                <%= form.select 'user_review_id', get_user.map { |u| [u.first_name, u.id] }, {:prompt => 'Revisa'},{:class => 'form form-control', id: ""}%>
+                <%= form.select 'user_review_id', get_user.map { |u| [u.first_name? ? u.first_name : u.email, u.id] }, {:prompt => 'Revisa'},{:class => 'form form-control', id: "validationCustom01", :required => true}%>
+                <div class="invalid-feedback">
+                    Requerido!
+                </div>
               </div>
 
               <div class="col-md-4">
                 <%= form.label "Aprueba" %><br>
-                <%= form.select 'user_aprove_id', get_user.map { |u| [u.first_name, u.id] }, {:prompt => 'Aprueba'},{:class => 'form form-control', id: ""}%>
+                <%= form.select 'user_aprove_id', get_user.map { |u| [u.first_name? ? u.first_name : u.email, u.id] }, {:prompt => 'Aprueba'},{:class => 'form form-control', id: "validationCustom01", :required => true}%>
+                <div class="invalid-feedback">
+                    Requerido!
+                </div>
               </div>
 
 
@@ -110,9 +129,7 @@
                             height: 200,
                             charCounterCount: false,
                             language: 'es',
-                            placeholderText: '<%= docu.name %>',
-                            toolbarButtons: ['undo', 'redo' , '|', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'outdent', 'indent', 'clearFormatting', 'insertTable', 'html'],
-                            toolbarButtonsXS: ['undo', 'redo' , '-', 'bold', 'italic', 'underline']
+                            placeholderText: '<%= docu.name %>'
 
                         })
                       </script>
@@ -121,14 +138,17 @@
                 <br>
                 <div class="col-md-12 no-padding">
                   <%= form.label :header %>
-                  <%= form.text_area :header, id: "wysiwyg" %>
+                  <%= form.text_area :header, class: "ckeditor" %>
                 </div>
                 <br>
+
+                <%= tinymce uploadimage: true %>
                 <div class="col-md-6 no-padding">
                   <%= form.label "Cambiar Descripcion" %>
-                  <%= form.text_area :change_description, class: "form form-control" %>
-                </div>
+                  <%= form.text_area :change_description, :rows => 10, :cols => 130, class: "form form-control tinymce" %>
 
+                </div>
+                <%= tinymce %>
                 <% elsif  @document.document_source == "Existente" %>
                 <div class="row">
                     
@@ -146,7 +166,7 @@
                   <br>
                 <div class="col-md-6 no-padding">
                   <%= form.label "Cambiar Descripcion" %>
-                  <%= form.text_area :change_description, class: "form form-control" %>
+                  <%= form.text_area :change_description, class: "tinymce" %>
                 </div>
               <% end -%>
 
@@ -206,7 +226,14 @@ jQuery(document).ready(function($) {
     }
 
   });
+
+
+    $(document).on('turbolinks:request-end', function() {
+  if (tinyMCE) { tinyMCE.remove(); }
 });
+
+});
+
 
 
 </script>

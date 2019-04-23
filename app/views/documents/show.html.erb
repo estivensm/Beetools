@@ -1,3 +1,4 @@
+
 <div class="col-xl-12">
   <div class="card">
     <div class="card-body">
@@ -25,15 +26,18 @@
 
       <div class="col-md-12 text-right no-padding-right">
         <% if @document.user.id == current_user.id %>
-          <% if get_finish_document(@document.state_review, @document.state_aprove) == true %>
-            <button type="button" class="btn btn-outline-success" disabled>Este Documento Fue Aprobado Por Todos <%= @document.user.first_name? ? @document.user.first_name : @document.user.email %></button>
-          <% else %>
-            <% if @document.finish_document == true %>
-              <button type="button" class="btn btn-outline-success" disabled>Pendiente de Aprobación</button>
-              <% else %>
-              <%= link_to "¿Esta listo #{@document.user.first_name? ? @document.user.first_name : @document.user.email}?", documents_ready_path(@document.id), method: :post, remote: true, class: "btn btn-info " %>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong"> Mensajes </button>
+
+            <% if get_finish_document(@document.state_review, @document.state_aprove) == true %>
+              <button type="button" class="btn btn-outline-success" disabled>Este Documento Fue Aprobado Por Todos</button>
+            <% else %>
+              <% if @document.finish_document == true %>
+                <button type="button" class="btn btn-outline-success" disabled>Pendiente de Aprobación</button>
+                <% else %>
+                <%= link_to "¿Este Documento Esta Listo Para Revision?", documents_ready_path(@document.id), method: :post, remote: true, class: "btn btn-info " %>
+              <% end -%>
             <% end -%>
-          <% end -%>
+
         <% end %>
       </div>
 
@@ -44,7 +48,7 @@
           <% if @document.state_review == true %>
             <button type="button" class="btn btn-outline-success" disabled>Revision Aprobada <%= @document.user_review.first_name %></button>
           <% else %>
-            <%= link_to "¿Apruebas Este Documento #{@document.user_review.first_name? ? @document.user_review.first_name : @document.user_review.email }?", document_update_path(@document.id, 2), class: "btn btn-info", method: :patch, remote: true %>
+            <%= link_to "¿Este Documento Esta Listo Para Revision?", document_update_path(@document.id, 2), class: "btn btn-info", method: :patch, remote: true %>
           <% end -%>
         </div>
       <% end -%>
@@ -54,7 +58,7 @@
           <% if @document.state_aprove == true %>
             <button type="button" class="btn btn-outline-success" disabled>Aprobastes Este Documento <%= @document.user_aprove.first_name %></button>
           <% else %>
-            <%= link_to "¿Apruebas Este Documento #{@document.user_aprove.first_name? ? @document.user_aprove.first_name : @document.user_aprove.email }?", document_update_path(@document.id, 1), class: "btn btn-info", method: :patch, remote: true %>
+            <%= link_to "¿Este Documento Esta Listo Para Revision?", document_update_path(@document.id, 1), class: "btn btn-info", method: :patch, remote: true %>
           <% end -%>
         </div>
       <% end -%>
@@ -71,6 +75,50 @@
 
       <%end%>
 
+      <%== @document.change_description%>
+
+      <div class="modal fade bd-example-modal-lg" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Comentarios
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </h5>
+            </div>
+            <div class="modal-body">
+              <% @comments.each do |comen| %>
+                <p><%= comen.title %></p>
+                <p><%= comen.description %></p>
+              <% end -%>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <%# unless @document.user.id == current_user.id %>
+        <!--
+        <%# form_tag document_comment_path, method: :post, remote: true do %>
+          <%# text_field_tag :title, nil, class: "form form-control", :placeholder => "Titulo" %>
+          <br>
+          <%# text_area_tag :description, nil, class: "form form-control", :placeholder => "Descripcion", :rows => 6 %>
+          <%# hidden_field_tag :document_id, nil, :value => @document.id %>
+
+          <%# if @document.user_review.id == current_user.id %>
+            <%# hidden_field_tag :user_id, nil, :value => @document.user_review.id %>
+          <%# elsif @document.user_aprove.id == current_user.id %>
+            <%# hidden_field_tag :user_id, nil, :value => @document.user_aprove.id %>
+          <%# end -%>
+          
+        <%# end -%>
+      -->
+
+      <%# end -%>
 
 
 
@@ -97,7 +145,7 @@
         <tbody>
           <tr>
             <td class="text-center">
-              <strong><%= @document.user.first_name %>  <%= @document.user.first_last_name %></strong>
+              <strong><%= @document.user.first_name? ? @document.user.first_name : @document.user.email %>  <%= @document.user.first_last_name %></strong>
               <p><%= get_date(@document.create_date) %></p>
             </td>
 
@@ -128,6 +176,9 @@
       </div>
 
       <div class="col-md-12 modal-footer">
+        <% unless @document.user.id == current_user.id %>
+          <%= link_to "Comentar", comment_index_path(:commen => @document), class: "btn btn-warning", remote: true %>
+        <% end -%>
           <%= link_to 'Volver', documents_path, class: "btn btn-success " %>
       </div>
 

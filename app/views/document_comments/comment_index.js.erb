@@ -1,0 +1,6 @@
+jQuery(document).ready(function($){
+	$('<%= j render "parciales/form_comment", document: @document %>').on('hidden.bs.modal', function (e) {
+	$(this).remove();
+	$('.modal-backdrop').remove();
+	}).modal();
+});

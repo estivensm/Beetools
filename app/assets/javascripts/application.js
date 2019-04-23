@@ -16,6 +16,9 @@
 //= require jquery_ujs
 //= require popper
 
+//= require tinymce
+//= require ckeditor-jquery
+
 //= require froala_editor.min.js
 //= require plugins/align.min.js
 //= require plugins/char_counter.min.js
@@ -68,8 +71,8 @@ jQuery(document).ready(function($) {
       inlineMode: false,
       language: 'es',
       imageUploadToS3: '<%= @aws_data.to_json.html_safe %>',
-      placeholderText: 'Encabezado',
-      toolbarButtons: ['bold', 'italic', 'underline', 'fontFamily', 'fontSize', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'insertLink', 'insertImage', 'insertTable']
+      placeholderText: 'Encabezado'
+      //toolbarButtons: ['bold', 'italic', 'underline', 'fontFamily', 'fontSize', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'insertLink', 'insertImage', 'insertTable']
     })
 
     $('#wysiwyg1').froalaEditor({
@@ -77,8 +80,8 @@ jQuery(document).ready(function($) {
       charCounterCount: false,
       language: 'es',
       imageUploadToS3: '<%= @aws_data.to_json.html_safe %>',
-      placeholderText: 'Parte Inferior',
-      toolbarButtons: ['bold', 'italic', 'underline', 'fontFamily', 'fontSize', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'insertLink', 'insertImage', 'insertTable']
+      placeholderText: 'Parte Inferior'
+      //toolbarButtons: ['bold', 'italic', 'underline', 'fontFamily', 'fontSize', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'insertLink', 'insertImage', 'insertTable']
 
     })
 
@@ -87,8 +90,8 @@ jQuery(document).ready(function($) {
       charCounterCount: false,
       language: 'es',
       imageUploadToS3: '<%= @aws_data.to_json.html_safe %>',
-      placeholderText: 'Cambiar Descripcion',
-      toolbarButtons: ['bold', 'italic', 'underline', 'fontFamily', 'fontSize', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'insertLink', 'insertImage', 'insertTable']
+      placeholderText: 'Cambiar Descripcion'
+      //toolbarButtons: ['bold', 'italic', 'underline', 'fontFamily', 'fontSize', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'insertLink', 'insertImage', 'insertTable']
 
     })
 });

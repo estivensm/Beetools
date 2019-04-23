@@ -20,6 +20,13 @@
 #  admin_user             :integer
 #  is_account             :boolean
 #  rol_id                 :integer
+#  confirmation_token     :string
+#  confirmed_at           :datetime
+#  confirmation_sent_at   :datetime
+#  unconfirmed_email      :string
+#  failed_attempts        :integer          default(0), not null
+#  unlock_token           :string
+#  locked_at              :datetime
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
@@ -30,10 +37,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
     has_many :process_map
-    has_many :proce
    	has_many :position
     has_many :document
-    belongs_to :position
+    #belongs_to :position
 
   mount_uploader :avatar, AvatarUploader         
 end

@@ -63,6 +63,10 @@ gem 'bootstrap', '~> 4.3.1'
 gem "aasm"
 #ckditor
 gem "wysiwyg-rails"
+gem 'ckeditor'
+gem 'tinymce-rails'
+gem 'tinymce-rails-langs'
+gem 'tinymce-rails-imageupload', github: 'PerfectlyNormal/tinymce-rails-imageupload'
 # active job
 # gem 'sidekiq'
 gem 'chosen-rails'
@@ -77,7 +81,6 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

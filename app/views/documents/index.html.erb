@@ -18,7 +18,7 @@
                   <th>Nombre</th>
                   <th>Tipo</th>
                   <th>Procceso</th>
-                  <th class="text-center">¿Es EL Ultimo?</th>
+                  <th class="text-center">Estado Del Documento</th>
                                         <!--
                   <th class="text-center">Creado</th>
                   <th class="text-center">Estado de Revisado</th>
@@ -37,7 +37,7 @@
                      <td><%= document.name %></td>
                       <td><%= document.document_type.name if document.document_type %></td>
                       <td><%= document.proceso.name if document.proceso %></td>
-                      <td class="text-center"><%= get_last(document.is_last) %></td>
+                      <td class="text-center"><%= get_traslate(document.document_state) %></td>
                       <!--
                       <td class="text-center"><%= get_icon(document.finish_document).html_safe %></td>
                       <td class="text-center"><%= get_icon(document.state_review).html_safe %></td>
@@ -49,13 +49,13 @@
                           <i class="fas fa-eye"></i>
                         <% end -%>
 
-                        <%= link_to edit_document_path(document), data: {toggle: "tooltip", placement: "bottom", turbolinks: false }, title: "Editar", class: "btn" do %>
-                          <i class="fas fa-pencil-alt"></i>
-                        <% end -%>
+                        <% estado =  get_finish_document(document.state_aprove, document.state_review) %>
 
-                        <a href="/documents/<%= document.id %>" class="btn" data-method="delete" data-toggle="tooltip" data-placement="top" title="Eliminar Documento" data-confirm="Estas Seguro?">
-                          <i class="fas fa-trash-alt"></i>
-                        </a>
+                        <% unless estado == true %>
+                          <%= link_to edit_document_path(document), data: {toggle: "tooltip", placement: "bottom", turbolinks: false }, title: "Editar", class: "btn" do %>
+                            <i class="fas fa-pencil-alt"></i>
+                          <% end -%>
+                        <% end -%>
 
                         <%= link_to pdf_document_path(document.id, :format => "pdf"), data: {toggle: "tooltip", placement: "bottom" }, title: "Generar Pdf", target:"_blank", class: "btn" do %>
                           <i class="fas fa-file-alt"></i>
@@ -64,6 +64,11 @@
                         <a data-toggle="tooltip" data-placement="bottom" title="" class="btn" data-confirm="Estas Seguro?" rel="nofollow" data-method="post" href="/version_document/<%= document.id %>" data-original-title="Duplicar">
                           <i class="fas fa-copy"></i>
                         </a>
+
+                        <a href="/documents/<%= document.id %>" class="btn" data-method="delete" data-toggle="tooltip" data-placement="top" title="Eliminar Documento" data-confirm="Estas Seguro?">
+                          <i class="fas fa-trash-alt"></i>
+                        </a>
+                        
                       </td>
                   </tr>
                 <% end %>
@@ -91,10 +96,11 @@
   .false{
     color: red;
   }
+
 </style>
 
 <script type="text/javascript">
-  $(function () {
+jQuery(document).ready(function($) {
   $('[data-toggle="tooltip"]').tooltip()
-})
+});
 </script>

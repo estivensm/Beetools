@@ -15,7 +15,10 @@
           <div class="row">
               <div class="col-md-4">
                   <%= label_tag "Primer Nombre" %><br />
-                  <%= text_field_tag :first_name, nil, class: "form form-control", :placeholder => "Nombre" %>
+                  <%= text_field_tag :first_name, nil, class: "form form-control", :placeholder => "Nombre", id: "validationCustom01", :required => true  %>
+                <div class="invalid-feedback">
+				    Requerido!
+				</div> 
               </div>
 
               <div class="col-md-4">
@@ -59,12 +62,19 @@
 
             <div class="col-md-6">
               <%= label_tag "Cargo" %><br>
-              <%= select_tag 'position_id', options_for_select(get_cargo.collect{ |u| ["#{u.name}", u.id] },{}), {:multiple => false, class: 'form-control', include_blank: false }%>
-            </div>
+              <%= select_tag 'position_id', options_for_select(get_cargo.collect{ |u| ["#{u.name}", u.id] },{}), {:multiple => false, class: 'form-control', include_blank: false, id: "validationCustom01", :required => true, :prompt => 'Selecciona una Opcion' }%>
+
+                  <div class="invalid-feedback">
+                      Requerido!
+                  </div> 
+            </div>	
 
             <div class="col-md-6">
               <%= label_tag :email %><br>
-              <%= email_field_tag :email, nil, class: "form form-control", :placeholder => "Email" %>
+              <%= email_field_tag :email, nil, class: "form form-control", :placeholder => "Email", id: "validationCustom01", :required => true %>
+                <div class="invalid-feedback">
+				    Requerido!
+				</div> 
             </div>
 
           </div>
@@ -78,12 +88,18 @@
           <div class="row">
             <div class="col-md-6">
                 <%= label_tag "Contraseña" %>
-                <%= password_field_tag :password, nil, class: "form form-control", :placeholder => "Contraseña" %>
+                <%= password_field_tag :password, nil, class: "form form-control", :placeholder => "Contraseña", id: "validationCustom01", :required => true %>
+                <div class="invalid-feedback">
+				    Requerido!
+				</div> 
             </div>
 
             <div class="col-md-6">
                 <%= label_tag "Confirmar Contraseña" %>
-                <%= password_field_tag :password_confirmation, nil, class: "form form-control", :placeholder => "Confirmar Contraseña" %>
+                <%= password_field_tag :password_confirmation, nil, class: "form form-control", :placeholder => "Confirmar Contraseña", id: "validationCustom01", :required => true %>
+                <div class="invalid-feedback">
+				    Requerido!
+				</div> 
             </div>
           </div>
 
@@ -103,26 +119,10 @@
              <br><br>
              <%= file_field_tag :avatar, class: "form form-control", id: "img1" %>
           </div>
-
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-body">
-          
-          <div class="col-md-12 no-padding-left">
-            <p id="email-user"><i class="fas fa-user"></i> <%= current_user.email %></p>
-            <p id="nombre-user"><i class="fas fa-user"></i> <%= current_user.first_name %> - <%= current_user.second_name %></p>
-            <p id="apellido"><i class="fas fa-user"></i> <%= current_user.first_last_name %> -  <%= current_user.second_last_name %> </p>
-            <p id="document-type"><i class="far fa-address-book"></i> <%= current_user.document_type %>  </p>
-            <p id="document-numero"><i class="far fa-address-book"></i> <%= current_user.document_number %>  </p>
-            <p id="date"><i class="fas fa-birthday-cake"></i> <%= get_date(current_user.birthday) %> </p>
-          </div>
-
-
+          <br><br>
           <div class="col-md-12 modal-footer">
             <%= submit_tag "Guardar", class: "btn btn-warning" %>
-          	<%= link_to "Volver", documents_path, class: "btn btn-light" %>
+            <%= link_to "Volver", users_path, class: "btn btn-light" %>
           </div>
 
         </div>

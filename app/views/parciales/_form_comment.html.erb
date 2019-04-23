@@ -1,0 +1,53 @@
+<div class="modal fade" id="product-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          Commentario
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        </h5>
+      </div>
+      <div class="modal-body">
+        <%= form_tag document_comment_path, method: :post, remote: true do %>
+
+        <div class="col-md-12 no-padding-left">
+          <%= label_tag "Titulo" %>
+          <%= text_field_tag :title, nil, class: "form form-control", :placeholder => "Titulo" %>
+        </div>
+
+        <br>
+
+
+        <div class="col-md-12 no-padding-left">
+          <%= label_tag "Descripcion" %>
+          <%= text_area_tag :description, nil, class: "form form-control", :placeholder => "Descripcion", :rows => 6 %>
+        </div>
+
+        <br>
+
+        <div class="collapse" id="collapseExample">
+            <%= file_field_tag :file, class: "form form-control" %>
+        </div>
+        
+        <br>
+
+          <%= hidden_field_tag :document_id, nil, :value => document.id %>
+          <% if document.user_review.id == current_user.id %>
+            <%= hidden_field_tag :user_id, nil, :value => document.user_review.id %>
+          <% elsif document.user_aprove.id == current_user.id %>
+            <%= hidden_field_tag :user_id, nil, :value => document.user_aprove.id %>
+          <% end -%>
+
+        <div class="col-md-12 modal-footer">
+          <%= submit_tag "Guardar", class: "btn btn-success add_service" %>
+          <label class="btn btn-info" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Archivo</label>
+        </div>
+
+      </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>

@@ -1,6 +1,7 @@
 class DocumentsController < ApplicationController
   before_action :set_document, only: [:show, :edit, :update, :destroy, :update_docu, :ready, :documents_pdf, :new_document]
   before_action :authenticate_user!
+  include ApplicationHelper
   # GET /documents
   # GET /documents.json
   def index
@@ -10,6 +11,7 @@ class DocumentsController < ApplicationController
   # GET /documents/1
   # GET /documents/1.json
   def show
+    @comments = DocumentComment.where(document_id: @document.id)
   end
 
   # GET /documents/new
@@ -63,8 +65,13 @@ class DocumentsController < ApplicationController
 
   # GET /documents/1/edit
   def edit
-    unless @document.user.id == current_user.id  
-      render file: "#{Rails.root}/public/404", :layout => false, :status => :not_found
+    if get_finish_document(@document.state_aprove, @document.state_review) == true
+        render file: "#{Rails.root}/public/404", :layout => false, :status => :not_found
+      else
+
+      unless @document.user.id == current_user.id  
+        render file: "#{Rails.root}/public/404", :layout => false, :status => :not_found
+      end
     end
   end
 
